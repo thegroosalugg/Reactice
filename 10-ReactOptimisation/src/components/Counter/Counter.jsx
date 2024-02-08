@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, memo, useCallback } from "react";
 
 import IconButton from "../UI/IconButton.jsx";
 import MinusIcon from "../UI/Icons/MinusIcon.jsx";
@@ -26,19 +26,20 @@ function isPrime(number) {
 // memo is a react hook which will compare the old & new prop values, and if they are exactly the same React will not execute this component again
 // memo is used to optimise app performance as unrelated state changes which re-execute the parent App component also re-execute all the child components
 // memo should only be used on a component that is as high up in the component tree as possible. If the parent component does not execute, nor do its children
-const Counter = memo(function Counter({ initialCount }) {
+const Counter = memo(function Counter({ initialCount }) { // memo is no longer needed here due to state uplifting, but has been kept for learning reference
   log("<Counter /> rendered", 1);
   const initialCountIsPrime = isPrime(initialCount);
 
   const [counter, setCounter] = useState(initialCount);
 
-  function handleDecrement() {
-    setCounter((prevCounter) => prevCounter - 1);
-  }
+  // all functions are JS objects, they're rendered each time the App is, and create a new object
+  const handleDecrement = useCallback(function handleDecrement() { // useCallback stops these functions from being executed each time the app is rendered
+    setCounter((prevCounter) => prevCounter - 1); // re-rended function prevents memo from inside IconButton from working, callback prevents this function from recreation
+  }, [])  // empty array of dependencies which will re-execute the function when app is rendered.
 
-  function handleIncrement() {
+  const handleIncrement = useCallback(function handleIncrement() {
     setCounter((prevCounter) => prevCounter + 1);
-  }
+  }, [])
 
   return (
     <section className="counter">
