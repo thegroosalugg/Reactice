@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+img {
+  border-radius: 5%;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: #1f2937;
+  color: #ffffff;
+  padding: 0.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Hide the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Hide the thumb */
+}
