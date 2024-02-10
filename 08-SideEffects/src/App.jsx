@@ -69,7 +69,7 @@ function App() {
   }
 
   const handleRemovePlace = useCallback(function handleRemovePlace() { // useCallback prevents the function from being executed each time App is rendered
-    setPickedPlaces((prevPickedPlaces) =>
+    setPickedPlaces((prevPickedPlaces) =>                    // all functions are JS objects and have a new value in memory each time the App is rendered
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
     setModalOpen(false)

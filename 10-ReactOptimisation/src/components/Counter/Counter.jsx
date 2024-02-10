@@ -1,13 +1,15 @@
-import { useState, memo } from "react";
+import { useState, memo, useCallback, useMemo } from "react";
 
 import IconButton from "../UI/IconButton.jsx";
 import MinusIcon from "../UI/Icons/MinusIcon.jsx";
 import PlusIcon from "../UI/Icons/PlusIcon.jsx";
 import CounterOutput from "./CounterOutput.jsx";
 import { log } from "../../log.js";
+import CounterHistory from "./CounterHistory.jsx";
 
 function isPrime(number) {
   log("Calculating if is prime number", 2, "other");
+
   if (number <= 1) {
     return false;
   }
@@ -23,22 +25,39 @@ function isPrime(number) {
   return true;
 }
 
-// memo is a react hook which will compare the old & new prop values, and if they are exactly the same React will not execute this component again
-// memo is used to optimise app performance as unrelated state changes which re-execute the parent App component also re-execute all the child components
-// memo should only be used on a component that is as high up in the component tree as possible. If the parent component does not execute, nor do its children
 const Counter = memo(function Counter({ initialCount }) {
   log("<Counter /> rendered", 1);
-  const initialCountIsPrime = isPrime(initialCount);
 
-  const [counter, setCounter] = useState(initialCount);
+  const initialCountIsPrime = useMemo(
+    () => isPrime(initialCount),
+    [initialCount]
+  );
 
-  function handleDecrement() {
-    setCounter((prevCounter) => prevCounter - 1);
-  }
+  // const [counter, setCounter] = useState(initialCount);
+  const [counterChanges, setCounterChanges] = useState([
+    { val: initialCount, id: Math.random() * 1000 },
+  ]);
 
-  function handleIncrement() {
-    setCounter((prevCounter) => prevCounter + 1);
-  }
+  const currentCounter = counterChanges.reduce(
+    (prevCounter, counterChange) => prevCounter + counterChange.val,
+    0
+  );
+
+  const handleDecrement = useCallback(function handleDecrement() {
+    // setCounter((prevCounter) => prevCounter - 1);
+    setCounterChanges((prevCounterChanges) => [
+      { val: -1, id: Math.random() * 1000 },
+      ...prevCounterChanges,
+    ]);
+  }, []);
+
+  const handleIncrement = useCallback(function handleIncrement() {
+    // setCounter((prevCounter) => prevCounter + 1);
+    setCounterChanges((prevCounterChanges) => [
+      { val: 1, id: Math.random() * 1000 },
+      ...prevCounterChanges,
+    ]);
+  }, []);
 
   return (
     <section className="counter">
@@ -50,13 +69,14 @@ const Counter = memo(function Counter({ initialCount }) {
         <IconButton icon={MinusIcon} onClick={handleDecrement}>
           Decrement
         </IconButton>
-        <CounterOutput value={counter} />
+        <CounterOutput value={currentCounter} />
         <IconButton icon={PlusIcon} onClick={handleIncrement}>
           Increment
         </IconButton>
       </p>
+      <CounterHistory history={counterChanges} />
     </section>
   );
 });
 
-export default Counter
+export default Counter;
