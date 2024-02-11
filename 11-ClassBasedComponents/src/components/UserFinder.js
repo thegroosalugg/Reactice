@@ -2,17 +2,21 @@ import { Fragment, useState, useEffect, Component } from "react";
 
 import Users from "./Users";
 import classes from "./UserFinder.module.css";
+import UsersContext from "../store/users-context";
 
-const DUMMY_USERS = [
-  { id: "u1", name: "Max" },
-  { id: "u2", name: "Manuel" },
-  { id: "u3", name: "Julie" },
-];
 
 class UserFinder extends Component {
+  static contextType = UsersContext; // static contextType can only be set once in class based components
+  // its value is set to the context constant created in the store folder
+
   constructor() {
     super();
-    this.state = { filteredUsers: DUMMY_USERS, searchTerm: "" };
+    this.state = { filteredUsers: [], searchTerm: "" };
+  }
+
+  componentDidMount() { // this will execute only once when app is rendered
+    // send http request...
+    this.setState({ filteredUsers: this.context.users }); // context is accessed using this.context and then any key values stored inside
   }
 
   componentDidUpdate(prevProps, prevState) { // lifecycle method provided by React
@@ -20,8 +24,8 @@ class UserFinder extends Component {
     //  This method receives two parameters: prevProps and prevState, which represent the previous props and state of the component
     if (prevState.searchTerm !== this.state.searchTerm) { // class based components cannot use hooks
       this.setState({  // Instead an if checks the prev search term was different to the current, and then executes the state update
-        filteredUsers: DUMMY_USERS.filter((user) =>
-          user.name.includes(this.state.searchTerm)
+        filteredUsers: this.context.users.filter((user) =>
+          user.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
         ),
       });
     }
