@@ -11,6 +11,17 @@ class Users extends Component {
     this.state = { showUsers: true }; // in class based components, state must be an object which holds all values
   } // state is always called this.state and this.setState, the names cannot be changed
 
+  componentDidUpdate() { // error boundary
+    // try someCodeWhichMightFail {
+    //   catch (error) {
+    //     handler error
+    //   }
+    // }
+    if (this.props.users.length === 0 ) { // will crash the app if no users found. Testing error boundary
+      throw new Error('no users')
+    }
+  }
+
   toggleUsersHandler() { // in setState will merge the prev and old state, any new values are updated and old values are kept
     this.setState((curState) => { // we can still use the toggle code to update state, but now it must return an object
       return { showUsers: !curState.showUsers };
