@@ -3,12 +3,6 @@ import User from "./User";
 
 import classes from "./Users.module.css";
 
-const DUMMY_USERS = [
-  { id: "u1", name: "Max" },
-  { id: "u2", name: "Manuel" },
-  { id: "u3", name: "Julie" },
-];
-
 class Users extends Component {
   // "this" is required to access class methods or properties from anywhere inside of that class/ object.
   constructor() { // the constructor method is a special method in JS classes that is called when a new instance of the class is created
@@ -26,7 +20,7 @@ class Users extends Component {
   render() { // render must be used to return renderable JS code
     const usersList = (
       <ul>
-        {DUMMY_USERS.map((user) => (
+        {this.props.users.map((user) => (
           <User key={user.id} name={user.name} />
         ))}
       </ul>
