@@ -3,12 +3,15 @@ import Places from "./Places.jsx";
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [avalablePlaces, setAvailablePlaces] = useState([]);
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     async function fetchPlaces() { // this is the correct way to use async/await in React's useEffect
+      setIsFetching(true)
       const response = await fetch("http://localhost:3000/places"); // the code is more readable than the one below
       const resData = await response.json();
       setAvailablePlaces(resData.places);
+      setIsFetching(false)
     }
 
     fetchPlaces();
@@ -29,6 +32,7 @@ export default function AvailablePlaces({ onSelectPlace }) {
     <Places
       title="Available Places"
       places={avalablePlaces}
+      isLoading={isFetching}
       fallbackText="No places available."
       onSelectPlace={onSelectPlace}
     />
