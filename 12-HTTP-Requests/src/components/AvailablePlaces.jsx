@@ -1,17 +1,29 @@
 import { useState, useEffect } from "react";
 import Places from "./Places.jsx";
+import Error from "./Error.jsx";
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [avalablePlaces, setAvailablePlaces] = useState([]);
-  const [isFetching, setIsFetching] = useState(false)
+  const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchPlaces() { // this is the correct way to use async/await in React's useEffect
-      setIsFetching(true)
-      const response = await fetch("http://localhost:3000/places"); // the code is more readable than the one below
-      const resData = await response.json();
-      setAvailablePlaces(resData.places);
-      setIsFetching(false)
+      setIsFetching(true); // fetching data dynamic text displays
+
+      try { // try catch wraps code that could cause an error to ensure the app does not crash
+        const response = await fetch("http://localhost:3000/places"); // the code is more readable than the one below
+        const resData = await response.json();
+
+        if (!response.ok) { // response.ok is built-in JS function. This throws new error if no response.
+          throw new Error("Failed to fetch places"); // this will not be seen in the UI but serves as a mechanism for signaling errors within the code flow.
+        }
+
+        setAvailablePlaces(resData.places);
+      } catch (error) {
+        setError({ message: error.message || "Could not fetch places" }); // if the error state has already been set, use previous state, or initiate new error message
+      }
+      setIsFetching(false); // data fetched, fallback text disappears
     }
 
     fetchPlaces();
@@ -27,6 +39,15 @@ export default function AvailablePlaces({ onSelectPlace }) {
   //       setAvailablePlaces(resData.places); // Updating the state with the fetched places data
   //     });
   // }, []); // Dependency array is empty, indicating this effect runs only once on component mount
+
+  if (error) {
+    return (
+      <Error
+        title={"Oopsy Daily, looks like there's an error"}
+        message={error.message}
+      />
+    );
+  }
 
   return (
     <Places
