@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Places from "./Places.jsx";
 import Error from "./Error.jsx";
+import { sortPlacesByDistance } from "../../../08-SideEffects/src/loc.js";
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [avalablePlaces, setAvailablePlaces] = useState([]);
@@ -15,15 +16,24 @@ export default function AvailablePlaces({ onSelectPlace }) {
         const response = await fetch("http://localhost:3000/places"); // the code is more readable than the one below
         const resData = await response.json();
 
-        if (!response.ok) { // response.ok is built-in JS function. This throws new error if no response.
+        if (!response.ok) {
+          // response.ok is built-in JS function. This throws new error if no response.
           throw new Error("Failed to fetch places"); // this will not be seen in the UI but serves as a mechanism for signaling errors within the code flow.
         }
 
-        setAvailablePlaces(resData.places);
+        navigator.geolocation.getCurrentPosition((position) => {
+          const sortedPlaces = sortPlacesByDistance(
+            resData.places,
+            position.coords.latitude,
+            position.coords.longitude
+          );
+          setAvailablePlaces(sortedPlaces);
+          setIsFetching(false); // location fetched, fallback text disappears
+        });
       } catch (error) {
         setError({ message: error.message || "Could not fetch places" }); // if the error state has already been set, use previous state, or initiate new error message
       }
-      setIsFetching(false); // data fetched, fallback text disappears
+      setIsFetching(false); // if error caught, fallback text also disappears. State needs to be set twice in either circumstance
     }
 
     fetchPlaces();
