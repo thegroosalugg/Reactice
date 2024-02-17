@@ -49,7 +49,7 @@ export default function AvailablePlaces({ onSelectPlace }) {
   if (error) {
     return (
       <Error
-        title={"Oopsy Daily, looks like there's an error"}
+        title="Oopsy Daily, looks like there's an error"
         message={error.message}
       />
     );

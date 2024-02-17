@@ -1,16 +1,18 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from "react";
 
-import Places from './components/Places.jsx';
-import Modal from './components/Modal.jsx';
-import DeleteConfirmation from './components/DeleteConfirmation.jsx';
-import logoImg from './assets/logo.png';
-import AvailablePlaces from './components/AvailablePlaces.jsx';
-import { updateUserPlaces } from './http.js';
+import Places from "./components/Places.jsx";
+import Modal from "./components/Modal.jsx";
+import DeleteConfirmation from "./components/DeleteConfirmation.jsx";
+import logoImg from "./assets/logo.png";
+import AvailablePlaces from "./components/AvailablePlaces.jsx";
+import Error from "./components/Error.jsx";
+import { updateUserPlaces } from "./http.js";
 
 function App() {
   const selectedPlace = useRef();
   const [userPlaces, setUserPlaces] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [error, setError] = useState(null);
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -32,12 +34,13 @@ function App() {
       return [selectedPlace, ...prevPickedPlaces];
     });
 
-    try {
-      // function may take some time so we set it to await
-      await updateUserPlaces([selectedPlace, ...userPlaces]) // we cannot pass the current state as it has not been updated yet and the prev state would be passed
+    try { // function may take some time so we set it to await
+      await updateUserPlaces([selectedPlace, ...userPlaces]); // we cannot pass the current state as it has not been updated yet and the prev state would be passed
       // instead we create a new array with the previos state and update it with the selected place
     } catch (error) {
       // any functions that might fail should be wrapped in try catch
+      setUserPlaces(userPlaces); // revert state to previous state if the await/async fails
+      setError({ message: error.message || "Failed to update places" }); // if the error state has already been set, use previous state, or initiate new error message
     }
   }
 
@@ -49,8 +52,22 @@ function App() {
     setModalIsOpen(false);
   }, []);
 
+  function handleError() {
+    setError(null);
+  }
+
   return (
     <>
+      {/* onClose ensures error is reset is the ESC key is pressed instead of the close button inside Modal */}
+      <Modal open={error} onClose={handleError}>
+        {error && (
+          <Error
+            title="Oh no! Looks like there's an error"
+            message={error.message}
+            onConfirm={handleError}
+          />
+        )}
+      </Modal>
       <Modal open={modalIsOpen} onClose={handleStopRemovePlace}>
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
