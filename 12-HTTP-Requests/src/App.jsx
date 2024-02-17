@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 import Places from "./components/Places.jsx";
 import Modal from "./components/Modal.jsx";
@@ -6,12 +6,13 @@ import DeleteConfirmation from "./components/DeleteConfirmation.jsx";
 import logoImg from "./assets/logo.png";
 import AvailablePlaces from "./components/AvailablePlaces.jsx";
 import Error from "./components/Error.jsx";
-import { updateUserPlaces } from "./http.js";
+import { fetchUserPlaces, updateUserPlaces } from "./http.js";
 
 function App() {
   const selectedPlace = useRef();
   const [userPlaces, setUserPlaces] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
 
   function handleStartRemovePlace(place) {
@@ -22,6 +23,23 @@ function App() {
   function handleStopRemovePlace() {
     setModalIsOpen(false);
   }
+
+  useEffect(() => {
+    async function fetchPlaces() {
+      setIsFetching(true); // fetching data dynamic text displays
+      try {
+        const places = await fetchUserPlaces();
+        setUserPlaces(places)
+      } catch (error) {
+        setError({ message: "Couldn't load user places"})
+      }
+
+      setIsFetching(false); // location fetched, fallback text disappears
+    }
+
+    fetchPlaces()
+  }, [])
+
 
   async function handleSelectPlace(selectedPlace) { // this function can be set as an async as it is only an event listener when we select a place
     setUserPlaces((prevPickedPlaces) => {
@@ -91,12 +109,15 @@ function App() {
         </p>
       </header>
       <main>
-        <Places
+        {error && <Error title={"It's not your day, have an error"} message={error.message} />}
+        {!error && <Places
           title="I'd like to visit ..."
           fallbackText="Select the places you would like to visit below."
+          isLoading={isFetching}
+          loadingText="Loading your saved places..."
           places={userPlaces}
           onSelectPlace={handleStartRemovePlace}
-        />
+        />}
 
         <AvailablePlaces onSelectPlace={handleSelectPlace} />
       </main>
