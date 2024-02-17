@@ -5,12 +5,11 @@ import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces.jsx';
+import { updateUserPlaces } from './http.js';
 
 function App() {
   const selectedPlace = useRef();
-
   const [userPlaces, setUserPlaces] = useState([]);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function handleStartRemovePlace(place) {
@@ -22,7 +21,7 @@ function App() {
     setModalIsOpen(false);
   }
 
-  function handleSelectPlace(selectedPlace) {
+  async function handleSelectPlace(selectedPlace) { // this function can be set as an async as it is only an event listener when we select a place
     setUserPlaces((prevPickedPlaces) => {
       if (!prevPickedPlaces) {
         prevPickedPlaces = [];
@@ -32,6 +31,14 @@ function App() {
       }
       return [selectedPlace, ...prevPickedPlaces];
     });
+
+    try {
+      // function may take some time so we set it to await
+      await updateUserPlaces([selectedPlace, ...userPlaces]) // we cannot pass the current state as it has not been updated yet and the prev state would be passed
+      // instead we create a new array with the previos state and update it with the selected place
+    } catch (error) {
+      // any functions that might fail should be wrapped in try catch
+    }
   }
 
   const handleRemovePlace = useCallback(async function handleRemovePlace() {
