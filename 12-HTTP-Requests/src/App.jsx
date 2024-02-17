@@ -40,7 +40,7 @@ function App() {
     } catch (error) {
       // any functions that might fail should be wrapped in try catch
       setUserPlaces(userPlaces); // revert state to previous state if the await/async fails
-      setError({ message: error.message || "Failed to update places" }); // if the error state has already been set, use previous state, or initiate new error message
+      setError({ message: "Failed to update places" }); // if the error state has already been set, use previous state, or initiate new error message
     }
   }
 
@@ -49,8 +49,15 @@ function App() {
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
     );
 
+    try {
+      await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id))
+    } catch (error) {
+      setUserPlaces(userPlaces) // rollback the state if error caught
+      setError({ message: "Could not delete place, soz" })
+    }
+
     setModalIsOpen(false);
-  }, []);
+  }, [userPlaces]);
 
   function handleError() {
     setError(null);
