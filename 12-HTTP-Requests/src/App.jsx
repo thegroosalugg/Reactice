@@ -13,7 +13,7 @@ function App() {
   const [userPlaces, setUserPlaces] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({ fetch: null , update: null });
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -31,7 +31,7 @@ function App() {
         const places = await fetchUserPlaces();
         setUserPlaces(places)
       } catch (error) {
-        setError({ message: "Couldn't load user places"})
+        setError(prevError => ({ ...prevError, fetch: "Couldn't load user places" }));
       }
 
       setIsFetching(false); // location fetched, fallback text disappears
@@ -58,7 +58,7 @@ function App() {
     } catch (error) {
       // any functions that might fail should be wrapped in try catch
       setUserPlaces(userPlaces); // revert state to previous state if the await/async fails
-      setError({ message: "Failed to update places" }); // if the error state has already been set, use previous state, or initiate new error message
+      setError(prevError => ({ ...prevError, update: "Failed to update places" })); // if the error state has already been set, use previous state, or initiate new error message
     }
   }
 
@@ -71,24 +71,24 @@ function App() {
       await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id))
     } catch (error) {
       setUserPlaces(userPlaces) // rollback the state if error caught
-      setError({ message: "Could not delete place, soz" })
+      setError(prevError => ({ ...prevError, update: "Could not delete place, soz" }));
     }
 
     setModalIsOpen(false);
   }, [userPlaces]);
 
   function handleError() {
-    setError(null);
+    setError(prevError => ({ ...prevError, update: null }));
   }
 
   return (
     <>
       {/* onClose ensures error is reset is the ESC key is pressed instead of the close button inside Modal */}
-      <Modal open={error} onClose={handleError}>
-        {error && (
+      <Modal open={error.update} onClose={handleError}>
+        {error.update && (
           <Error
             title="Oh no! Looks like there's an error"
-            message={error.message}
+            message={error.update}
             onConfirm={handleError}
           />
         )}
@@ -109,8 +109,8 @@ function App() {
         </p>
       </header>
       <main>
-        {error && <Error title={"It's not your day, have an error"} message={error.message} />}
-        {!error && <Places
+        {error.fetch && <Error title={"It's not your day, have an error"} message={error.fetch} />}
+        {!error.fetch && <Places
           title="I'd like to visit ..."
           fallbackText="Select the places you would like to visit below."
           isLoading={isFetching}
