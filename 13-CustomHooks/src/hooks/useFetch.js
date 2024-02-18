@@ -20,6 +20,6 @@ export function useFetch(fetchFunction, initialValue) {
 
     fetchData();
   }, [fetchFunction]);
-
-  return { fetchedData, isFetching, error };
+                     // state updating functions can also be returned
+  return { fetchedData, setFetchedData, isFetching, error };
 }
