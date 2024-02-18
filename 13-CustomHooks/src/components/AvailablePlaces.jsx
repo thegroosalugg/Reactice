@@ -4,19 +4,26 @@ import { sortPlacesByDistance } from '../loc.js';
 import { fetchAvailablePlaces } from '../http.js';
 import { useFetch } from '../hooks/useFetch.js';
 
-// navigator.geolocation.getCurrentPosition((position) => {
-//   const sortedPlaces = sortPlacesByDistance(
-//     places,
-//     position.coords.latitude,
-//     position.coords.longitude
-//   );
-//   setAvailablePlaces(sortedPlaces);
-//   setIsFetching(false);
-// });
+async function fetchSortedPlaces() {
+  const places = await fetchAvailablePlaces()
+
+  // A Promise in JS represents the eventual completion (or failure) of an asynchronous operation and its resulting value
+  return new Promise((resolve) => { // promise is an object that takes a function as an argument with 2 parameters, resolve and reject
+    navigator.geolocation.getCurrentPosition((position) => { // reject is not needed in this case (to throw errors)
+      const sortedPlaces = sortPlacesByDistance(
+        places,
+        position.coords.latitude,
+        position.coords.longitude
+      );
+
+      resolve(sortedPlaces)
+    });
+  })
+}
 
 export default function AvailablePlaces({ onSelectPlace }) {
 
-  const { fetchedData: availablePlaces, setFetchedData: setAvailablePlaces, isFetching, error } = useFetch(fetchAvailablePlaces, [])
+  const { fetchedData: availablePlaces, isFetching, error } = useFetch(fetchSortedPlaces, [])
 
   if (error) {
     return <Error title="An error occurred!" message={error.message} />;
