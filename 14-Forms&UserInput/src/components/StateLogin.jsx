@@ -1,16 +1,16 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 export default function Login() {
-  const email = useRef();
-  const password = useRef();
+  const [userData, setUserData] = useState({ email: "", password: "" });
 
   function handleSubmit(event) {
     event.preventDefault(); // prevents browser's default behaviour, i.e. submitting form and sending an HTTP request
+    console.log(userData);
+  }
 
-    const userEmail = email.current.value
-    const userPassword = password.current.value
-
-    console.log(userEmail, userPassword);
+  function handleInputChange(dataType, value) {
+    // when the function is passed, we wrap the curlies {} in parenthesis () to tell React we're creating an Object and not starting a function
+    setUserData((prevData) => ({ ...prevData, [dataType]: value })); // using the [] syntax we can directly access a key inside the object and then change its values
   }
 
   return (
@@ -25,7 +25,8 @@ export default function Login() {
             id="email"
             type="email"
             name="email"
-            ref={email}
+            onChange={(event) => handleInputChange("email", event.target.value)} // e-t-v captures the user input data and passes its value as an argument
+            value={userData.email}
           />
         </div>
 
@@ -35,7 +36,8 @@ export default function Login() {
             id="password"
             type="password"
             name="password"
-            ref={password}
+            onChange={(event) => handleInputChange("password", event.target.value)}
+            value={userData.password}
           />
         </div>
       </div>
