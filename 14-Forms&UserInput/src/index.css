@@ -47,6 +47,18 @@ form {
   box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
 }
 
+.form-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-selector .button {
+  flex: 1;
+  max-width: 6rem;
+  margin-inline: 0.2rem;
+}
+
 .control,
 fieldset {
   margin-bottom: 1rem;
