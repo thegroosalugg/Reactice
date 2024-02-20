@@ -1,19 +1,18 @@
 import { useState } from "react";
+import { isEmail, isNotEmpty, hasMinLength } from "../util/validation";
 import Input from "./Input";
 
 export default function StateLogin() {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [isEditting, setIsEditting] = useState({ email: false, password: false });
 
-  const emailInvalid = isEditting.email && !userData.email.includes("@");
-  const passwordInvalid = isEditting.password && userData.password.trim().length < 6
+  const emailInvalid = isEditting.email && !isEmail(userData.email) && !isNotEmpty(userData.email);
+  const passwordInvalid = isEditting.password && !hasMinLength(userData.password, 6);
 
   function handleSubmit(event) {
     event.preventDefault(); // prevents browser's default behaviour, i.e. submitting form and sending an HTTP request
 
-    if (emailInvalid || passwordInvalid) {
-      return
-    }
+    if (emailInvalid || passwordInvalid || !isNotEmpty(userData.password)) { return } // do not execute code IF invalid
 
     console.log(userData);
   }
