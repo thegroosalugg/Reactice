@@ -9,6 +9,7 @@ export default function Signup() {
     // Object.fromEntries() constructs the object using the iterable returned by formData.entries(), which yields arrays representing key-value pairs.
     data.acquisitionn = acquisitionBoxes // merge the 2 datasets by adding a new key to data and setting its value to the entries of the acquisitionBoxes
     console.log(data)
+    // event.target.reset() // resets the form
   }
 
   return (
@@ -98,6 +99,7 @@ export default function Signup() {
       </div>
 
       <p className="form-actions">
+        {/* button type reset will also reset the form */}
         <button type="reset" className="button button-flat">
           Reset
         </button>

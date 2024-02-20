@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function Login() {
+export default function RefLogin() {
   const email = useRef();
   const password = useRef();
 
@@ -16,7 +16,7 @@ export default function Login() {
   return (
     // alternative method to handle button submitting is to add the event listener to the form instead of the button
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2>Ref Login</h2>
 
       <div className="control-row">
         <div className="control no-margin">

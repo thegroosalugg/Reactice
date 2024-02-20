@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Login() {
+export default function StateLogin() {
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   function handleSubmit(event) {
@@ -16,7 +16,7 @@ export default function Login() {
   return (
     // alternative method to handle button submitting is to add the event listener to the form instead of the button
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2>State Login</h2>
 
       <div className="control-row">
         <div className="control no-margin">
