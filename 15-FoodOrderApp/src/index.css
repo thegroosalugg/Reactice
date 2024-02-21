@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
 }
 
+/*  Header styles applied */
 #main-header {
   display: flex;
   justify-content: space-between;
@@ -221,6 +222,7 @@ h1 {
   color: #1f1a09;
 }
 
+/* Cart button styles applied */
 .text-button {
   font: inherit;
   cursor: pointer;
