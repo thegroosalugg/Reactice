@@ -23,5 +23,9 @@ export default function Menu() {
     fetchMeals();
   }, []);
 
-  return <Meals meals={fetchedMeals} />;
+  if (error) {
+    return <h2 className="loading">404 Failed to load menu</h2>
+  }
+
+  return <Meals meals={fetchedMeals} isLoading={isFetching} />;
 }
