@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
 }
 
+/*  Header styles applied */
 #main-header {
   display: flex;
   justify-content: space-between;
@@ -50,6 +51,7 @@ h1 {
   text-transform: uppercase;
 }
 
+/* Meal item styles applied */
 #meals {
   width: 90%;
   max-width: 70rem;
@@ -212,6 +214,7 @@ h1 {
   color: #1f1a09;
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
+  transition: 0.5s ease;
 }
 
 .button:hover,
@@ -221,6 +224,7 @@ h1 {
   color: #1f1a09;
 }
 
+/* Cart button styles applied */
 .text-button {
   font: inherit;
   cursor: pointer;
