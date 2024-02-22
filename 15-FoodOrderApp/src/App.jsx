@@ -3,6 +3,7 @@ import Modal from "./components/Modal";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import CartContextProvider from "./store/CartContext";
+import Cart from "./components/Cart";
 
 function App() {
   const [modalState, setModalState] = useState(false);
@@ -20,7 +21,7 @@ function App() {
   return (
     <CartContextProvider>
       <Modal open={modalState} closeModal={closeModal}>
-        {/* {cartState.length <= 0 && <h2>Your Cart is Empty</h2>} */}
+        <Cart closeModal={closeModal} />
       </Modal>
       <Header openCart={openModal} />
       <Menu />

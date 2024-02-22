@@ -9,7 +9,6 @@ export default function Menu() {
 
   console.log("menu")
 
-
   useEffect(() => {
     async function fetchMeals() { // this is the correct way to use async/await in React's useEffect
       setIsFetching(true); // fetching data dynamic text displays
@@ -26,9 +25,7 @@ export default function Menu() {
     fetchMeals();
   }, []);
 
-  if (error) {
-    return <h2 className="loading">404 Failed to load menu</h2>
-  }
+  if (error) { return <h2 className="loading">404 Failed to load menu</h2> }
 
   return <Meals meals={fetchedMeals} isLoading={isFetching} />;
 }

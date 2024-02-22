@@ -34,7 +34,6 @@ export default function CartContextProvider({ children }) {
   return (
     // Return the CartContext.Provider with the value set to the context value
     <CartContext.Provider value={contextValue}>
-      {/* Render the children */}
       {children}
     </CartContext.Provider>
   );
