@@ -7,11 +7,18 @@ export const CartContext = createContext({ // creating default template provides
 });
 
 export default function CartContextProvider({ children }) {
-  // Define your state variables here if needed
   const [cartState, setCartState] = useState([]);
 
-  function handleAddItems() {
+  function handleAddItems(meal) {
+    const itemIndex = cartState.findIndex((cartItem) => cartItem.id === meal.id); // returns existing item's index or -1
 
+    if (itemIndex !== -1) { // if item already exists, its index will not be -1 and quantity is updated
+      const updatedCart = [...cartState];
+      updatedCart[itemIndex].quantity += 1;
+      setCartState(updatedCart);
+    } else { // else the index is -1 and item is added to array
+      setCartState((prevCart) => [...prevCart, { ...meal, quantity: 1 }]);
+    }
   }
 
   function handleUpdateItems() {

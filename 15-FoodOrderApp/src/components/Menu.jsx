@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { fetchAvailableMeals } from "../https";
 import Meals from "./Meals";
 
-export default function Menu({ onAdd }) {
+export default function Menu() {
   const [fetchedMeals, setFetchedMeals] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
+
+  console.log("menu")
+
 
   useEffect(() => {
     async function fetchMeals() { // this is the correct way to use async/await in React's useEffect
@@ -27,5 +30,5 @@ export default function Menu({ onAdd }) {
     return <h2 className="loading">404 Failed to load menu</h2>
   }
 
-  return <Meals meals={fetchedMeals} isLoading={isFetching} onAdd={onAdd} />;
+  return <Meals meals={fetchedMeals} isLoading={isFetching} />;
 }

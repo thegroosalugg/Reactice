@@ -1,4 +1,11 @@
-export default function Meals({ meals, isLoading, onAdd }) {
+import { useContext } from "react";
+import { CartContext } from "../store/CartContext";
+
+export default function Meals({ meals, isLoading }) {
+  const { addItem, cart } = useContext(CartContext)
+
+  console.log("meals", cart)
+
   return (
     <>
       <ul id="meals">
@@ -16,7 +23,7 @@ export default function Meals({ meals, isLoading, onAdd }) {
                   <p className="meal-item-description">{meal.description}</p>
                 </div>
                 <p className="meal-item-actions">
-                  <button className="button" onClick={() => onAdd(meal)}>Add to Card</button>
+                  <button className="button" onClick={() => addItem(meal)}>Add to Card</button>
                 </p>
               </article>
             </li>
