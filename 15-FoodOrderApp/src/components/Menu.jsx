@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchAvailableMeals } from "../https";
 import Meals from "./Meals";
 
-export default function Menu() {
+export default function Menu({ onAdd }) {
   const [fetchedMeals, setFetchedMeals] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
@@ -27,5 +27,5 @@ export default function Menu() {
     return <h2 className="loading">404 Failed to load menu</h2>
   }
 
-  return <Meals meals={fetchedMeals} isLoading={isFetching} />;
+  return <Meals meals={fetchedMeals} isLoading={isFetching} onAdd={onAdd} />;
 }

@@ -15,13 +15,27 @@ function App() {
     setModalState(false);
   }
 
+  function handleAddItems(meal) {
+    const itemAlreadyInCart = cartState.find((cartItem) => cartItem.id === meal.id);
+
+    if (itemAlreadyInCart) {
+      // setCartState()
+      console.log(cartState);
+    } else {
+      setCartState((prevCart) => [...prevCart, { ...meal, quantity: 1 }]);
+      console.log(meal);
+    }
+  }
+
+  function handleUpdateItems() {}
+
   return (
     <>
       <Modal open={modalState} closeModal={closeModal}>
         {cartState.length <= 0 && <h2>Your Cart is Empty</h2>}
       </Modal>
       <Header openCart={openModal} />
-      <Menu />
+      <Menu onAdd={handleAddItems} />
     </>
   );
 }

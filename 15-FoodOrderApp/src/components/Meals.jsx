@@ -1,4 +1,4 @@
-export default function Meals({ meals, isLoading }) {
+export default function Meals({ meals, isLoading, onAdd }) {
   return (
     <>
       <ul id="meals">
@@ -16,7 +16,7 @@ export default function Meals({ meals, isLoading }) {
                   <p className="meal-item-description">{meal.description}</p>
                 </div>
                 <p className="meal-item-actions">
-                  <button className="button">Add to Card</button>
+                  <button className="button" onClick={() => onAdd(meal)}>Add to Card</button>
                 </p>
               </article>
             </li>
