@@ -241,11 +241,17 @@ h1 {
   background-color: transparent;
   border: none;
   color: #ffc404;
+  transition: 0.5s ease;
 }
 
 .text-button:hover,
 .text-button:active {
   color: #e4ddd4;
+}
+
+.modal .text-button:hover,
+.modal .text-button:active {
+  color: #ff6347;
 }
 
 .modal {
