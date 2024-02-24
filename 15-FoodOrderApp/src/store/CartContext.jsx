@@ -21,8 +21,17 @@ export default function CartContextProvider({ children }) {
     }
   }
 
-  function handleUpdateItems() {
+  function handleUpdateItems(meal, quantity) {
+    const itemIndex = cartState.findIndex((cartItem) => cartItem.id === meal.id);
+    const updatedCart = [...cartState];
 
+    updatedCart[itemIndex].quantity += quantity;
+
+    if (updatedCart[itemIndex].quantity <= 0) {
+      updatedCart.splice(itemIndex, 1);
+    }
+
+    setCartState(updatedCart);
   }
 
   const contextValue = {

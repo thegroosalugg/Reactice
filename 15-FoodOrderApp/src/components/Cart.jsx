@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, updateCart } = useContext(CartContext);
   const cartTotal = cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
   const pad = (string, size) => { return string.padStart(size, ' ') };
 
@@ -16,9 +16,9 @@ export default function Cart() {
             <li key={meal.id} className="cart-item">
               <p>{pad(meal.name, 40)} — {pad(String(meal.quantity), 2)} x {pad(`$${(meal.quantity * meal.price).toFixed(2)}`, 7)}</p>
               <p className="cart-item-actions">
-                <button>-</button>
+                <button onClick={() => updateCart(meal, -1)}>-</button>
                 <span>{pad(String(meal.quantity), 2)}</span>
-                <button>+</button>
+                <button  onClick={() => updateCart(meal, 1)}>+</button>
               </p>
             </li>
           ))}
