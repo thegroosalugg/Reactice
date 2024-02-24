@@ -20,12 +20,23 @@ export default function CheckoutForm({ closeModal }) {
       </p>
       {!formSubmitted && (
         <>
-          <input />
-          <input />
-          <input />
+          <div className="control">
+            <label htmlFor="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full-name" required />
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" required />
+            <label htmlFor="street">Street</label>
+            <input type="text" id="street" name="street" required />
+          </div>
           <div className="control-row">
-            <input />
-            <input />
+            <span>
+              <label htmlFor="postcode">Postcode</label>
+              <input />
+            </span>
+            <span>
+              <label htmlFor="city">City</label>
+              <input />
+            </span>
           </div>
         </>
       )}
