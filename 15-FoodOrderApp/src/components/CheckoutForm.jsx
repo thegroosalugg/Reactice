@@ -13,6 +13,7 @@ export default function CheckoutForm({ closeModal }) {
     console.log(data);
 
     setFormSubmitted(true);
+    event.target.reset()
   }
 
 
@@ -49,7 +50,7 @@ export default function CheckoutForm({ closeModal }) {
       <p className="modal-actions">
         <button
           className={formSubmitted ? "button" : "text-button"}
-          onClick={closeModal}
+          onClick={() => closeModal(false)}
         >
           {formSubmitted ? "Okay" : "Close"}
         </button>

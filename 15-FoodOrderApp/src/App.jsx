@@ -9,13 +9,10 @@ import CheckoutForm from "./components/CheckoutForm";
 function App() {
   const [modalState, setModalState] = useState({ open: false, type: "cart" });
 
-  function openModal(type = "cart") {
-    setModalState({ ...modalState, open: true, type });
+  function togglenModal(boolean, type = "cart") {
+    setModalState({ ...modalState, open: boolean, type });
   }
 
-  function closeModal() {
-    setModalState({ ...modalState, open: false });
-  }
 
   useEffect(() => {
     console.log("Modal state:", modalState);
@@ -23,15 +20,15 @@ function App() {
 
   return (
     <CartContextProvider>
-      <Modal {...modalState} closeModal={closeModal}>
+      <Modal {...modalState} closeModal={togglenModal}>
         {modalState.open && (
           <>
-            {modalState.type === "cart" && <Cart openModal={openModal} closeModal={closeModal} />}
-            {modalState.type === "form" && <CheckoutForm closeModal={closeModal}/>}
+            {modalState.type === "cart" && <Cart togglenModal={togglenModal} />}
+            {modalState.type === "form" && <CheckoutForm closeModal={togglenModal}/>}
           </>
         )}
       </Modal>
-      <Header openCart={openModal} />
+      <Header openModal={togglenModal} />
       <Menu />
     </CartContextProvider>
   );
