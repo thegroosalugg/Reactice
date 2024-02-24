@@ -22,12 +22,10 @@ export default function Cart({ openModal, closeModal}) {
           ))}
         </ul>
       )}
-      <p className="cart-total">
-        ${total(cart)}
-      </p>
+      <p className="cart-total">${total(cart)}</p>
       <p className="modal-actions">
         <button className="text-button" onClick={closeModal}>Close</button>
-        <button className="button" onClick={() => openModal("form")} >Checkout</button>
+        {cart.length > 0 && <button className="button" onClick={() => openModal("form")}>Checkout</button>}
       </p>
     </div>
   );
