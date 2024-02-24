@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
 
 export default function Cart() {
-  const { cart, updateCart } = useContext(CartContext);
-  const cartTotal = cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
+  const { cart, updateCart, total } = useContext(CartContext);
 
   return (
     <div className="cart">
@@ -24,7 +23,7 @@ export default function Cart() {
         </ul>
       )}
       <p className="cart-total">
-        ${cartTotal}
+        ${total(cart)}
       </p>
     </div>
   );

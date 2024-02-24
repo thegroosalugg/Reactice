@@ -4,6 +4,7 @@ export const CartContext = createContext({ // creating default template provides
   cart: [], // empty default value to match the useState inside the App component
   addItem: () => {}, // empty dummy arrow function set as context default value
   updateCart: () => {},
+  total: () => {},
 });
 
 export default function CartContextProvider({ children }) {
@@ -34,10 +35,15 @@ export default function CartContextProvider({ children }) {
     setCartState(updatedCart);
   }
 
+  function calculateCartTotal(cart) {
+    return cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
+  }
+
   const contextValue = {
     cart: cartState,
     addItem: handleAddItems,
-    updateCart: handleUpdateItems
+    updateCart: handleUpdateItems,
+    total: calculateCartTotal
   };
 
   return (
