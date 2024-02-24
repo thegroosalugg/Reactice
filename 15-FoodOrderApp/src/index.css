@@ -109,14 +109,21 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+.center {
+  text-align: center;
+}
+
 .cart h2 {
   margin: 1rem 0;
+  text-align: center;
 }
 
 .cart ul {
   list-style: none;
   margin: 0.5rem 0;
   padding: 0;
+  overflow: auto;
+  max-height: 35vh;
 }
 
 .modal-actions {
@@ -152,6 +159,9 @@ h1 {
 
 .cart-item p {
   margin: 0;
+  font-family: monospace;
+  font-size: 1rem;
+  white-space: pre-wrap;
 }
 
 .cart-item-actions {
@@ -235,7 +245,7 @@ h1 {
 
 .text-button:hover,
 .text-button:active {
-  color: #ffab04;
+  color: #e4ddd4;
 }
 
 .modal {
@@ -263,4 +273,16 @@ h1 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Hide the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Hide the thumb */
 }
