@@ -7,8 +7,14 @@ export default function CheckoutForm({ closeModal }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log(data);
+
     setFormSubmitted(true);
   }
+
 
   return (
     <form className="control" onSubmit={handleSubmit}>
@@ -21,8 +27,8 @@ export default function CheckoutForm({ closeModal }) {
       {!formSubmitted && (
         <>
           <div className="control">
-            <label htmlFor="full-name">Full Name</label>
-            <input type="text" id="full-name" name="full-name" required />
+            <label htmlFor="name">Full Name</label>
+            <input type="text" id="name" name="name" required/>
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" required />
             <label htmlFor="street">Street</label>
@@ -31,11 +37,11 @@ export default function CheckoutForm({ closeModal }) {
           <div className="control-row">
             <span>
               <label htmlFor="postcode">Postcode</label>
-              <input />
+              <input type="text" id="postcode" name="postcode" required />
             </span>
             <span>
               <label htmlFor="city">City</label>
-              <input />
+              <input type="text" id="city" name="city" required />
             </span>
           </div>
         </>
@@ -47,7 +53,7 @@ export default function CheckoutForm({ closeModal }) {
         >
           {formSubmitted ? "Okay" : "Close"}
         </button>
-        {!formSubmitted && (<button className="button" onClick={handleSubmit}>Submit</button>)}
+        {!formSubmitted && (<button className="button" type="submit">Submit</button>)}
       </p>
     </form>
   );
