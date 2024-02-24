@@ -30,7 +30,7 @@ export default function Meals({ meals, isLoading }) {
         </ul>
       )}
       {/* setting loading text below the UL lowers its position on the page without additional CSS */}
-      {isLoading && <h2 className="loading">Loading Menu...</h2>}
+      {isLoading && <h2 className="center">Loading Menu...</h2>}
     </>
   );
 }

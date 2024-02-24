@@ -18,9 +18,7 @@ export default function Modal({ open, closeModal, children }) {
     <dialog className="modal" ref={dialog} onClose={closeModal}>
       {open ? children : null}
       <p className="modal-actions">
-        <button className="text-button" onClick={closeModal}>
-          Close
-        </button>
+        <button className="text-button" onClick={closeModal}>Close</button>
         <button className="button">Checkout</button>
       </p>
     </dialog>,

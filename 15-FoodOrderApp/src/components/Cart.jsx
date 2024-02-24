@@ -9,7 +9,7 @@ export default function Cart() {
   return (
     <div className="cart">
       <h2>Your Cart 🛒</h2>
-      {cart.length <= 0 && <p>Your Cart is Empty 🤷🏼</p>}
+      {cart.length <= 0 && <p className="center">Your Cart is Empty 🤷🏼</p>}
       {cart.length > 0 && (
         <ul>
           {cart.map((meal) => (

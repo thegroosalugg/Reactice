@@ -11,3 +11,7 @@ const str = '123456785435'
 console.log(pad(str, 24));
 
 console.log('2'.padStart(2, 0))
+
+const array = [1, 2, 3, 4, 5]
+const result = array.splice(3, 1)
+console.log(result, array)
