@@ -278,15 +278,19 @@ h1 {
   }
 }
 
-@media screen and (max-width: 472px) {
+@media screen and (max-width: 470px) {
   .modal {
-    width: 95%;
     font-size: 0.3rem;
   }
 
   .modal button {
     padding: 0.2rem;
   }
+
+  .modal-actions {
+    gap: 0.1rem;
+  }
+
 
   .cart h2 {
     margin: 0;

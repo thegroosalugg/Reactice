@@ -26,8 +26,8 @@ function App() {
       <Modal {...modalState} closeModal={closeModal}>
         {modalState.open && (
           <>
-            {modalState.type === "cart" && <Cart />}
-            {modalState.type === "checkout" && <CheckoutForm />}
+            {modalState.type === "cart" && <Cart openModal={openModal} closeModal={closeModal} />}
+            {modalState.type === "form" && <CheckoutForm openModal={openModal} closeModal={closeModal}/>}
           </>
         )}
       </Modal>

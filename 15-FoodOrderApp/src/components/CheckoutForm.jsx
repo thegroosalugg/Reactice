@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ openModal, closeModal}) {
   const { cart, total } = useContext(CartContext);
 
   function handleSubmit() {
@@ -19,6 +19,10 @@ export default function CheckoutForm() {
         <input />
         <input />
       </div>
+      <p className="modal-actions">
+        <button className="text-button" onClick={closeModal}>Close</button>
+        <button className="button" onClick={() => openModal("confirm")}>Submit</button>
+      </p>
     </form>
   )
 }
