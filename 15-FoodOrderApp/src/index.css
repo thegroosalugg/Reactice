@@ -154,6 +154,7 @@ h1 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  height: 2rem;
 }
 
 .cart-item p {
@@ -274,6 +275,41 @@ h1 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 472px) {
+  .modal {
+    width: 95%;
+    font-size: 0.3rem;
+  }
+
+  .modal button {
+    padding: 0.2rem;
+  }
+
+  .cart h2 {
+    margin: 0;
+  }
+
+  .cart-item {
+    height: 0.8rem;
+  }
+
+  .cart-item-actions button{
+    cursor: pointer;
+    font-size: 0.3rem;
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  .cart-item-actions {
+    gap: 0.3rem;
+  }
+
+  .cart-total {
+    font-size: 0.4rem;
+    margin: 0 0.2rem;
   }
 }
 
