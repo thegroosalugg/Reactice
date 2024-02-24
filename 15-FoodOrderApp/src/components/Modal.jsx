@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 export default function Modal({ open, closeModal, children }) {
@@ -17,6 +17,12 @@ export default function Modal({ open, closeModal, children }) {
     // this is necessary to reset the modal state to false, otherwise its impossible to reopen modal
     <dialog className="modal" ref={dialog} onClose={closeModal}>
       {open ? children : null}
+      <p className="modal-actions">
+        <button className="text-button" onClick={closeModal}>
+          Close
+        </button>
+        <button className="button">Checkout</button>
+      </p>
     </dialog>,
     document.getElementById("modal")
   );

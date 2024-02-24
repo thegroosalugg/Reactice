@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
 
-export default function Cart({ closeModal }) {
+export default function Cart() {
   const { cart } = useContext(CartContext);
   const cartTotal = cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
+  const pad = (string, size) => { return string.padStart(size, ' ') };
 
   return (
     <div className="cart">
@@ -13,10 +14,10 @@ export default function Cart({ closeModal }) {
         <ul>
           {cart.map((meal) => (
             <li key={meal.id} className="cart-item">
-              <p>{meal.name} — {meal.quantity} x ${(meal.quantity * meal.price).toFixed(2)}</p>
+              <p>{pad(meal.name, 25)} — {pad(String(meal.quantity), 2)} x ${(meal.quantity * meal.price).toFixed(2)}</p>
               <p className="cart-item-actions">
                 <button>-</button>
-                <span>{meal.quantity}</span>
+                <span>{pad(String(meal.quantity), 2)}</span>
                 <button>+</button>
               </p>
             </li>
@@ -24,11 +25,7 @@ export default function Cart({ closeModal }) {
         </ul>
       )}
       <p className="cart-total">
-        💲{cartTotal}
-      </p>
-      <p className="modal-actions">
-        <button className="text-button" onClick={closeModal}>Close</button>
-        <button className="button">Checkout</button>
+        ${cartTotal}
       </p>
     </div>
   );

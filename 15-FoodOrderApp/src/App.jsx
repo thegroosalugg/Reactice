@@ -21,7 +21,7 @@ function App() {
   return (
     <CartContextProvider>
       <Modal open={modalState} closeModal={closeModal}>
-        <Cart closeModal={closeModal} />
+        <Cart />
       </Modal>
       <Header openCart={openModal} />
       <Menu />

@@ -158,6 +158,8 @@ h1 {
 
 .cart-item p {
   margin: 0;
+  font-family: monospace;
+  white-space: pre-wrap;
 }
 
 .cart-item-actions {
@@ -241,7 +243,7 @@ h1 {
 
 .text-button:hover,
 .text-button:active {
-  color: #ffab04;
+  color: #e4ddd4;
 }
 
 .modal {
