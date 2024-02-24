@@ -25,7 +25,7 @@ export default function CartContextProvider({ children }) {
     const itemIndex = cartState.findIndex((cartItem) => cartItem.id === meal.id);
     const updatedCart = [...cartState];
 
-    updatedCart[itemIndex].quantity += quantity;
+    updatedCart[itemIndex].quantity = Math.min(updatedCart[itemIndex].quantity + quantity, 9);
 
     if (updatedCart[itemIndex].quantity <= 0) {
       updatedCart.splice(itemIndex, 1);

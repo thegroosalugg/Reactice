@@ -4,7 +4,6 @@ import { CartContext } from "../store/CartContext";
 export default function Cart() {
   const { cart, updateCart } = useContext(CartContext);
   const cartTotal = cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
-  const pad = (string, size) => { return string.padStart(size, ' ') };
 
   return (
     <div className="cart">
@@ -14,10 +13,10 @@ export default function Cart() {
         <ul>
           {cart.map((meal) => (
             <li key={meal.id} className="cart-item">
-              <p>{pad(meal.name, 40)} — {pad(String(meal.quantity), 2)} x {pad(`$${(meal.quantity * meal.price).toFixed(2)}`, 7)}</p>
+              <p>{meal.name} — {meal.quantity} x {(meal.quantity * meal.price).toFixed(2)}</p>
               <p className="cart-item-actions">
                 <button onClick={() => updateCart(meal, -1)}>-</button>
-                <span>{pad(String(meal.quantity), 2)}</span>
+                <span>{meal.quantity}</span>
                 <button  onClick={() => updateCart(meal, 1)}>+</button>
               </p>
             </li>
