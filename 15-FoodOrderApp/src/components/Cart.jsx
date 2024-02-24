@@ -14,7 +14,7 @@ export default function Cart() {
         <ul>
           {cart.map((meal) => (
             <li key={meal.id} className="cart-item">
-              <p>{pad(meal.name, 25)} — {pad(String(meal.quantity), 2)} x ${(meal.quantity * meal.price).toFixed(2)}</p>
+              <p>{pad(meal.name, 40)} — {pad(String(meal.quantity), 2)} x {pad(`$${(meal.quantity * meal.price).toFixed(2)}`, 7)}</p>
               <p className="cart-item-actions">
                 <button>-</button>
                 <span>{pad(String(meal.quantity), 2)}</span>
