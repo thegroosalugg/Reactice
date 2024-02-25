@@ -41,14 +41,14 @@ export default function Checkout({ closeModal }) {
             <input type="text" id="street" name="street" required />
           </div>
           <div className="control-row">
-            <span>
+            <p>
               <label htmlFor="postcode">Postcode</label>
               <input type="text" id="postcode" name="postcode" required />
-            </span>
-            <span>
+            </p>
+            <p>
               <label htmlFor="city">City</label>
               <input type="text" id="city" name="city" required />
-            </span>
+            </p>
           </div>
         </>
       )}
