@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
@@ -7,15 +7,11 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 
 function App() {
-  const [modalState, setModalState] = useState("");
+  const [modalState, setModalState] = useState();
 
   function toggleModal(type) {
     setModalState(type);
   }
-
-  useEffect(() => {
-    console.log("Modal state:", modalState);
-  }, [modalState]);
 
   return (
     <CartContextProvider>

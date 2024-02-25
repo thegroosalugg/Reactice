@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
 import Button from "../ui/Button";
 
-export default function Cart({ toggleModal}) {
+export default function Cart({ toggleModal }) {
   const { cart, updateCart, total } = useContext(CartContext);
 
   return (
@@ -17,7 +17,7 @@ export default function Cart({ toggleModal}) {
               <p className="cart-item-actions">
                 <Button label="-" onClick={() => updateCart(meal, -1)} />
                 <span>{meal.quantity}</span>
-                <Button label="+"  onClick={() => updateCart(meal, 1)}/>
+                <Button label="+" onClick={() => updateCart(meal, 1)} />
               </p>
             </li>
           ))}
