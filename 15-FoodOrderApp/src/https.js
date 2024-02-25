@@ -3,7 +3,7 @@ export async function fetchAvailableMeals() {
   const meals = await response.json();
 
   if (!response.ok) { // response.ok is built-in JS function. This throws new error if no response.
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch menu");
   }
 
   return meals; // Return the array of meals directly
@@ -20,7 +20,7 @@ export async function updateOrders({ items, customer }) {
   const resData = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to update user data");
+    throw new Error("Could not submit order");
   }
 
   return resData.message; // the response will contain an object with a message property in the dummy backend
