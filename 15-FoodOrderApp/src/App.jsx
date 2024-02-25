@@ -9,8 +9,8 @@ import Checkout from "./components/Checkout";
 function App() {
   const [modalState, setModalState] = useState({ open: false, type: "cart" });
 
-  function togglenModal(boolean, type = "cart") {
-    setModalState({ ...modalState, open: boolean, type });
+  function togglenModal(open, type = "cart") {
+    setModalState({ ...modalState, open, type });
   }
 
 
