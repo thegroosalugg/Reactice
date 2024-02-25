@@ -13,7 +13,7 @@ export default function Header({ openModal }) {
         <img src={logo} alt="logo" />
         <h1>Laugh and grow fat</h1>
       </div>
-      <Button text onClick={() => openModal(true)} label={`Cart (${cartTotal})`} />
+      <Button text onClick={() => openModal("cart")} label={`Cart (${cartTotal})`} />
     </header>
   );
 }

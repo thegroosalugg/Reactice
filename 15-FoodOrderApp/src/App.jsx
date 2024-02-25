@@ -7,12 +7,11 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 
 function App() {
-  const [modalState, setModalState] = useState({ open: false, type: "cart" });
+  const [modalState, setModalState] = useState("");
 
-  function togglenModal(open, type = "cart") {
-    setModalState({ ...modalState, open, type });
+  function toggleModal(type) {
+    setModalState(type);
   }
-
 
   useEffect(() => {
     console.log("Modal state:", modalState);
@@ -20,15 +19,11 @@ function App() {
 
   return (
     <CartContextProvider>
-      <Modal {...modalState} closeModal={togglenModal}>
-        {modalState.open && (
-          <>
-            {modalState.type === "cart" && <Cart togglenModal={togglenModal} />}
-            {modalState.type === "form" && <Checkout closeModal={togglenModal}/>}
-          </>
-        )}
+      <Modal open={modalState} closeModal={toggleModal}>
+        {modalState === "cart" && <Cart toggleModal={toggleModal} />}
+        {modalState === "form" && <Checkout closeModal={toggleModal} />}
       </Modal>
-      <Header openModal={togglenModal} />
+      <Header openModal={toggleModal} />
       <Menu />
     </CartContextProvider>
   );

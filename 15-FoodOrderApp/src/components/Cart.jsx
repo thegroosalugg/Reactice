@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
 import Button from "../ui/Button";
 
-export default function Cart({ togglenModal}) {
+export default function Cart({ toggleModal}) {
   const { cart, updateCart, total } = useContext(CartContext);
 
   return (
@@ -25,8 +25,8 @@ export default function Cart({ togglenModal}) {
       )}
       <p className="cart-total">${total(cart)}</p>
       <p className="modal-actions">
-        <Button text label="Close" onClick={() => togglenModal(false)} />
-        {cart.length > 0 && <Button label="Checkout" onClick={() => togglenModal(true, "form")} />}
+        <Button text label="Close" onClick={() => toggleModal()} />
+        {cart.length > 0 && <Button label="Checkout" onClick={() => toggleModal("form")} />}
       </p>
     </div>
   );

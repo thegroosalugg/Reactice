@@ -43,7 +43,7 @@ export default function Checkout({ closeModal }) {
         </>
       )}
       <p className="modal-actions">
-          <Button text={!formSubmitted} onClick={() => closeModal(false)} label={formSubmitted ? "Okay" : "Close"} />
+          <Button text={!formSubmitted} onClick={() => closeModal()} label={formSubmitted ? "Okay" : "Close"} />
         {!formSubmitted && <Button type="submit" label="Submit" />}
       </p>
     </form>
