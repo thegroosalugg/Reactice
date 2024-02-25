@@ -1,21 +1,32 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../store/CartContext";
+import { updateOrders } from "../https";
 
-export default function CheckoutForm({ closeModal }) {
+export default function Checkout({ closeModal }) {
   const { cart, total } = useContext(CartContext);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
+    fetch("http://localhost:3000/orders", {
+    method: "POST",
+    body: JSON.stringify({ order: { items: cart, customer: { ...data, total: total(cart) } } }),
+    headers: { 'content-type': 'application/json' }
+  });
 
-    setFormSubmitted(true);
-    event.target.reset()
+  setFormSubmitted(true)
+    // try { // Call the updateOrders function with the cart and form data
+    //   await updateOrders({ items: cart, customer: { ...data, total: total(cart) }});
+
+    //   setFormSubmitted(true); // If updateOrders succeeds, set formSubmitted to true
+    //   event.target.reset(); // Reset the form
+    // } catch (error) {
+    //   console.error("Failed to update orders:", error.message);
+    // }
   }
-
 
   return (
     <form className="control" onSubmit={handleSubmit}>
@@ -29,7 +40,7 @@ export default function CheckoutForm({ closeModal }) {
         <>
           <div className="control">
             <label htmlFor="name">Full Name</label>
-            <input type="text" id="name" name="name" required/>
+            <input type="text" id="name" name="name" required />
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" required />
             <label htmlFor="street">Street</label>
@@ -54,7 +65,7 @@ export default function CheckoutForm({ closeModal }) {
         >
           {formSubmitted ? "Okay" : "Close"}
         </button>
-        {!formSubmitted && (<button className="button" type="submit">Submit</button>)}
+        {!formSubmitted && <button className="button" type="submit">Submit</button>}
       </p>
     </form>
   );

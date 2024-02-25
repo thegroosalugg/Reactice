@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Menu from "./components/Menu";
 import CartContextProvider from "./store/CartContext";
 import Cart from "./components/Cart";
-import CheckoutForm from "./components/CheckoutForm";
+import Checkout from "./components/Checkout";
 
 function App() {
   const [modalState, setModalState] = useState({ open: false, type: "cart" });
@@ -24,7 +24,7 @@ function App() {
         {modalState.open && (
           <>
             {modalState.type === "cart" && <Cart togglenModal={togglenModal} />}
-            {modalState.type === "form" && <CheckoutForm closeModal={togglenModal}/>}
+            {modalState.type === "form" && <Checkout closeModal={togglenModal}/>}
           </>
         )}
       </Modal>
