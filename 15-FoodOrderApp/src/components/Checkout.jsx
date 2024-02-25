@@ -11,21 +11,14 @@ export default function Checkout({ closeModal }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
-    fetch("http://localhost:3000/orders", {
-    method: "POST",
-    body: JSON.stringify({ order: { items: cart, customer: { ...data, total: total(cart) } } }),
-    headers: { 'content-type': 'application/json' }
-  });
+    try { // Call the updateOrders function with the cart and form data
+      await updateOrders({ items: cart, customer: { ...data, total: total(cart) }});
+      setFormSubmitted(true); // If updateOrders succeeds, set formSubmitted to true
+      event.target.reset(); // Reset the form
+    } catch (error) {
+      console.error("Failed to update orders:", error.message);
+    }
 
-  setFormSubmitted(true)
-    // try { // Call the updateOrders function with the cart and form data
-    //   await updateOrders({ items: cart, customer: { ...data, total: total(cart) }});
-
-    //   setFormSubmitted(true); // If updateOrders succeeds, set formSubmitted to true
-    //   event.target.reset(); // Reset the form
-    // } catch (error) {
-    //   console.error("Failed to update orders:", error.message);
-    // }
   }
 
   return (
