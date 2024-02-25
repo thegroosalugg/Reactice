@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../store/CartContext";
 import { updateOrders } from "../https";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 
 export default function Checkout({ closeModal }) {
   const { cart, total, clearCart } = useContext(CartContext);
@@ -15,11 +17,10 @@ export default function Checkout({ closeModal }) {
       await updateOrders({ items: cart, customer: { ...data, total: total(cart) }});
       setFormSubmitted(true); // If updateOrders succeeds, set formSubmitted to true
       event.target.reset(); // Reset the form
-      clearCart() // empty cart function in context
+      clearCart(); // empty cart function in context
     } catch (error) {
       console.error("Could not submit order", error.message);
     }
-
   }
 
   return (
@@ -32,34 +33,22 @@ export default function Checkout({ closeModal }) {
       </p>
       {!formSubmitted && (
         <>
-          <div className="control">
-            <label htmlFor="name">Full Name</label>
-            <input type="text" id="name" name="name" required />
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" required />
-            <label htmlFor="street">Street</label>
-            <input type="text" id="street" name="street" required />
-          </div>
+          <Input label="Full Name" id="name" />
+          <Input label="Email" id="email" type="email" />
+          <Input label="Street" id="street" />
           <div className="control-row">
-            <p>
-              <label htmlFor="postcode">Postcode</label>
-              <input type="text" id="postcode" name="postcode" required />
-            </p>
-            <p>
-              <label htmlFor="city">City</label>
-              <input type="text" id="city" name="city" required />
-            </p>
+            <Input label="Postcode" id="postcode" />
+            <Input label="City" id="city" />
           </div>
         </>
       )}
       <p className="modal-actions">
-        <button
-          className={formSubmitted ? "button" : "text-button"}
-          onClick={() => closeModal(false)}
-        >
-          {formSubmitted ? "Okay" : "Close"}
-        </button>
-        {!formSubmitted && <button className="button" type="submit">Submit</button>}
+        <Button
+          text={!formSubmitted}
+          onClick={() => closeModal()}
+          label={formSubmitted ? "Okay" : "Close"}
+        />
+        {!formSubmitted && <Button type="submit" label="Submit" />}
       </p>
     </form>
   );

@@ -13,7 +13,6 @@ export async function updateOrders({ items, customer }) {
   const response = await fetch("http://localhost:3000/orders", { // we can pass an object as a second argument to configure the request
     method: "POST", // HTTP method for handling request
     body: JSON.stringify({ order: { items, customer } }), // arrays are not accepted as data, so JSON stringify must be used
-    // it must also receive an object, and as the key value pair matches, only 'places' is set instead of '{ places: places }'
     headers: { 'content-type': 'application/json' } // informs the backend that JSON data is attached. Required for successful formatting
   });
 
