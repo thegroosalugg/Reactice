@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../store/CartContext";
+import Button from "../ui/Button";
 
 export default function Cart({ togglenModal}) {
   const { cart, updateCart, total } = useContext(CartContext);
@@ -14,9 +15,9 @@ export default function Cart({ togglenModal}) {
             <li key={meal.id} className="cart-item">
               <p>{meal.name} — {meal.quantity} x {(meal.quantity * meal.price).toFixed(2)}</p>
               <p className="cart-item-actions">
-                <button onClick={() => updateCart(meal, -1)}>-</button>
+                <Button label="-" onClick={() => updateCart(meal, -1)} />
                 <span>{meal.quantity}</span>
-                <button  onClick={() => updateCart(meal, 1)}>+</button>
+                <Button label="+"  onClick={() => updateCart(meal, 1)}/>
               </p>
             </li>
           ))}
@@ -24,8 +25,8 @@ export default function Cart({ togglenModal}) {
       )}
       <p className="cart-total">${total(cart)}</p>
       <p className="modal-actions">
-        <button className="text-button" onClick={() => togglenModal(false)}>Close</button>
-        {cart.length > 0 && <button className="button" onClick={() => togglenModal(true, "form")}>Checkout</button>}
+        <Button text label="Close" onClick={() => togglenModal(false)} />
+        {cart.length > 0 && <Button label="Checkout" onClick={() => togglenModal(true, "form")} />}
       </p>
     </div>
   );
