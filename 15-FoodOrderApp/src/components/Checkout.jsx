@@ -3,7 +3,7 @@ import { CartContext } from "../store/CartContext";
 import { updateOrders } from "../https";
 
 export default function Checkout({ closeModal }) {
-  const { cart, total } = useContext(CartContext);
+  const { cart, total, clearCart } = useContext(CartContext);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   async function handleSubmit(event) {
@@ -15,6 +15,7 @@ export default function Checkout({ closeModal }) {
       await updateOrders({ items: cart, customer: { ...data, total: total(cart) }});
       setFormSubmitted(true); // If updateOrders succeeds, set formSubmitted to true
       event.target.reset(); // Reset the form
+      clearCart() // empty cart function in context
     } catch (error) {
       console.error("Failed to update orders:", error.message);
     }

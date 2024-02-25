@@ -5,6 +5,7 @@ export const CartContext = createContext({ // creating default template provides
   addItem: () => {}, // empty dummy arrow function set as context default value
   updateCart: () => {},
   total: () => {},
+  clearCart: () => {}
 });
 
 export default function CartContextProvider({ children }) {
@@ -39,11 +40,16 @@ export default function CartContextProvider({ children }) {
     return cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
   }
 
+  function handleEmptyCart() {
+    setCartState([]);
+  }
+
   const contextValue = {
     cart: cartState,
     addItem: handleAddItems,
     updateCart: handleUpdateItems,
-    total: calculateCartTotal
+    total: calculateCartTotal,
+    clearCart: handleEmptyCart
   };
 
   return (
