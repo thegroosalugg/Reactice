@@ -11,7 +11,7 @@ export const CartContext = createContext({ // creating default template provides
 export default function CartContextProvider({ children }) {
   const [cartState, setCartState] = useState([]);
 
-  function handleAddItems(meal) {
+  function addItem(meal) {
     const itemIndex = cartState.findIndex((cartItem) => cartItem.id === meal.id); // returns existing item's index or -1
 
     if (itemIndex !== -1) { // if item already exists, its index will not be -1 and quantity is updated
@@ -23,7 +23,7 @@ export default function CartContextProvider({ children }) {
     }
   }
 
-  function handleUpdateItems(meal, quantity) {
+  function updateCart(meal, quantity) {
     const itemIndex = cartState.findIndex((cartItem) => cartItem.id === meal.id);
     const updatedCart = [...cartState];
 
@@ -36,20 +36,20 @@ export default function CartContextProvider({ children }) {
     setCartState(updatedCart);
   }
 
-  function calculateCartTotal(cart) {
+  function total(cart) {
     return cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
   }
 
-  function handleEmptyCart() {
+  function clearCart() {
     setCartState([]);
   }
 
   const contextValue = {
     cart: cartState,
-    addItem: handleAddItems,
-    updateCart: handleUpdateItems,
-    total: calculateCartTotal,
-    clearCart: handleEmptyCart
+    addItem,
+    updateCart,
+    total,
+    clearCart
   };
 
   return (
