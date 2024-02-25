@@ -4,6 +4,8 @@ export const CartContext = createContext({ // creating default template provides
   cart: [], // empty default value to match the useState inside the App component
   addItem: () => {}, // empty dummy arrow function set as context default value
   updateCart: () => {},
+  total: () => {},
+  clearCart: () => {}
 });
 
 export default function CartContextProvider({ children }) {
@@ -25,7 +27,7 @@ export default function CartContextProvider({ children }) {
     const itemIndex = cartState.findIndex((cartItem) => cartItem.id === meal.id);
     const updatedCart = [...cartState];
 
-    updatedCart[itemIndex].quantity += quantity;
+    updatedCart[itemIndex].quantity = Math.min(updatedCart[itemIndex].quantity + quantity, 9);
 
     if (updatedCart[itemIndex].quantity <= 0) {
       updatedCart.splice(itemIndex, 1);
@@ -34,10 +36,20 @@ export default function CartContextProvider({ children }) {
     setCartState(updatedCart);
   }
 
+  function calculateCartTotal(cart) {
+    return cart.map((meal) => meal.quantity * meal.price).reduce((acc, curr) => acc + curr, 0).toFixed(2)
+  }
+
+  function handleEmptyCart() {
+    setCartState([]);
+  }
+
   const contextValue = {
     cart: cartState,
     addItem: handleAddItems,
-    updateCart: handleUpdateItems
+    updateCart: handleUpdateItems,
+    total: calculateCartTotal,
+    clearCart: handleEmptyCart
   };
 
   return (

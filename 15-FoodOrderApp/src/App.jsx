@@ -1,29 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import CartContextProvider from "./store/CartContext";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
-  const [modalState, setModalState] = useState(false);
+  const [modalState, setModalState] = useState({ open: false, type: "cart" });
 
-  function openModal() {
-    setModalState(true);
+  function togglenModal(open, type = "cart") {
+    setModalState({ ...modalState, open, type });
   }
 
-  function closeModal() {
-    setModalState(false);
-  }
 
-  console.log("app")
+  useEffect(() => {
+    console.log("Modal state:", modalState);
+  }, [modalState]);
 
   return (
     <CartContextProvider>
-      <Modal open={modalState} closeModal={closeModal}>
-        <Cart />
+      <Modal {...modalState} closeModal={togglenModal}>
+        {modalState.open && (
+          <>
+            {modalState.type === "cart" && <Cart togglenModal={togglenModal} />}
+            {modalState.type === "form" && <Checkout closeModal={togglenModal}/>}
+          </>
+        )}
       </Modal>
-      <Header openCart={openModal} />
+      <Header openModal={togglenModal} />
       <Menu />
     </CartContextProvider>
   );

@@ -152,16 +152,13 @@ h1 {
 
 .cart-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  margin: 0.5rem 0;
+  height: 2rem;
 }
 
 .cart-item p {
-  margin: 0;
-  font-family: monospace;
-  font-size: 1rem;
-  white-space: pre-wrap;
+  margin-right: 25px;
 }
 
 .cart-item-actions {
@@ -208,6 +205,7 @@ h1 {
   padding: 0.5rem;
   border-radius: 4px;
   border: 1px solid #ccc;
+  margin-bottom: 1rem;
 }
 
 .control-row {
@@ -241,11 +239,17 @@ h1 {
   background-color: transparent;
   border: none;
   color: #ffc404;
+  transition: 0.5s ease;
 }
 
 .text-button:hover,
 .text-button:active {
   color: #e4ddd4;
+}
+
+.modal .text-button:hover,
+.modal .text-button:active {
+  color: #ff6347;
 }
 
 .modal {
@@ -272,6 +276,45 @@ h1 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .modal {
+    font-size: 0.3rem;
+  }
+
+  .modal button {
+    padding: 0.2rem;
+  }
+
+  .modal-actions {
+    gap: 0.1rem;
+  }
+
+
+  .cart h2 {
+    margin: 0;
+  }
+
+  .cart-item {
+    height: 0.8rem;
+  }
+
+  .cart-item-actions button{
+    cursor: pointer;
+    font-size: 0.3rem;
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  .cart-item-actions {
+    gap: 0.3rem;
+  }
+
+  .cart-total {
+    font-size: 0.4rem;
+    margin: 0 0.2rem;
   }
 }
 

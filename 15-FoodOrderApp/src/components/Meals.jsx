@@ -4,8 +4,6 @@ import { CartContext } from "../store/CartContext";
 export default function Meals({ meals, isLoading }) {
   const { addItem } = useContext(CartContext);
 
-  console.log("meals");
-
   return (
     <>
       {!isLoading && (
