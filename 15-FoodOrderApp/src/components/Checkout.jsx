@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../store/CartContext";
 import { updateOrders } from "../https";
-import Input from "./Input";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 
 export default function Checkout({ closeModal }) {
   const { cart, total, clearCart } = useContext(CartContext);
@@ -42,13 +43,8 @@ export default function Checkout({ closeModal }) {
         </>
       )}
       <p className="modal-actions">
-        <button
-          className={formSubmitted ? "button" : "text-button"}
-          onClick={() => closeModal(false)}
-        >
-          {formSubmitted ? "Okay" : "Close"}
-        </button>
-        {!formSubmitted && <button className="button" type="submit">Submit</button>}
+          <Button text={!formSubmitted} onClick={() => closeModal(false)} label={formSubmitted ? "Okay" : "Close"} />
+        {!formSubmitted && <Button type="submit" label="Submit" />}
       </p>
     </form>
   );
