@@ -17,7 +17,7 @@ export default function Checkout({ closeModal }) {
       event.target.reset(); // Reset the form
       clearCart() // empty cart function in context
     } catch (error) {
-      console.error("Failed to update orders:", error.message);
+      console.error("Could not submit order", error.message);
     }
 
   }
