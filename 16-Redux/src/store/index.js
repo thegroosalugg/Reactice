@@ -20,10 +20,25 @@ const counterSlice = createSlice({
   },
 });
 
-export const counterActions = counterSlice.actions
+const authState = { authorised: false };
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: authState,
+  reducers: {
+    toggle(state, action) {
+      state.authorised = action.payload; // receives true or false as argument. Is used as validator triggered by event listeners
+    },
+  },
+});
+
+export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 // configureStore expects an object with a reducer key. In a large component store you store an object with your other reducers inside
 // store states selected based on keys we name them, so in this store "state.counter.count" || "state.counter.display" || "state.counter.update()"
-const store = configureStore({ reducer: { counter: counterSlice.reducer } });
+const store = configureStore({ // configure multiple reducers and access them via state.reducerName
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+});
 export default store;
 
 // original redux-react reducer
@@ -31,7 +46,7 @@ export default store;
 // const counterReducer = (state = initialState, action) => {
 //   if (action.type === "update") {
 //     // when this 'type" of action is called, it expects to get an 'amount' and changes the state by that amount
-//     return { ...state, counter: state.counter + action.amount };
+//     return { ...state, count: state.count + action.amount };
 //   }
 
 //   if (action.type === "toggle") {
