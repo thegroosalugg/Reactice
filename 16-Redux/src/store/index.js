@@ -1,44 +1,16 @@
 // import { createStore } from "redux";
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import counterSlice from "./counter";
+import authSlice from "./auth";
 
 // redux store file. May be marked as depreciated but can still be used
 
-const initialState = { count: 0, display: true };
-
-// createSlice from Redux Toolkit
-const counterSlice = createSlice({
-  name: "counter", // name required
-  initialState,
-  reducers: {
-    // in create slice, we can manipulate the state directly as a copy will be made to ensure it remains inmutable
-    update(state, action) {
-      state.count += action.payload; // redux sets the value data we obtain as payload, it cannot be renamed
-    },
-    toggle(state) {
-      state.display = !state.display;
-    },
-  },
-});
-
-const authState = { authorised: false };
-
-const authSlice = createSlice({
-  name: "auth",
-  initialState: authState,
-  reducers: {
-    toggle(state, action) {
-      state.authorised = action.payload; // receives true or false as argument. Is used as validator triggered by event listeners
-    },
-  },
-});
-
-export const counterActions = counterSlice.actions;
-export const authActions = authSlice.actions;
 // configureStore expects an object with a reducer key. In a large component store you store an object with your other reducers inside
 // store states selected based on keys we name them, so in this store "state.counter.count" || "state.counter.display" || "state.counter.update()"
-const store = configureStore({ // configure multiple reducers and access them via state.reducerName
-  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
-});
+const store = configureStore({
+  // configure multiple reducers and access them via state.reducerName
+  reducer: { counter: counterSlice, auth: authSlice },
+});         // reducers outsourced to separate files and are exported/import then set as reducers here
 export default store;
 
 // original redux-react reducer

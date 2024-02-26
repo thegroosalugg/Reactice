@@ -1,5 +1,5 @@
 import classes from "./Counter.module.css";
-import { counterActions } from "../store";
+import { counterActions } from "../store/counter";
 import { useSelector, useDispatch } from "react-redux"; // import from react-dedux.
 // useSelector to grab any state data directly. useDispatch to call functions. connect to connect class based components with functions
 
