@@ -4,11 +4,8 @@ import { createStore } from "redux";
 
 // create a reducer function like in React. The state is given an initial value
 const counterReducer = (state = { counter: 0 }, action) => {
-  if (action.type === "plus") {
-    return { counter: state.counter + 1 };
-  }
-  if (action.type === "minus") {
-    return { counter: state.counter - 1 };
+  if (action.type === "counter") { // when this 'type" of action is called, it expects to get an 'amount' and changes the state by that amount
+    return { counter: state.counter + action.amount };
   }
 
   return state;

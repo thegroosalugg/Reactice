@@ -6,10 +6,7 @@ const Counter = () => {
   const dispatch = useDispatch(); // initialise dispatch function
 
   const increaseCounter = () => {
-    dispatch({ type: "plus" }); // call dispatch action sending an object with an action type
-  };
-  const decreaseCounter = () => {
-    dispatch({ type: "minus" });
+    dispatch({ type: "counter", amount: 1 }); // call dispatch action sending an object with an action type
   };
 
   const toggleCounterHandler = () => {};
@@ -21,7 +18,9 @@ const Counter = () => {
       <div>
                      {/* connect function to event listenders */}
         <button onClick={increaseCounter}>Plus</button>
-        <button onClick={decreaseCounter}>Minus</button>
+        {/* reducer functions can be pointed to by being stored in functions, or executed as arrow functions directly in event listeners */}
+        <button onClick={() => dispatch({ type: "counter", amount: 5 })}>Plus 5</button>
+        <button onClick={() => dispatch({ type: "counter", amount: -1 })}>Minus</button>
       </div>
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
     </main>
