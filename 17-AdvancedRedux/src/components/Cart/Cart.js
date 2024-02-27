@@ -15,7 +15,7 @@ const Cart = (props) => {
       {items.length > 0 && (
         <ul>
           {items.map((item) => (
-            <CartItem {...item} />
+            <CartItem key={item.id} {...item} />
           ))}
         </ul>
       )}
