@@ -1,10 +1,12 @@
 import CartButton from "../Cart/CartButton";
 import classes from "./MainHeader.module.css";
-import { useDispatch } from "react-redux"; // import from react-dedux.
+import { useSelector, useDispatch } from "react-redux"; // import from react-dedux.
 import { cartActions } from "../../store/cartReducer";
 
 const MainHeader = (props) => {
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.items)
+  const total = items.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <header className={classes.header}>
@@ -12,7 +14,7 @@ const MainHeader = (props) => {
       <nav>
         <ul>
           <li>
-            <CartButton onClick={() => dispatch(cartActions.show(true))} />
+            <CartButton total={total} onClick={() => dispatch(cartActions.show(true))} />
           </li>
         </ul>
       </nav>
