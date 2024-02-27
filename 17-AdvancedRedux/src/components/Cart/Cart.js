@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Cart = (props) => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items);
+  const total = items.reduce((total, { price, quantity }) => total + quantity * price, 0).toFixed(2);
 
   return (
     <Card className={classes.cart}>
@@ -19,7 +20,10 @@ const Cart = (props) => {
           ))}
         </ul>
       )}
-      <button onClick={() => dispatch(cartActions.show(false))}>Close</button>
+      <div className={classes["cart-total"]}>
+        <p>Total: ${total}</p>
+        <button onClick={() => dispatch(cartActions.show(false))}>Close</button>
+      </div>
     </Card>
   );
 };
