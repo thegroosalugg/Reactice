@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.items);
+  const items = useSelector(state => state.items);
   const total = items.reduce((total, { price, quantity }) => total + quantity * price, 0).toFixed(2);
 
   return (

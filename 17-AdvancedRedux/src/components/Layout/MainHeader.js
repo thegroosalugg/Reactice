@@ -5,7 +5,7 @@ import { cartActions } from "../../store/cartReducer";
 
 const MainHeader = (props) => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.items)
+  const items = useSelector(state => state.items)
   const total = items.reduce((total, item) => total + item.quantity, 0)
 
   return (
