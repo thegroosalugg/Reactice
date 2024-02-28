@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { items: [], display: false };
+const initialState = { items: [], display: false, mounted: false };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -19,6 +19,8 @@ const cartSlice = createSlice({
       } else {
         existingItem.quantity++;
       }
+
+      state.mounted = true; // ensures http requested are not sent on initial render when cart is first mounted via fetch
     },
 
     updateItem(state, action) {
@@ -29,6 +31,8 @@ const cartSlice = createSlice({
       if (state.items[index].quantity <= 0) { // quantity is zero, locate item in array again via index and use splice to delete the item from the items state
         state.items.splice(index, 1);
       }
+
+      state.mounted = true;
     },
 
     loadCart(state, action) {
