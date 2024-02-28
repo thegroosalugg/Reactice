@@ -4,7 +4,7 @@ import Notification from "./components/UI/Notification";
 import Products from "./components/Shop/Products";
 import Layout from "./components/Layout/Layout";
 import Cart from "./components/Cart/Cart";
-import { sendCartData } from "./store/cartSlice";
+import { fetchCartData, sendCartData } from "./store/cartRequests";
 
 let initialRender = true;
 
@@ -13,6 +13,10 @@ function App() {
   const cart = useSelector((state) => state.cart.items); // automatically subscribes to all changes to state
   const popup = useSelector((state) => state.ui.popup);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
 
   useEffect(() => {
     if (initialRender) {
