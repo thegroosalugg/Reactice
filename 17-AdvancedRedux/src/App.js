@@ -4,7 +4,7 @@ import Notification from "./components/UI/Notification";
 import Products from "./components/Shop/Products";
 import Layout from "./components/Layout/Layout";
 import Cart from "./components/Cart/Cart";
-import { uiActions } from "./store/uiSlice";
+import { sendCartData } from "./store/cartSlice";
 
 let initialRender = true;
 
@@ -15,52 +15,13 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // add reference /card.json to URL
-    const sendCartData = async () => {
-
-      dispatch( // update notification status
-        uiActions.status({
-          status: "pending",
-          title: "Pending",
-          message: "Sending request",
-        })
-      );
-
-      const response = await fetch(
-        "https://advanced-redux-ea825-default-rtdb.firebaseio.com/cart.json",
-        {
-          method: "PUT", // will overwrite existing data with new data
-          body: JSON.stringify(cart), // stringify the data to JSON format
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Sending data failed");
-      }
-
-      dispatch( // no errors, update notification
-        uiActions.status({
-          status: "success",
-          title: "Success",
-          message: "Request sent",
-        })
-      );
-    };
-
     if (initialRender) {
       initialRender = false; // this code will only run once
       return; // abort code and do not send request on initial render
     }
 
-    sendCartData().catch(error => // call the function and call .catch on it then define any erros you might catch
-      dispatch(
-        uiActions.status({
-          status: "error",
-          title: "Error",
-          message: "Failed to send request",
-        })
-      )
-    ); // dispatch will not change, but is set as dependency to remove warnings
+    dispatch(sendCartData(cart));
+    // dispatch will not change, but is set as dependency to remove warnings
   }, [cart, dispatch]); // request sent each time cart state changes
 
   return (
