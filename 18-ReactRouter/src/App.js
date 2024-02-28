@@ -6,13 +6,20 @@ import {
 } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Products from "./pages/Products";
+import RootLayouy from "./pages/Root";
 
 const router = createBrowserRouter([
   {
-    path: "/", // homepage path is empty. Specific pages come after /
-    element: <Homepage />, // element set to the imported component
+    path: "/",
+    element: <RootLayouy />, // import custom root component, declare it as a new route and set existing routes as its children
+    children: [
+      {
+        path: "/", // homepage path is empty. Specific pages come after /
+        element: <Homepage />, // element set to the imported component
+      },
+      { path: "/products", element: <Products /> },
+    ],
   },
-  { path: "/products", element: <Products /> },
 ]);
 
 // alternative syntax for handling the router
