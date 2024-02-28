@@ -4,7 +4,7 @@ const initialState = { items: [], display: false };
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState, // key value pairs automatically match. Redux Toolkit this key MUST be named 'initialState
   reducers: {
     show(state, action) {
       state.display = action.payload;
