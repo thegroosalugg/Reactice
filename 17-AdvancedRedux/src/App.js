@@ -6,6 +6,8 @@ import Layout from "./components/Layout/Layout";
 import Cart from "./components/Cart/Cart";
 import { uiActions } from "./store/uiSlice";
 
+let initialRender = true;
+
 function App() {
   const showCart = useSelector((state) => state.cart.display);
   const cart = useSelector((state) => state.cart.items); // automatically subscribes to all changes to state
@@ -15,13 +17,15 @@ function App() {
   useEffect(() => {
     // add reference /card.json to URL
     const sendCartData = async () => {
-      dispatch(
+
+      dispatch( // update notification status
         uiActions.status({
           status: "pending",
-          title: "pending",
+          title: "Pending",
           message: "Sending request",
         })
       );
+
       const response = await fetch(
         "https://advanced-redux-ea825-default-rtdb.firebaseio.com/cart.json",
         {
@@ -34,7 +38,7 @@ function App() {
         throw new Error("Sending data failed");
       }
 
-      dispatch(
+      dispatch( // no errors, update notification
         uiActions.status({
           status: "success",
           title: "Success",
@@ -43,7 +47,20 @@ function App() {
       );
     };
 
-    sendCartData();
+    if (initialRender) {
+      initialRender = false; // this code will only run once
+      return; // abort code and do not send request on initial render
+    }
+
+    sendCartData().catch(error => // call the function and call .catch on it then define any erros you might catch
+      dispatch(
+        uiActions.status({
+          status: "error",
+          title: "Error",
+          message: "Failed to send request",
+        })
+      )
+    ); // dispatch will not change, but is set as dependency to remove warnings
   }, [cart, dispatch]); // request sent each time cart state changes
 
   return (
