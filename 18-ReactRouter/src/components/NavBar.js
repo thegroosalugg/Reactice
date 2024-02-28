@@ -1,10 +1,11 @@
+import classes from "./MainNavigation.module.css"
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <header>
+    <header className={classes.header}>
       <nav>
-        <ul>
+        <ul className={classes.list}>
           <li>
             {/* Link ensures we only render the selected component without restarting whole app and states */}
             <Link to="/">Home</Link>
