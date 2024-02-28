@@ -1,6 +1,6 @@
 import classes from './CartItem.module.css';
 import { useDispatch } from 'react-redux';
-import { cartActions } from '../../store/cartReducer';
+import { cartActions } from '../../store/cartSlice';
 
 const CartItem = (props) => {
   const { id, title, quantity, price } = props; // Max's code uses destructing, so I went with it and spread the item as a prop

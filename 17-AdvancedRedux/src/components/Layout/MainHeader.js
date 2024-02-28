@@ -1,11 +1,11 @@
 import CartButton from "../Cart/CartButton";
 import classes from "./MainHeader.module.css";
 import { useSelector, useDispatch } from "react-redux"; // import from react-dedux.
-import { cartActions } from "../../store/cartReducer";
+import { cartActions } from "../../store/cartSlice";
 
 const MainHeader = (props) => {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.items)
+  const items = useSelector(state => state.cart.items)
   const total = items.reduce((total, item) => total + item.quantity, 0)
 
   return (

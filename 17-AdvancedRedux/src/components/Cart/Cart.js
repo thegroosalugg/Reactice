@@ -1,12 +1,12 @@
 import Card from "../UI/Card";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
-import { cartActions } from "../../store/cartReducer";
+import { cartActions } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.items);
+  const items = useSelector(state => state.cart.items);
   const total = items.reduce((total, { price, quantity }) => total + quantity * price, 0).toFixed(2);
 
   return (
