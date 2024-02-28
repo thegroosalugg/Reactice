@@ -9,9 +9,7 @@ import { fetchCartData, sendCartData } from "./store/cartRequests";
 let initialRender = true;
 
 function App() {
-  const showCart = useSelector((state) => state.cart.display);
-  const cart = useSelector((state) => state.cart.items); // automatically subscribes to all changes to state
-  const mounted = useSelector((state) => state.cart.mounted);
+  const { display, mounted, items } = useSelector((state) => state.cart);
   const popup = useSelector((state) => state.ui.popup);
 
   const dispatch = useDispatch();
@@ -27,16 +25,16 @@ function App() {
     }
 
     if (mounted) {
-      dispatch(sendCartData(cart));
+      dispatch(sendCartData(items));
     }
     // dispatch will not change, but is set as dependency to remove warnings
-  }, [cart, dispatch]); // request sent each time cart state changes
+  }, [items, mounted, dispatch]); // request sent each time cart state changes
 
   return (
     <Fragment>
       {popup && <Notification {...popup} />}
       <Layout>
-        {showCart && <Cart />}
+        {display && <Cart />}
         <Products />
       </Layout>
     </Fragment>
