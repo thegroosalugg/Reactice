@@ -1,6 +1,6 @@
 import classes from './EventItem.module.css';
 import { useParams } from 'react-router-dom';
-import { EVENTS } from '../pages/Events';
+import { EVENTS } from './EventsList';
 
 function EventItem() {
   const { eventId } = useParams();
@@ -17,7 +17,7 @@ function EventItem() {
       <h1>{event.title}</h1>
       <time>{event.date}</time>
       <p>{event.description}</p>
-      <p>{eventId}</p>
+      <p>page ID: {eventId}</p>
       <menu className={classes.actions}>
         <a href="edit">Edit</a>
         <button onClick={startDeleteHandler}>Delete</button>
