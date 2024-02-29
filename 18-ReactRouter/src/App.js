@@ -6,18 +6,21 @@ import {
 } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Products from "./pages/Products";
-import RootLayouy from "./pages/Root";
+import RootLayout from "./pages/Root";
 import ErrorPage from "./components/ErrorPage";
 import ProductDetails from "./pages/ProductDetails";
+
+// absolute paths begin with / and render directly after domain name
+// relatives path begin without / and render after the parent's path
 
 const router = createBrowserRouter([
   {
     path: "/", // empty path as default
-    element: <RootLayouy />, // import custom root component, declare it as a new route and set existing routes as its children
+    element: <RootLayout />, // import custom root component, declare it as a new route and set existing routes as its children
     errorElement: <ErrorPage />, // errorElement loads a custom component when user specifies incorrect URL
     children: [
       {
-        path: "/", // homepage path is empty. Specific pages come after /
+        index: true, // alternative is to set index: true to ensure this page loads when no paths specified, indexing this as the root page
         element: <Homepage />, // element set to the imported component
       },
       { path: "/products", element: <Products /> },
