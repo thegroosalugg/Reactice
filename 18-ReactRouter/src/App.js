@@ -7,11 +7,13 @@ import {
 import Homepage from "./pages/Homepage";
 import Products from "./pages/Products";
 import RootLayouy from "./pages/Root";
+import ErrorPage from "./components/ErrorPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", // empty path as default
     element: <RootLayouy />, // import custom root component, declare it as a new route and set existing routes as its children
+    errorElement: <ErrorPage />, // errorElement loads a custom component when user specifies incorrect URL
     children: [
       {
         path: "/", // homepage path is empty. Specific pages come after /

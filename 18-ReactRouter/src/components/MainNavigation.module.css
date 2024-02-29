@@ -21,3 +21,8 @@
   color: var(--color-primary-800);
   text-decoration: underline;
 }
+
+main {
+  margin: 2rem auto;
+  text-align: center;
+}
