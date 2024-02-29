@@ -1,17 +1,13 @@
-import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
+import NavButton from "./MainNavButton";
 
 function MainNavigation() {
   return (
     <header className={classes.header}>
       <nav>
         <ul className={classes.list}>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/events">Events</NavLink>
-          </li>
+          <NavButton path="/" name="Home" />
+          <NavButton path="/events" name="Events" />
         </ul>
       </nav>
     </header>
