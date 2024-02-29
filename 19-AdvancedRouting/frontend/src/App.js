@@ -4,6 +4,7 @@ import ErrorPage from "./components/Error";
 import HomePage from "./pages/Main";
 import EventItem from "./components/EventItem";
 import EventsList from "./components/EventsList";
+import EventLayout from "./pages/eventsRoot";
 
 const router = createBrowserRouter([
   {
@@ -12,8 +13,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "/events", element: <EventsList /> },
-      { path: "/events/:eventId", element: <EventItem /> },
+      {
+        path: "events",
+        element: <EventLayout />,
+        children: [
+          { index: true, element: <EventsList /> },
+          { path: ":eventId", element: <EventItem /> },
+        ],
+      },
     ],
   },
 ]);
