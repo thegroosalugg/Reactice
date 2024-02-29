@@ -1,5 +1,5 @@
-import classes from "./MainNavigation.module.css"
-import { Link } from "react-router-dom";
+import classes from "./MainNavigation.module.css";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -8,10 +8,22 @@ export default function NavBar() {
         <ul className={classes.list}>
           <li>
             {/* Link ensures we only render the selected component without restarting whole app and states */}
-            <Link to="/">Home</Link>
+            <NavLink
+              to="/" // isActive is a built-in react-router prop, it checks if the URL matches the current path and returns a boolean
+              className={({ isActive }) => (isActive ? classes.active : null)}
+              // end // using an 'end' prop ensures that the home path doesn't remain actuve from partial path matches
+              // however it is not required here as it does not remain active
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/products">Products</Link>
+            <NavLink
+              to="/products"
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Products
+            </NavLink>
           </li>
         </ul>
       </nav>
