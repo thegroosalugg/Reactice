@@ -1,11 +1,12 @@
 import classes from './EventItem.module.css';
-import { useParams } from 'react-router-dom';
-import { EVENTS } from './EventsList';
+import { useParams, useLoaderData } from 'react-router-dom';
 
 function EventItem() {
   const { eventId } = useParams();
+  const events = useLoaderData();
+  console.log("Child:", events)
 
-  const event = EVENTS.find((event) => event.id === eventId);
+  const event = events.find((event) => event.id === eventId);
 
   function startDeleteHandler() {
     // ...
