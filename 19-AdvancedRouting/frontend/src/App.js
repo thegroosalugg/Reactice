@@ -6,6 +6,18 @@ import EventItem from "./components/EventItem";
 import EventsList from "./components/EventsList";
 import EventLayout from "./pages/eventsRoot";
 
+const fetchBackend = async () => {
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+    // ...
+  } else {
+    // const resData = await response.json();
+    // return resData.events;
+    return response; // can just return response directly in loaders
+  }
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,27 +32,11 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsList />,
-            loader: async () => { // loader takes a function and returns data, can be called from any component
-              const response = await fetch("http://localhost:8080/events");
-
-              if (!response.ok) {
-                // ...
-              } else {
-                const resData = await response.json();
-                return resData.events;
-              }
-            },
+            loader: fetchBackend  // loader takes a function and returns data, can be called from parent & children
           },
-          { path: ":eventId", element: <EventItem />,             loader: async () => {
-            const response = await fetch("http://localhost:8080/events");
-
-            if (!response.ok) {
-              // ...
-            } else {
-              const resData = await response.json();
-              return resData.events;
-            }
-          }, },
+          { path: ":eventId", element: <EventItem />, loader: fetchBackend },
+          // loading data twice in each sibling, as non parent/child relationship. Only in this app to test features, in real setting would not fetch in each component
+          // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
         ],
       },
     ],
@@ -51,22 +47,3 @@ function App() {
   return <RouterProvider router={router} />;
 }
 export default App;
-// 1. Add five new (dummy) page components (content can be simple <h1> elements)
-//    - HomePage
-//    - EventsPage
-//    - EventDetailPage
-//    - NewEventPage
-//    - EditEventPage
-// 2. Add routing & route definitions for these five pages
-//    - / => HomePage
-//    - /events => EventsPage
-//    - /events/<some-id> => EventDetailPage
-//    - /events/new => NewEventPage
-//    - /events/<some-id>/edit => EditEventPage
-// 3. Add a root layout that adds the <MainNavigation> component above all page components
-// 4. Add properly working links to the MainNavigation
-// 5. Ensure that the links in MainNavigation receive an "active" class when active
-// 6. Output a list of dummy events to the EventsPage
-//    Every list item should include a link to the respective EventDetailPage
-// 7. Output the ID of the selected event on the EventDetailPage
-// BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components

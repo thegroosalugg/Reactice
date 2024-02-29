@@ -1,10 +1,11 @@
-import classes from './EventItem.module.css';
-import { useParams, useLoaderData } from 'react-router-dom';
+import classes from "./EventItem.module.css";
+import { useParams, useLoaderData } from "react-router-dom";
 
 function EventItem() {
   const { eventId } = useParams();
-  const events = useLoaderData();
-  console.log("Child:", events)
+  const { events } = useLoaderData(); // response data is an object with an events key
+  
+  console.log("Child:", events);
 
   const event = events.find((event) => event.id === eventId);
 
