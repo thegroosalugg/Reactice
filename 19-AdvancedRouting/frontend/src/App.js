@@ -3,7 +3,7 @@ import RootLayout from "./pages/root";
 import ErrorPage from "./components/Error";
 import HomePage from "./pages/Main";
 import EventsPage from "./pages/Events";
-import EventDetailPage from "./pages/EventDetail";
+import EventItem from "./components/EventItem";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "/events", element: <EventsPage /> },
-      { path: "/events/:eventId", element: <EventDetailPage /> },
+      { path: "/events/:eventId", element: <EventItem /> },
     ],
   },
 ]);
