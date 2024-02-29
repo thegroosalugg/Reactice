@@ -11,7 +11,7 @@ export default function NavBar() {
             <NavLink
               to="/" // isActive is a built-in react-router prop, it checks if the URL matches the current path and returns a boolean
               className={({ isActive }) => (isActive ? classes.active : null)}
-              // end // using an 'end' prop ensures that the home path doesn't remain actuve from partial path matches
+              // end // using an 'end' prop ensures that the home path doesn't remain active from partial path matches, i.e. from children
               // however it is not required here as it does not remain active
             >
               Home

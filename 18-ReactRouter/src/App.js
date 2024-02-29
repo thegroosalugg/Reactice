@@ -8,6 +8,7 @@ import Homepage from "./pages/Homepage";
 import Products from "./pages/Products";
 import RootLayouy from "./pages/Root";
 import ErrorPage from "./components/ErrorPage";
+import ProductDetails from "./pages/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
         element: <Homepage />, // element set to the imported component
       },
       { path: "/products", element: <Products /> },
+      // adding a :colon signals react-router that this is a dynamic path. Can be named anything. Dynamically renders based on dynamic content
+      { path: "/products/:customPath", element: <ProductDetails /> },
     ],
   },
 ]);
