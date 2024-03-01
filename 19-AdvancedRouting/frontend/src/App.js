@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <EventLayout />,
         children: [
           { index: true, element: <EventsList />, loader: fetchBackend  }, // loader takes a function and returns data, can be called from parent & children
-          { path: ":eventIdFromRouter", element: <EventItem />, loader: fetchBackend },
+          { path: ":eventIdFromRouter", element: <EventItem />, loader: loadEvent },
           // loading data twice in each sibling, as non parent/child relationship. Only in this app to test features, in real setting would not fetch in each component
           // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
         ],

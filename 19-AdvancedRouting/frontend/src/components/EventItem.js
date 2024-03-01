@@ -3,11 +3,9 @@ import { useParams, useLoaderData, json } from "react-router-dom";
 
 export default function EventItem() {
   const { eventIdFromRouter } = useParams();
-  const { events } = useLoaderData(); // response data is an object with an events key
+  const { event } = useLoaderData(); // response data is an object with an events key
 
-  console.log("Child:", events);
-
-  const event = events.find((event) => event.id === eventIdFromRouter);
+  console.log("Child:", event);
 
   function startDeleteHandler() {
     // ...
@@ -33,13 +31,17 @@ export default function EventItem() {
 }
 
 // can't get this to work yet
-export async function loadEvent(request, params) {
-  const id = params.eventIdFromRouter
+export async function loadEvent({ request, params }) {
+  const id = params.eventIdFromRouter;
 
-  const response = await fetch("http://localhost:8080/events" + id)
+  const response = await fetch("http://localhost:8080/events/" + id);
 
   if (!response.ok) {
-    throw json({ title: "Huh?!", message: "You wanna go where now?" }, { status: 500 });
+    console.log(response)
+    throw json(
+      { title: "Huh?!", message: "You wanna go where now?" },
+      { status: 500 }
+    );
   } else {
     return response;
   }
