@@ -10,7 +10,9 @@ const fetchBackend = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    // ...
+    throw new Response(JSON.stringify({ message: "Could not fetch data..." }), {
+      status: 500, // response thrown to error component if status detected
+    });
   } else {
     // const resData = await response.json();
     // return resData.events;
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />, // as parent page, will be loaded as primary component to handle any types of error
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsList />,
-            loader: fetchBackend  // loader takes a function and returns data, can be called from parent & children
+            loader: fetchBackend, // loader takes a function and returns data, can be called from parent & children
           },
           { path: ":eventId", element: <EventItem />, loader: fetchBackend },
           // loading data twice in each sibling, as non parent/child relationship. Only in this app to test features, in real setting would not fetch in each component

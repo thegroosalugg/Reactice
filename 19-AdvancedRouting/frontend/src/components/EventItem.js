@@ -4,7 +4,7 @@ import { useParams, useLoaderData } from "react-router-dom";
 function EventItem() {
   const { eventId } = useParams();
   const { events } = useLoaderData(); // response data is an object with an events key
-  
+
   console.log("Child:", events);
 
   const event = events.find((event) => event.id === eventId);
@@ -15,10 +15,14 @@ function EventItem() {
 
   return (
     <article className={classes.event}>
-      <img src={event.image} alt={event.title} />
-      <h1>{event.title}</h1>
-      <time>{event.date}</time>
-      <p>{event.description}</p>
+      {event && (
+        <>
+          <img src={event.image} alt={event.title} />
+          <h1>{event.title}</h1>
+          <time>{event.date}</time>
+          <p>{event.description}</p>
+        </>
+      )}
       <p>page ID: {eventId}</p>
       <menu className={classes.actions}>
         <a href="edit">Edit</a>
