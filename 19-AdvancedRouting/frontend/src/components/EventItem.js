@@ -1,9 +1,10 @@
 import classes from "./EventItem.module.css";
-import { useParams, useLoaderData, json, Link } from "react-router-dom";
+import { useParams, json, Link, useRouteLoaderData } from "react-router-dom";
 
 export default function EventItem() {
   const { eventIdFromRouter } = useParams();
-  const { event } = useLoaderData(); // response data is an object with an event key
+  // const { event } = useLoaderData(); // response data is an object with an event key
+  const { event } = useRouteLoaderData("event-info") // useLoaderData searches only current route, when accessing parent data, we useRouteLoaderData
 
   console.log("Child:", event);
 

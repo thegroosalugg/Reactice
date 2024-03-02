@@ -19,18 +19,15 @@ const router = createBrowserRouter([
         element: <EventLayout />,
         children: [
           { index: true, element: <EventsList />, loader: fetchBackend }, // loader takes a function and returns data, can be called from parent & children
-          { path: ":eventIdFromRouter",
+          {
+            path: ":eventIdFromRouter",
+            id: "event-info", // required for children to useRouteLoaderData and access this loader
             loader: loadEvent, // this doesn't work. Returns undefined when disabling below loaders and trying to access this LoaderData
             children: [
-              { index: true, element: <EventItem />,
-                loader: loadEvent // this works with useLoaderData directly in the component
-              },
-              { path: "edit", element: <EventForm />,
-                loader: loadEvent // this works the same as EventItem
-            },
+              { index: true, element: <EventItem /> },
+              { path: "edit", element: <EventForm /> },
             ],
-          },
-          // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
+          }, // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
         ],
       },
     ],
