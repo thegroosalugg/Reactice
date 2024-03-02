@@ -5,7 +5,8 @@ import HomePage from "./pages/Main";
 import EventItem, { loadEvent } from "./components/EventItem";
 import EventsList, { fetchBackend } from "./components/EventsList";
 import EventLayout from "./pages/eventsRoot";
-import EventForm from "./components/EventForm";
+import EditEventPage from "./pages/EditEvent";
+import NewEventPage from "./pages/NewEvent";
 
 const router = createBrowserRouter([
   {
@@ -25,9 +26,10 @@ const router = createBrowserRouter([
             loader: loadEvent, // this doesn't work. Returns undefined when disabling below loaders and trying to access this LoaderData
             children: [
               { index: true, element: <EventItem /> },
-              { path: "edit", element: <EventForm /> },
+              { path: "edit", element: <EditEventPage /> },
             ],
           }, // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
+          { path: "new", element: <NewEventPage /> },
         ],
       },
     ],

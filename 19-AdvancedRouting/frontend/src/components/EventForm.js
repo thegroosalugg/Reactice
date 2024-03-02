@@ -1,10 +1,9 @@
-import { useNavigate, useRouteLoaderData } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 import Input from '../ui/Input';
 
-function EventForm({ method }) {
-  const { event } = useRouteLoaderData("event-info")
+function EventForm({ event, method }) {
   const navigate = useNavigate();
 
   function cancelHandler() {
@@ -16,7 +15,7 @@ function EventForm({ method }) {
       <Input id="title" type="text" event={event} />
       <Input id="image" type="url"  event={event} />
       <Input id="date"  type="date" event={event} />
-      <Input text id="description" rows="5" event={event} />
+      <Input id="description" text  event={event} rows="4" />
       <div className={classes.actions}>
         <button type="button" onClick={cancelHandler}>
           Cancel
