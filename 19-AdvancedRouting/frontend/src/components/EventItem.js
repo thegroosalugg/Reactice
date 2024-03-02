@@ -1,9 +1,9 @@
 import classes from "./EventItem.module.css";
-import { useParams, useLoaderData, json } from "react-router-dom";
+import { useParams, useLoaderData, json, Link } from "react-router-dom";
 
 export default function EventItem() {
   const { eventIdFromRouter } = useParams();
-  const { event } = useLoaderData(); // response data is an object with an events key
+  const { event } = useLoaderData(); // response data is an object with an event key
 
   console.log("Child:", event);
 
@@ -23,7 +23,7 @@ export default function EventItem() {
       )}
       <p>page ID: {eventIdFromRouter}</p>
       <menu className={classes.actions}>
-        <a href="edit">Edit</a>
+        <Link to="edit">Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>
       </menu>
     </article>

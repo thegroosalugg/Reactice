@@ -5,6 +5,7 @@ import HomePage from "./pages/Main";
 import EventItem, { loadEvent } from "./components/EventItem";
 import EventsList, { fetchBackend } from "./components/EventsList";
 import EventLayout from "./pages/eventsRoot";
+import EventForm from "./components/EventForm";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <EventsList />, loader: fetchBackend  }, // loader takes a function and returns data, can be called from parent & children
           { path: ":eventIdFromRouter", element: <EventItem />, loader: loadEvent },
+          { path: ":eventIdFromRouter/edit", element: <EventForm /> },
           // loading data twice in each sibling, as non parent/child relationship. Only in this app to test features, in real setting would not fetch in each component
           // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
         ],
