@@ -1,5 +1,12 @@
 {
   "events": [
+     {
+      "title": "Chugging",
+      "image": "https://thumbs.dreamstime.com/z/bottles-famous-global-beer-brands-poznan-pol-mar-including-heineken-becks-bud-miller-corona-stella-artois-san-miguel-143170440.jpg",
+      "date": "2028-12-09",
+      "description": "drown in liquor",
+      "id": "3eba5d8d-3eb4-4902-8ff7-1487dd00b572"
+    },
     {
       "id": "e671",
       "title": "Standing",

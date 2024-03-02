@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 import Input from '../ui/Input';
@@ -11,7 +11,8 @@ function EventForm({ event, method }) {
   }
 
   return (
-    <form className={classes.form}>
+    // Form is a React-Router hook, it will take the submit HTTP req data and send it to your action. Name field required on all inputs
+    <Form method="post" className={classes.form}>
       <Input id="title" type="text" event={event} />
       <Input id="image" type="url"  event={event} />
       <Input id="date"  type="date" event={event} />
@@ -22,7 +23,7 @@ function EventForm({ event, method }) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 }
 
