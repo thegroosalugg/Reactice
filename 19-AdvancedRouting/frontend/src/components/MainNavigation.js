@@ -1,5 +1,5 @@
 import classes from "./MainNavigation.module.css";
-import NavButton from "./MainNavButton";
+import NavButton from "../ui/MainNavButton";
 
 function MainNavigation() {
   return (

@@ -1,5 +1,5 @@
 import classes from './EventsNavigation.module.css';
-import NavButton from './MainNavButton';
+import NavButton from '../ui/MainNavButton';
 
 function EventsNavigation() {
   return (
