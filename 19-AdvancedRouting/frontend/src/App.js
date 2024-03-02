@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/root";
 import ErrorPage from "./components/Error";
 import HomePage from "./pages/Main";
-import EventItem, { deleteEvent, loadEvent } from "./components/EventItem";
+import EventInfoPage, { deleteEvent, loadEvent } from "./pages/EventInfo";
 import EventsList, { fetchBackend } from "./components/EventsList";
 import EventLayout from "./pages/eventsRoot";
 import EditEventPage from "./pages/EditEvent";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             id: "event-info", // required for children to useRouteLoaderData and access this loader
             loader: loadEvent, // this doesn't work. Returns undefined when disabling below loaders and trying to access this LoaderData
             children: [
-              { index: true, element: <EventItem />, action: deleteEvent }, // programatically triggers via useSubmit. Sends HTTP delete request to backend
+              { index: true, element: <EventInfoPage />, action: deleteEvent }, // programatically triggers via useSubmit. Sends HTTP delete request to backend
               { path: "edit", element: <EditEventPage /> },
             ],
           }, // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
