@@ -1,10 +1,13 @@
-import { Form, useNavigate } from 'react-router-dom';
+import { Form, useNavigate, useNavigation } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 import Input from '../ui/Input';
 
 function EventForm({ event, method }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // used to navigate to a specific route
+  const navigation = useNavigation(); // used to check on the state of a request
+
+  const submitting = navigation.state === "submitting" // will be true during state changes
 
   function cancelHandler() {
     navigate('..');
@@ -18,10 +21,10 @@ function EventForm({ event, method }) {
       <Input id="date"  type="date" event={event} />
       <Input id="description" text  event={event} rows="4" />
       <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
+        <button disabled={submitting} type="button" onClick={cancelHandler}>
           Cancel
         </button>
-        <button>Save</button>
+        <button disabled={submitting}>{submitting ? "Sending..." : "Save"}</button>
       </div>
     </Form>
   );
