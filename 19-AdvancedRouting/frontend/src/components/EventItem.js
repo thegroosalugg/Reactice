@@ -30,7 +30,6 @@ export default function EventItem() {
   );
 }
 
-// can't get this to work yet
 export async function loadEvent({ request, params }) {
   const id = params.eventIdFromRouter;
 
@@ -41,8 +40,9 @@ export async function loadEvent({ request, params }) {
     throw json(
       { title: "Huh?!", message: "You wanna go where now?" },
       { status: 500 }
-    );
-  } else {
-    return response;
-  }
+      );
+    } else {
+      console.log(response)
+      return response;
+    }
 }
