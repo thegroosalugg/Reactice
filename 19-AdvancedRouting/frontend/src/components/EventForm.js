@@ -4,7 +4,8 @@ import classes from './EventForm.module.css';
 import Input from '../ui/Input';
 
 function EventForm({ event, method }) {
-  const data = useActionData(); // fetches response data from actions in this route.
+  // fetches response data from actions in this route.
+  const { errors } = useActionData() || {}; // destructured so could come back undefined causing error. If no error empty object keeps things in check
   // eventForm is without a route, its child of NewEvent & EditEvent, but the action is only on NewEvent route
   const navigate = useNavigate(); // used to navigate to a specific route
   const navigation = useNavigation(); // used to check on the state of a request
@@ -18,17 +19,18 @@ function EventForm({ event, method }) {
   return (
     // Form is a React-Router hook, it will take the submit HTTP req data and send it to your action. Name field required on all inputs
     <Form method="post" className={classes.form}>
-      {data && data.errors && (
+      {/* prints all errors from the object in a list */}
+      {/* {errors && (
         <ul>
-          {Object.values(data.errors).map((error) =>
+          {Object.values(errors).map((error) =>
           <li key={error}>{error}</li>
           )}
         </ul>
-      )}
-      <Input id="title" type="text" event={event} />
-      <Input id="image" type="url"  event={event} />
-      <Input id="date"  type="date" event={event} />
-      <Input id="description" text  event={event} rows="4" />
+      )} */}
+      <Input id="title" type="text" event={event} errors={errors} />
+      <Input id="image" type="url"  event={event} errors={errors} />
+      <Input id="date"  type="date" event={event} errors={errors} />
+      <Input id="description" text  event={event} errors={errors} rows="4" />
       <div className={classes.actions}>
         <button disabled={submitting} type="button" onClick={cancelHandler}>
           Cancel
