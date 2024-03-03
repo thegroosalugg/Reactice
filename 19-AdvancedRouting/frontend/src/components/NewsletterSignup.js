@@ -8,6 +8,7 @@ function NewsletterSignup() {
 
   useEffect(() => {
     if (state === "idle" && data && data.message) {
+      console.log(data)
       window.alert(data.message) // retrieve message from NewsletterPage signUp action function
     }
   }, [state, data]) // will re-execute with any state or data changes
@@ -17,9 +18,11 @@ function NewsletterSignup() {
     // fetcher's form will trigger an action without initialising a route transition
     <fetcher.Form method="post" action="/newsletter" className={classes.newsletter}>
       <input
+        name="email"
         type="email"
         placeholder="Sign up for newsletter..."
         aria-label="Sign up for newsletter"
+        required
       />
       <button>Sign up</button>
     </fetcher.Form>
