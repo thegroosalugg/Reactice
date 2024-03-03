@@ -20,8 +20,12 @@ export async function sendData({ request, params }) {
     body: JSON.stringify(eventData)
   })
 
+  if (response.status === 422) { // activate server side validation on the backend
+    return response // return prevents redirect below, keep client on page, keep input data, display server side validations
+  }
+
   if (!response.ok) {
-    throw json({title: "Updating failed", message: "Didn't manage to upload data"}, {status: 500})
+    throw json({title: "Updating failed", message: "Didn't manage to save data"}, {status: 500})
   }
 
   return redirect("/events") // react router hook that will redirect to specified path on completopn, i.e. away from form page
