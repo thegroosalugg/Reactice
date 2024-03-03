@@ -3,12 +3,12 @@ import RootLayout from "./pages/root";
 import ErrorPage from "./components/Error";
 import HomePage from "./pages/Main";
 import EventInfoPage, { deleteEvent, loadEvent } from "./pages/EventInfo";
-import EventsList, { fetchBackend } from "./components/EventsList";
 import EventLayout from "./pages/eventsRoot";
 import EditEventPage from "./pages/EditEvent";
 import NewEventPage from "./pages/NewEvent";
 import { updateEvent } from "./components/EventForm";
 import NewsletterPage, { signUp } from "./pages/Newsletter";
+import EventsPage, { deferEvents as loadEvents } from "./pages/Events";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         path: "events", // path is relative to parent
         element: <EventLayout />,
         children: [
-          { index: true, element: <EventsList />, loader: fetchBackend }, // loader takes a function and returns data, can be called from parent & children
+          { index: true, element: <EventsPage />, loader: loadEvents }, // loader takes a function and returns data, can be called from parent & children
           {
             path: ":eventIdFromRouter",
             id: "event-info", // required for children to useRouteLoaderData and access this loader
