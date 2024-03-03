@@ -8,6 +8,7 @@ import EventLayout from "./pages/eventsRoot";
 import EditEventPage from "./pages/EditEvent";
 import NewEventPage from "./pages/NewEvent";
 import { updateEvent } from "./components/EventForm";
+import NewsletterPage, { signUp } from "./pages/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
           }, // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
           { path: "new", element: <NewEventPage />, action: updateEvent }, // executes action function when form data submitted
         ],
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: signUp,
       },
     ],
   },

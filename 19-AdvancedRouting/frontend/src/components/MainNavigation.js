@@ -1,5 +1,6 @@
 import classes from "./MainNavigation.module.css";
 import NavButton from "../ui/MainNavButton";
+import NewsletterSignup from "./NewsletterSignup";
 
 function MainNavigation() {
   return (
@@ -8,8 +9,10 @@ function MainNavigation() {
         <ul className={classes.list}>
           <NavButton path="/" name="Home" />
           <NavButton path="/events" name="Events" />
+          <NavButton path="/newsletter" name="Newsletter" />
         </ul>
       </nav>
+      <NewsletterSignup />
     </header>
   );
 }
