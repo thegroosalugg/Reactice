@@ -10,7 +10,7 @@ export default function EventInfoPage() {
   return <EventItem event={event} />
 }
 
-export async function loadEvent({ request, params }) {
+export async function loader({ request, params }) {
   const id = params.eventIdFromRouter;
 
   const response = await fetch("http://localhost:8080/events/" + id);
@@ -27,7 +27,7 @@ export async function loadEvent({ request, params }) {
     }
 }
 
-export async function deleteEvent({ request, params }) {
+export async function action({ request, params }) {
   const id = params.eventIdFromRouter;
 
   const response = await fetch("http://localhost:8080/events/" + id, { method: request.method }); // configuration extracts method from useSubmit above

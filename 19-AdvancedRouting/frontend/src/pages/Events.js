@@ -35,7 +35,7 @@ const loadEvents = async () => {
   }
 };
 
-export function deferEvents() {
+export function loader() {
   // loadEvents() is executed(), not pointed to
   return defer({ events: loadEvents() }); // must pass an object as argument, the response.events will hold the events data
 } // the object's value must be a promise, the awaited response in the async function

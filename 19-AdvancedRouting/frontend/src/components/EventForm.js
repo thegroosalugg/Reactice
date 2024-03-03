@@ -41,7 +41,7 @@ export default function EventForm({ event, method }) {
   );
 }
 
-export async function updateEvent({ request, params }) {
+export async function action({ request, params }) {
   const data = await request.formData(); // used for processing the response of a fetch request, if the expected data comes from a form
   const eventData = { // construct a new object and use .get and point to the input field names to extract the data
     title: data.get("title"),

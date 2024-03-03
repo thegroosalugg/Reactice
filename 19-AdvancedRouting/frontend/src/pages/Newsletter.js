@@ -10,7 +10,7 @@ export default function NewsletterPage() {
   );
 }
 
-export async function signUp({ request }) {
+export async function action({ request }) {
   const data = await request.formData();
   const email = data.get("email");
 

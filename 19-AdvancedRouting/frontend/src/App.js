@@ -2,13 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/root";
 import ErrorPage from "./components/Error";
 import HomePage from "./pages/Main";
-import EventInfoPage, { deleteEvent, loadEvent } from "./pages/EventInfo";
+import EventInfoPage, { action as deleteEvent, loader as loadEvent } from "./pages/EventInfo";
 import EventLayout from "./pages/eventsRoot";
 import EditEventPage from "./pages/EditEvent";
 import NewEventPage from "./pages/NewEvent";
-import { updateEvent } from "./components/EventForm";
-import NewsletterPage, { signUp } from "./pages/Newsletter";
-import EventsPage, { deferEvents as loadEvents } from "./pages/Events";
+import { action as updateEvent } from "./components/EventForm";
+import NewsletterPage, { action as signUp } from "./pages/Newsletter";
+import EventsPage, { loader as loadEvents } from "./pages/Events";
 
 const router = createBrowserRouter([
   {
