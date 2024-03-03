@@ -1,11 +1,32 @@
 {
   "events": [
     {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
+      "title": "Standing",
       "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
+      "date": "2036-06-13",
+      "description": "Stand with us",
+      "id": "1167ae09-2e8a-4d30-a57c-7bbc63171bd3"
+    },
+    {
+      "id": "e382",
+      "title": "Running",
+      "date": "2026-09-13",
+      "image": "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "description": "Gota go fast"
+    },
+    {
+      "id": "e945",
+      "title": "Crouching",
+      "date": "2024-10-01",
+      "image": "https://images.pexels.com/photos/462162/pexels-photo-462162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "description": "Get down"
+    },
+    {
+      "title": "Swimming",
+      "image": "https://images.pexels.com/photos/273886/pexels-photo-273886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "date": "2024-10-01",
+      "description": "Go with the flow",
+      "id": "e104"
     }
   ]
 }

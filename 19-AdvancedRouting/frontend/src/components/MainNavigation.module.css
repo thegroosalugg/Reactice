@@ -3,7 +3,7 @@
   margin: auto;
   padding: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .list {
@@ -16,7 +16,6 @@
   color: var(--color-primary-400);
 }
 
-.list a:hover,
-.list a.active {
+.list a:hover {
   color: var(--color-primary-800);
 }
