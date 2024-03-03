@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function EventsPage() {
   const { events } = useLoaderData();
 
-  console.log("Parent:", events);
+  console.log("EVENTSPAGE, Promise:", events);
 
   return (
     // Suspense is a React (not ROuter) hook which must wrap Await and provides fallback data whilst the fetched data is awaited
@@ -18,7 +18,7 @@ export default function EventsPage() {
   );
 }
 
-const loadEvents = async () => {
+export const loadEvents = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {

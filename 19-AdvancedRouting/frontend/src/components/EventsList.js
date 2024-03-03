@@ -8,7 +8,8 @@ export default function EventsList({ events }) {
       <ul className={classes.list}>
         {events.map((event) => (
           <li key={event.id} className={classes.item}>
-            <Link to={event.id}>
+            {/* usually you can link to event.id, but since this component is now rendered elsewhere, an absolute path is required */}
+            <Link to={`/events/${event.id}`}>
               <img src={event.image} alt={event.title} />
               <div className={classes.content}>
                 <h2>{event.title}</h2>
