@@ -6,7 +6,8 @@ import EventInfoPage, { deleteEvent, loadEvent } from "./pages/EventInfo";
 import EventsList, { fetchBackend } from "./components/EventsList";
 import EventLayout from "./pages/eventsRoot";
 import EditEventPage from "./pages/EditEvent";
-import NewEventPage, { sendData } from "./pages/NewEvent";
+import NewEventPage from "./pages/NewEvent";
+import { updateEvent } from "./components/EventForm";
 
 const router = createBrowserRouter([
   {
@@ -26,10 +27,10 @@ const router = createBrowserRouter([
             loader: loadEvent, // this doesn't work. Returns undefined when disabling below loaders and trying to access this LoaderData
             children: [
               { index: true, element: <EventInfoPage />, action: deleteEvent }, // programatically triggers via useSubmit. Sends HTTP delete request to backend
-              { path: "edit", element: <EditEventPage /> },
+              { path: "edit", element: <EditEventPage />, action: updateEvent },
             ],
           }, // when using context, you can update the context once data loaded, but refreshing the eventID page does not trigger the parent to fetch the data again, so the context is empty and leads to error
-          { path: "new", element: <NewEventPage />, action: sendData }, // executes action function when form data submitted
+          { path: "new", element: <NewEventPage />, action: updateEvent }, // executes action function when form data submitted
         ],
       },
     ],
