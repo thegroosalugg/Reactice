@@ -82,7 +82,7 @@ export async function action({ params, request }) {
   const token = getAuthToken(); // fetch auth token from local storage
   const response = await fetch('http://localhost:8080/events/' + eventId, {
     method: request.method,
-    headers: { Authorization: 'Bearer ' + token }, // Authorizations Bearer is just the syntax the backend expects
+    headers: { 'Authorization': 'Bearer ' + token }, // Authorizations Bearer is just the syntax the backend expects
   }); // allows authorised users to delete events
 
   if (!response.ok) {
