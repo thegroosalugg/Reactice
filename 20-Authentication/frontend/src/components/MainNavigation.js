@@ -11,7 +11,7 @@ function MainNavigation() {
           <NavButton path="/events" />
           <NavButton path="/newsletter" />
           {/* loads login mode by default */}
-          <NavButton path="/auth?mode=login" label="Authorisation" />
+          <NavButton path="/auth?mode=login" label="Authentication" />
         </ul>
       </nav>
       <NewsletterSignup />

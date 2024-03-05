@@ -8,6 +8,7 @@ function AuthForm() {
   // the 2nd is a function that lets us update the query parameters
   const [searchParams, setSearchParams] = useSearchParams();
   const isLogin = searchParams.get('mode') === 'login' // how retrieve current set query parameter
+  console.log('AuthForm [mode]:', searchParams.get('mode'))
 
   return (
     <>
@@ -26,7 +27,7 @@ function AuthForm() {
         </p> */}
 
         <div className={classes.actions}>
-          {/* '?' sets query parameter and 'mode' is the name of the parameter */}
+          {/* '?' sets query parameter and 'mode' is the name of the parameter. Ternary switches mode between 2 custom set values */}
           <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
             {isLogin ? 'Create new user' : 'Login'}
           </Link>

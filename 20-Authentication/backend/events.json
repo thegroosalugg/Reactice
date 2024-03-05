@@ -8,5 +8,16 @@
       "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
     }
   ],
-  "users": []
+  "users": [
+    {
+      "email": "test@example.com",
+      "password": "$2a$12$zaWcGz0KRSi3cFfLTMGPFOijVOALMjYzG8o6GoJPrcnSg3nGNBv1a",
+      "id": "59d5af0f-4f36-429d-834f-1ce5abe04afa"
+    },
+    {
+      "email": "test1@example.com",
+      "password": "$2a$12$O07EfhAeGWQPOCOf6fx0COFVCj8E7THTON0qpt7pRCbibZ0rh37Ii",
+      "id": "0cf86ca4-09d7-4748-b171-52fff1c6d6df"
+    }
+  ]
 }
