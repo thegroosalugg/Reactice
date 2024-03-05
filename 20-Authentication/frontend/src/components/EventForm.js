@@ -11,7 +11,7 @@ import classes from './EventForm.module.css';
 import Input from '../ui/Input';
 
 function EventForm({ method, event }) {
-  const data = useActionData();
+  const { errors } = useActionData() || {}; // initialise with empty object if no errors or app will crash
   const navigate = useNavigate();
   const navigation = useNavigation();
 
@@ -23,17 +23,19 @@ function EventForm({ method, event }) {
 
   return (
     <Form method={method} className={classes.form}>
-      {data && data.errors && (
+
+      {/* {errors && (
         <ul>
-          {Object.values(data.errors).map((err) => (
+          {Object.values(errors).map((err) => (
             <li key={err}>{err}</li>
           ))}
         </ul>
-      )}
-      <Input id="title" type="text" event={event} />
-      <Input id="image" type="url"  event={event} />
-      <Input id="date"  type="date" event={event} />
-      <Input id="description" text  event={event} rows="4" />
+      )} */}
+
+      <Input id="title" type="text" event={event} errors={errors} />
+      <Input id="image" type="url"  event={event} errors={errors} />
+      <Input id="date"  type="date" event={event} errors={errors} />
+      <Input id="description" text  event={event} errors={errors} rows="4" />
 
       {/* <p>
         <label htmlFor="title">Title</label>
@@ -75,7 +77,7 @@ function EventForm({ method, event }) {
           defaultValue={event ? event.description : ''}
         />
       </p> */}
-      
+
       <div className={classes.actions}>
         <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel

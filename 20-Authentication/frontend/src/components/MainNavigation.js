@@ -7,10 +7,11 @@ function MainNavigation() {
     <header className={classes.header}>
       <nav>
         <ul className={classes.list}>
-          <NavButton path="/" />
+          <NavButton path="/" label="Home" />
           <NavButton path="/events" />
           <NavButton path="/newsletter" />
-          <NavButton path="/auth" />
+          {/* loads login mode by default */}
+          <NavButton path="/auth?mode=login" label="Authorisation" />
         </ul>
       </nav>
       <NewsletterSignup />
