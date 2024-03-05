@@ -35,7 +35,11 @@ export async function action({ request }) {
     throw json({ message: 'User not authenticated' }, { status: 500 });
   }
 
-  console.log('Auth Action, redirect [response]:', response) // logging data
+  const { token } = await response.json(); // authentication token sent from dummy backend
+
+  localStorage.setItem('token', token); // store the token using browser built in local storage. Expects 2 arguments key as a string and then value
+
+  console.log('Auth Action, redirect [response]:', response, '[token]:', token) // logging data
 
   return redirect('/');
 }
