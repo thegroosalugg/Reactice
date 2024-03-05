@@ -18,6 +18,26 @@
       "email": "test1@example.com",
       "password": "$2a$12$O07EfhAeGWQPOCOf6fx0COFVCj8E7THTON0qpt7pRCbibZ0rh37Ii",
       "id": "0cf86ca4-09d7-4748-b171-52fff1c6d6df"
+    },
+    {
+      "email": "goldengod@yahoo.com",
+      "password": "$2a$12$5JSJsJ5etLkb0/VqnWIr.O.ylHkxhlRz9VP5.t.e.hNzMxWjG3Kea",
+      "id": "73b8cc63-4d05-4f21-bcb9-6d7ec072d5f1"
+    },
+    {
+      "email": "goldengod1@yahoo.com",
+      "password": "$2a$12$hcJ1QwbFVHEh7lP03p08JeIctSqUwxz6vMaV5TANzO0W156zYFbVS",
+      "id": "cac57185-7159-4bc1-a9f3-c095023d8fa6"
+    },
+    {
+      "email": "goldengod2@yahoo.com",
+      "password": "$2a$12$AAr1XraHpR0XE7./yw3mZ.PG8bxh/1SISwFR7MSMgyPBWn.pzssyK",
+      "id": "4c3bdf04-e8e0-43f2-9a8f-d268678338ef"
+    },
+    {
+      "email": "goldengod2@3yahoo.com",
+      "password": "$2a$12$u44LVKVfQxPW9wUKVCxIr.XZM9fw/5pHX3RBEKzQIvC6W1qOPnOne",
+      "id": "f0c5fc64-baee-4e9f-b696-1398c347ed84"
     }
   ]
 }

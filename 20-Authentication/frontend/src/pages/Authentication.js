@@ -15,7 +15,7 @@ export async function action({ request }) {
     throw json({ message: 'mode unspecified' }, { status: 422 });
   }
 
-  const data = await request.formData();
+  const data = await request.formData(); //
   const authData = { email: data.get('email'), password: data.get('password') };
 
   const response = await fetch('http://localhost:8080/' + mode, {
@@ -25,7 +25,9 @@ export async function action({ request }) {
   });
 
   if (response.status === 422 || response.status === 401) { // error statuses set on dummy backend
-    console.log('Auth Action, 401/422 [response]:', response)
+
+    console.log('Auth Action, 401/422 [response]:', response) // logging data
+
     return response;
   }
 
@@ -33,6 +35,7 @@ export async function action({ request }) {
     throw json({ message: 'User not authenticated' }, { status: 500 });
   }
 
-  console.log('Auth Action, redirect [response]:', response)
+  console.log('Auth Action, redirect [response]:', response) // logging data
+
   return redirect('/');
 }
