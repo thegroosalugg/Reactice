@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
+import Input from '../ui/Input';
 
 function EventForm({ method, event }) {
   const data = useActionData();
@@ -29,7 +30,12 @@ function EventForm({ method, event }) {
           ))}
         </ul>
       )}
-      <p>
+      <Input id="title" type="text" event={event} />
+      <Input id="image" type="url"  event={event} />
+      <Input id="date"  type="date" event={event} />
+      <Input id="description" text  event={event} rows="4" />
+
+      {/* <p>
         <label htmlFor="title">Title</label>
         <input
           id="title"
@@ -68,7 +74,8 @@ function EventForm({ method, event }) {
           required
           defaultValue={event ? event.description : ''}
         />
-      </p>
+      </p> */}
+      
       <div className={classes.actions}>
         <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
@@ -119,4 +126,3 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
-
