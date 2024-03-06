@@ -9,7 +9,7 @@ import {
 
 import classes from './EventForm.module.css';
 import Input from '../ui/Input';
-import { getAuthToken } from '../util/getAuthToken';
+import { getAuthToken } from '../util/auth';
 
 function EventForm({ method, event }) {
   const { errors } = useActionData() || {}; // initialise with empty object if no errors or app will crash

@@ -15,7 +15,7 @@ export async function action({ request }) {
     throw json({ message: 'mode unspecified' }, { status: 422 });
   }
 
-  const data = await request.formData(); //
+  const data = await request.formData();
   const authData = { email: data.get('email'), password: data.get('password') };
 
   const response = await fetch('http://localhost:8080/' + mode, {
@@ -26,7 +26,7 @@ export async function action({ request }) {
 
   if (response.status === 422 || response.status === 401) { // error statuses set on dummy backend
 
-    console.log('Auth Action, 401/422 [response]:', response) // logging data
+    console.log('Auth Action, 401/422 [response]:', response); // logging data
 
     return response;
   }
@@ -38,8 +38,15 @@ export async function action({ request }) {
   const { token } = await response.json(); // authentication token sent from dummy backend
 
   localStorage.setItem('token', token); // store the token using browser built in local storage. Expects 2 arguments key as a string and then value
+  const expiration = new Date(); // built-in browser function
+  expiration.setHours(expiration.getHours() + 1); // sets expiration time to current hours + 1
+  localStorage.setItem('expiration', expiration.toISOString()); //toISOString required to preserve data format
 
-  console.log('Auth Action, redirect [response]:', response, '[token]:', token) // logging data
+  console.log(                                     // logging data
+    'Auth Action, redirect [response]:', response,
+    '[token]:', token,
+    '[expiration]:', expiration
+  );
 
   return redirect('/');
 }
