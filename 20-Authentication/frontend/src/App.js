@@ -15,12 +15,15 @@ import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 import AuthenticationPage, { action as authAction } from './pages/Authentication';
 import { action as logout } from './pages/Logout';
+import { loadToken } from './util/getAuthToken';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    id: 'root', // loader accessible in every route
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    loader: loadToken, // will always update if token is deleted or new token is obtained
     children: [
       { index: true, element: <HomePage />, },
       { path: 'auth', action: authAction, element: <AuthenticationPage />, },

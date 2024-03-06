@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
-import classes from '../components/MainNavigation.module.css';
 
-export default function NavButton({ path, label }) {
+export default function NavButton({ path, label, cssClass }) {
   // less props to pass as path name matches label name, only need to format it
   const linkText = label ? label : path.charAt(1).toUpperCase() + path.slice(2)
 
@@ -9,7 +8,7 @@ export default function NavButton({ path, label }) {
     <li>
       <NavLink
         to={path}
-        className={({ isActive }) => (isActive ? classes.active : undefined)}
+        className={({ isActive }) => (isActive ? cssClass : undefined)}
         end
       >
         {linkText}
