@@ -16,7 +16,18 @@
   color: var(--color-primary-400);
 }
 
+.button:hover,
 .list a:hover,
 .list a.active {
   color: var(--color-primary-800);
+}
+
+.button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
