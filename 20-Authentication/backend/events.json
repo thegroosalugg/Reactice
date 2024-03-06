@@ -1,6 +1,13 @@
 {
   "events": [
     {
+      "title": "pagecontent",
+      "image": "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=pexels-james-wheeler-414612.jpg&fm=jpg",
+      "date": "2024-03-06",
+      "description": "I am waiting for a bus. I am waiting for a bus. I am waiting for a bus. I am waiting for a bus. I am waiting for a bus. ",
+      "id": "aa652a57-d331-4a12-82f9-6ba16811b8ac"
+    },
+    {
       "title": "A new event",
       "image": "https://cdn.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/va-2016/muenchner-christkindlmarkt/christkindlmarkt-marienplat-logo-hp/document/christkindlmarkt-marienplat-logo-hp.jpg",
       "date": "2022-10-01",
@@ -8,5 +15,11 @@
       "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
     }
   ],
-  "users": []
+  "users": [
+    {
+      "email": "goldengod@yahoo.com",
+      "password": "$2a$12$4FB4VisxWmoiXu2WfEoV6Oc8GmR4oQb1sdpwxoDcsOuReV/xWwWOi",
+      "id": "04100df6-45bd-4de6-97eb-56df60335dda"
+    }
+  ]
 }

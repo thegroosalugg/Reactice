@@ -1,32 +1,33 @@
-import { useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form, Link, useActionData, useNavigation, useSearchParams } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
+import Input from '../ui/Input';
 
 function AuthForm() {
-  const [isLogin, setIsLogin] = useState(true);
+  // searchParams has similar syntax to state. 1st element is an object that gives access to the currently set query parameters.
+  // the 2nd is a function that lets us update the query parameters
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isLogin = searchParams.get('mode') === 'login' // how retrieve current set query parameter
+  const { errors, message } = useActionData() || {}; // retrieves data when there is a return statement, in this action only 401/422 responses
+  const navigation = useNavigation(); // checks the current http state
 
-  function switchAuthHandler() {
-    setIsLogin((isCurrentlyLogin) => !isCurrentlyLogin);
-  }
+  const submitting = navigation.state === 'submitting';
+
+  console.log('AuthForm [mode]:', searchParams.get('mode')) // logging data
 
   return (
     <>
       <Form method="post" className={classes.form}>
         <h1>{isLogin ? 'Log in' : 'Create a new user'}</h1>
-        <p>
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" required />
-        </p>
-        <p>
-          <label htmlFor="image">Password</label>
-          <input id="password" type="password" name="password" required />
-        </p>
+        <Input id="email" type="email" errors={errors} />
+        <Input id="password" type="password" errors={errors} />
+        {message && <p>{message}</p>}
         <div className={classes.actions}>
-          <button onClick={switchAuthHandler} type="button">
+          {/* '?' sets query parameter and 'mode' is the name of the parameter. Ternary switches mode between 2 custom set values */}
+          <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
             {isLogin ? 'Create new user' : 'Login'}
-          </button>
-          <button>Save</button>
+          </Link>
+          <button disabled={submitting}>{submitting ? 'Submitting...' : 'Submit'}</button>
         </div>
       </Form>
     </>
