@@ -7,9 +7,11 @@ import { fetchEvents } from '../../util/http.js';
 
 export default function NewEventsSection() {
   const query = useQuery({ // the constant create from useQuery is an object with many built-in properties
-    // key caches data. Tanstack reuses cached data and shows on screen immediately when another fetch request is sent
+    // key caches data. Tanstack reuses cached data and shows on screen immediately when another fetch request is sent with the same query key
     queryKey: ['events'], // Key is an array that can hold any data type including nested arrays & objects.
-    queryFn: fetchEvents // defines the code that will send the request
+    queryFn: fetchEvents, // defines the code that will send the request
+    staleTime: 5000, // minimum time (ms) before another request is sent. Avoid sending too many unecessary rquests
+    gcTime: 30 * 60 * 1000, // timer before cached data is cleared
   });
 
   let content;
@@ -18,9 +20,9 @@ export default function NewEventsSection() {
     content = <LoadingIndicator />;
   }
 
-  if (query.error) { // in order for query error to work, there needs to be an error thrown in the fetch function
+  if (query.isError) { // in order for query error to work, there needs to be an error thrown in the fetch function
     content = (
-      // checks if the error has an info key (set in http.js), and displays message caught errors. If not caught, fallback || message
+      // checks if the error has an info key (set in http.js), and displays message of caught errors. If not caught, fallback || message
       <ErrorBlock title="An error occurred" message={query.error.info?.message || "Failed to fetch events"} />
     );
   }
