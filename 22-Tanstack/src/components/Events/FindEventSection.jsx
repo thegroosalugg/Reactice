@@ -8,10 +8,12 @@ import ErrorBlock from '../UI/ErrorBlock';
 export default function FindEventSection() {
   const searchElement = useRef();
   const [searchTerm, setSearchTerm] = useState();
-  const { data, isPending, isError, error } = useQuery({ // query always passes an object to the query function
+  const { data, isLoading, isError, error } = useQuery({ // query always passes an object to the query function
     queryKey: ['events', searchTerm], // ensures dynamic caching for each search term
     queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }), // like with event listeners, wrap with arrow function to pass an argument
-  }); // signal is a built-in key found in the object passed by useQurry to the queryFn
+    // signal is a built-in key found in the object passed by useQurry to the queryFn
+    enabled: searchTerm !== undefined // no requests sent on initial state as its undefined, requests only sent after user submits
+  });
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -20,7 +22,7 @@ export default function FindEventSection() {
 
   let content = <p>Please enter a search term and to find events.</p>;
 
-  if (isPending) {
+  if (isLoading) { // if a query is disabled, react treats it as pending. So we check isLoading instead of isPending to remove loading indicators from UI
     content = <LoadingIndicator />;
   }
 
@@ -36,7 +38,7 @@ export default function FindEventSection() {
 
   if (data) {
     content = (
-      <ul className='events-list'>
+      <ul className="events-list">
         {data.map((event) => (
           <li key={event.id}>
             <EventItem event={event} />
@@ -44,6 +46,7 @@ export default function FindEventSection() {
         ))}
       </ul>
     );
+  }
 
     return (
       <section className='content-section' id='all-events-section'>
@@ -62,4 +65,3 @@ export default function FindEventSection() {
       </section>
     );
   }
-}
