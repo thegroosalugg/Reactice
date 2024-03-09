@@ -1,3 +1,8 @@
+import { QueryClient } from '@tanstack/react-query';
+
+// when exported, cannot be in the same file as App.
+export const queryClient = new QueryClient(); // initialise new query client and pass it as the value to the client prop in the provider
+
 export async function fetchEvents({ signal, searchTerm }) {
   // signal is built into useQuery object, searcTerm is custom
   let url = 'http://localhost:3000/events'; // if no arguments passed, uses this only
