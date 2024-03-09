@@ -17,6 +17,7 @@ export async function fetchEvents({ signal, searchTerm }) {
   }
 
   console.log( // logging data
+    'FetchEvents',
     '[search]:', searchTerm,
     '[signal]:', signal,
     '[response]:', response
@@ -43,7 +44,33 @@ export async function createNewEvent(eventData) {
     throw error;
   }
 
+  console.log( // logging data
+  'CreateNewEvent',
+  '[response]:', response
+)
+
   const { event } = await response.json();
 
   return event;
+}
+
+export async function fetchSelectableImages({ signal }) {
+  const response = await fetch(`http://localhost:3000/events/images`, { signal });
+
+  if (!response.ok) {
+    const error = new Error('An error occurred while fetching the images');
+    error.code = response.status;
+    error.info = await response.json();
+    throw error;
+  }
+
+  console.log( // logging data
+  'FetchSelectableImages',
+  '[signal]:', signal,
+  '[response]:', response
+)
+
+  const { images } = await response.json();
+
+  return images;
 }

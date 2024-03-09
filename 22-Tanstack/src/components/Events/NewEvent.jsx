@@ -13,7 +13,7 @@ export default function NewEvent() {
   }); // similar to useQuery, but used to send http requests, such as updating/creating/deleting
 
   function handleSubmit(formData) {
-    mutate({ events: formData });
+    mutate({ event: formData }); // data type expected in the backend
   }
 
   return (
