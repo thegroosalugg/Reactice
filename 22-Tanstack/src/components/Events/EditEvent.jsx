@@ -13,18 +13,39 @@ export default function EditEvent() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events', id], // same key as in Event Details means the form will be filled with data instantly thanks to caching
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
-  });
+  }); // signal provided by ReactQuery/Tanstack
 
   const { mutate } = useMutation({
     mutationFn: updateEvent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['events'] })
-      navigate('../');
+    // the formData passed in mutate in handleSubmit is automatically passed to onMutate
+    onMutate: async (data) => { // optimistic updating: will execute the following code when mutate is executed, without awaiting
+
+      // cancels ongoing queries linked to this key. The data is about to be updated and they may not be relevant anymore
+      await queryClient.cancelQueries({ queryKey: ['events', id] });
+
+      const rollbackEvent = queryClient.getQueriesData(['events', id]); // similar to below, fetches previous data and stores in a variable
+
+      // setQueriesData will update the data immediately to formData without awaiting async to complete response
+      queryClient.setQueriesData(['events', id], data.event); // formData is an object with an event key. Expects 2 arguments, the key and the data to set
+
+      return { rollbackEvent }; // this return data will be passed to the 'context' key when calling 'onSettled'
+    },
+
+    // receives same props, data, error etc. Also context which is used to rollback to previous data
+    onError: (error, data, context) => { // also expects a function as a value which will execute if errors caught
+      // rollback data if caught. Context is a queries property, and .rollbackEvent is the return from onMutate
+      queryClient.setQueriesData(['events', id], context.rollbackEvent);
+    },
+
+    onSettled: () => { // like on success, executes when mutation finished, whether successfully or via rollback
+      queryClient.invalidateQueries(['events', id]); // queries invalidated and new data fetched.
+      // When configuration isn't needed, can pass queryKey directly as an argument without passing an object
     }
   });
 
-  function handleSubmit(formData) {
+   function handleSubmit(formData) {
     mutate({ id, event: formData });
+    navigate('../'); // navigate immediately without waiting for success
   }
 
   function handleClose() {
