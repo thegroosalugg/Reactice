@@ -1,16 +1,29 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import Header from '../Header.jsx';
-import { fetchEvent } from '../../util/http.js';
-import { useQuery } from '@tanstack/react-query';
+import { deleteEvent, fetchEvent, queryClient } from '../../util/http.js';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import ErrorBlock from '../UI/ErrorBlock.jsx';
 
 export default function EventDetails() {
-  const { id } = useParams();
-  const { data, isPending, isError, error } = useQuery({
+  const navigate = useNavigate(); // navigate from page on sucess
+  const { id } = useParams(); // fetch URL ID
+  const { data, isPending, isError, error } = useQuery({ // use query to fetch the event
     queryKey: ['events', id],
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
   });
+
+  const { mutate } = useMutation({ // mutate used to delete event
+    mutationFn: deleteEvent,
+    onSuccess: () => { // will execute after the mutation function has a response
+      queryClient.invalidateQueries({ queryKey: ['events'] }); // invalidates previous queries and fetches the updated events
+      navigate('/events'); // event is deleted, redirect to main page
+    },
+  });
+
+  function handleDelete() {
+    mutate({ id }); // backened expects an object with an ID key
+  }
 
   console.log('Event Details', '[id]:', id, '[data]:', data); // logging data
 
@@ -26,7 +39,7 @@ export default function EventDetails() {
       {isError && (
         <ErrorBlock
           title='Loading failed'
-          message={error.info?.message || 'Couldn\'t fetch event details'}
+          message={error.info?.message || "Couldn't fetch event details"}
         />
       )}
       {data && (
@@ -34,7 +47,7 @@ export default function EventDetails() {
           <header>
             <h1>{data.title}</h1>
             <nav>
-              <button>Delete</button>
+              <button onClick={handleDelete}>Delete</button>
               <Link to='edit'>Edit</Link>
             </nav>
           </header>
@@ -43,7 +56,9 @@ export default function EventDetails() {
             <div id='event-details-info'>
               <div>
                 <p id='event-details-location'>{data.location}</p>
-                <time dateTime={`${data.date}T${data.time}:00`}>{data.date} @ {data.time}</time>
+                <time dateTime={`${data.date}T${data.time}:00`}>
+                  {data.date} @ {data.time}
+                </time>
               </div>
               <p id='event-details-description'>{data.description}</p>
             </div>
