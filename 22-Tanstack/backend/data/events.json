@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "8264",
+    "title": "The Event",
+    "description": "Do not talk about the event",
+    "date": "2024-03-28",
+    "time": "16:30",
+    "location": "Stay at home",
+    "image": "park.jpg"
+  }
+]

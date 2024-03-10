@@ -4,6 +4,8 @@ import Header from '../Header.jsx';
 import { deleteEvent, fetchEvent, queryClient } from '../../util/http.js';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import ErrorBlock from '../UI/ErrorBlock.jsx';
+import LoadingIndicator from '../UI/LoadingIndicator.jsx';
+import { formatDate } from '../../util/formatDate.js';
 
 export default function EventDetails() {
   const navigate = useNavigate(); // navigate from page on sucess
@@ -35,13 +37,15 @@ export default function EventDetails() {
           View all Events
         </Link>
       </Header>
-      {isPending && <p>Loading Event Details...</p>}
-      {isError && (
-        <ErrorBlock
-          title='Loading failed'
-          message={error.info?.message || "Couldn't fetch event details"}
-        />
-      )}
+      <div id='event-details-content' className='center'>
+        {isPending && <LoadingIndicator />}
+        {isError && (
+          <ErrorBlock
+            title='Loading failed'
+            message={error.info?.message || "Couldn't fetch event details"}
+          />
+        )}
+      </div>
       {data && (
         <article id='event-details'>
           <header>
@@ -57,7 +61,7 @@ export default function EventDetails() {
               <div>
                 <p id='event-details-location'>{data.location}</p>
                 <time dateTime={`${data.date}T${data.time}:00`}>
-                  {data.date} @ {data.time}
+                  {formatDate(data.date)} @ {data.time}
                 </time>
               </div>
               <p id='event-details-description'>{data.description}</p>
