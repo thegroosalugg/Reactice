@@ -18,7 +18,10 @@ export default function EventDetails() {
   const { mutate } = useMutation({ // mutate used to delete event
     mutationFn: deleteEvent,
     onSuccess: () => { // will execute after the mutation function has a response
-      queryClient.invalidateQueries({ queryKey: ['events'] }); // invalidates previous queries and fetches the updated events
+      queryClient.invalidateQueries({
+        queryKey: ['events'],
+        refetchType: 'none', // second argument prevents it sending another fetch request on this page. The request is bad as this ID is deleted
+      }); // invalidates previous queries and fetches the updated events
       navigate('/events'); // event is deleted, redirect to main page
     },
   });
