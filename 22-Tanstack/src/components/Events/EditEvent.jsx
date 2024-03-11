@@ -23,10 +23,10 @@ export default function EditEvent() {
       // cancels ongoing queries linked to this key. The data is about to be updated and they may not be relevant anymore
       await queryClient.cancelQueries({ queryKey: ['events', id] });
 
-      const rollbackEvent = queryClient.getQueriesData(['events', id]); // similar to below, fetches previous data and stores in a variable
+      const rollbackEvent = queryClient.getQueryData(['events', id]); // similar to below, fetches previous data and stores in a variable
 
-      // setQueriesData will update the data immediately to formData without awaiting async to complete response
-      queryClient.setQueriesData(['events', id], data.event); // formData is an object with an event key. Expects 2 arguments, the key and the data to set
+      // setQueryData will update the data immediately to formData without awaiting async to complete response
+      queryClient.setQueryData(['events', id], data.event); // formData is an object with an event key. Expects 2 arguments, the key and the data to set
 
       return { rollbackEvent }; // this return data will be passed to the 'context' key when calling 'onSettled'
     },
@@ -34,7 +34,7 @@ export default function EditEvent() {
     // receives same props, data, error etc. Also context which is used to rollback to previous data
     onError: (error, data, context) => { // also expects a function as a value which will execute if errors caught
       // rollback data if caught. Context is a queries property, and .rollbackEvent is the return from onMutate
-      queryClient.setQueriesData(['events', id], context.rollbackEvent);
+      queryClient.setQueryData(['events', id], context.rollbackEvent);
     },
 
     onSettled: () => { // like on success, executes when mutation finished, whether successfully or via rollback

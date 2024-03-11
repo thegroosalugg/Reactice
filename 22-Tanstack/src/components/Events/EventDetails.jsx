@@ -42,7 +42,7 @@ export default function EventDetails() {
     mutate({ id }); // backened expects an object with an ID key
   }
 
-  console.log('Event Details\n', '[id]:', id, '\n', '[data]:', data); // logging data
+  console.log('Event Details\n', '[id]:', id, '\n', '[data]:', data, '\n', '[modal]:', showModal); // logging data
 
   return (
     <>
