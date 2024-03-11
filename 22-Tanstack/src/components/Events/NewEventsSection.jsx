@@ -8,8 +8,11 @@ import { fetchEvents } from '../../util/http.js';
 export default function NewEventsSection() {
   const query = useQuery({ // the constant create from useQuery is an object with many built-in properties
     // key caches data. Tanstack reuses cached data and shows on screen immediately when another fetch request is sent with the same query key
-    queryKey: ['events'], // Key is an array that can hold any data type including nested arrays & objects.
-    queryFn: fetchEvents, // defines the code that will send the request
+    queryKey: ['events', { max: 3}], // Key is an array that can hold any data type including nested arrays & objects.
+
+    // Signal is a built-in query prop...
+    // ...as is queryKey which holds the data above. We can spread queryKey by accessing [1] the second element '{max: 3}' without repetition
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }), // defines the code that will send the request
     staleTime: 5000, // minimum time (ms) before another request is sent. Avoid sending too many unecessary rquests
     gcTime: 30 * 60 * 1000, // timer before cached data is cleared
   });

@@ -3,11 +3,15 @@ import { QueryClient } from '@tanstack/react-query';
 // when exported, cannot be in the same file as App.
 export const queryClient = new QueryClient(); // initialise new query client and pass it as the value to the client prop in the provider
 
-export async function fetchEvents({ signal, searchTerm }) {
+export async function fetchEvents({ signal, searchTerm, max }) {
   // signal is built into useQuery object, searcTerm is custom
   let url = 'http://localhost:3000/events'; // if no arguments passed, uses this only
 
-  if (searchTerm) { // searching handled on dummy backend, only search term is needed
+  if (searchTerm && max) { // the URL gets ? for the first parameter and & for the second
+    url += '?search=' + searchTerm + '&max=' + max; // as such the construction of the max string changes if we have a searchTerm
+  } else if (max) {
+    url += '?max=' + max;
+  } else if (searchTerm) {
     url += '?search=' + searchTerm;
   }
 
@@ -22,10 +26,11 @@ export async function fetchEvents({ signal, searchTerm }) {
   }
 
   console.log( // logging data
-    'FetchEvents',
-    '[search]:', searchTerm,
-    '[signal]:', signal,
-    '[response]:', response
+  'FetchEvents\n',
+  '[search]:', searchTerm, '\n',
+  '[max]:', max, '\n',
+  '[signal]:', signal, '\n',
+  '[response]:', response
   )
 
   const { events } = await response.json();
@@ -50,7 +55,7 @@ export async function createNewEvent(eventData) {
   }
 
   console.log( // logging data
-  'CreateNewEvent',
+  'CreateNewEvent\n',
   '[response]:', response
 )
 
@@ -70,8 +75,8 @@ export async function fetchSelectableImages({ signal }) {
   }
 
   console.log( // logging data
-  'FetchSelectableImages',
-  '[signal]:', signal,
+  'FetchSelectableImages\n',
+  '[signal]:', signal, '\n',
   '[response]:', response
 )
 
@@ -91,9 +96,9 @@ export async function fetchEvent({ id, signal }) {
   }
 
   console.log( // logging data
-  'FetchEvent',
-  '[id]:', id,
-  '[signal]:', signal,
+  'FetchEvent\n',
+  '[id]:', id, '\n',
+  '[signal]:', signal, '\n',
   '[response]:', response
 )
 
@@ -116,8 +121,8 @@ export async function deleteEvent({ id }) {
   }
 
   console.log( // logging data
-  'DeleteEvent',
-  '[id]:', id,
+  'DeleteEvent\n',
+  '[id]:', id, '\n',
   '[response]:', response
 )
 
@@ -141,8 +146,8 @@ export async function updateEvent({ id, event }) {
   }
 
   console.log( // logging data
-  'UpdateEvent',
-  '[id]:', id,
+  'UpdateEvent\n',
+  '[id]:', id, '\n',
   '[response]:', response
 )
 
