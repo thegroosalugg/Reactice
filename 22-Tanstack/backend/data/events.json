@@ -1,11 +1,11 @@
 [
   {
     "id": "8264",
-    "title": "The Event",
-    "description": "Do not talk about the event",
+    "title": "Blue",
+    "description": "More data of sorts",
     "date": "2024-03-28",
     "time": "12:10",
-    "location": "Stay at home",
+    "location": "OffBase",
     "image": "park.jpg"
   },
   {
@@ -19,20 +19,20 @@
   },
   {
     "id": "8657",
-    "title": "The Event",
-    "description": "Do not talk about the event",
+    "title": "Orange",
+    "description": "Nevermind this",
     "date": "2025-04-18",
     "time": "22:59",
-    "location": "Stay at home",
-    "image": "laptop-on-desk.jpg"
+    "location": "The Moon",
+    "image": "women-coding.jpg"
   },
   {
     "id": "4690",
-    "title": "The Event",
-    "description": "Do not talk about the event",
+    "title": "The Streets are cold",
+    "description": "streets are on fire",
     "date": "2014-07-04",
     "time": "04:04",
-    "location": "Stay at home",
+    "location": "Concrete Jungle",
     "image": "buzzing-city.jpg"
   }
 ]
