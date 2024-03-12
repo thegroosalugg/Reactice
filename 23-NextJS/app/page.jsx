@@ -11,6 +11,7 @@ export default function Home() {
       <Header />
       <p>🔥 Let&apos;s get started! 🔥</p>
       {/* using an anchor would mean a brand new page is downloaded from the backend */}
+      <p><Link href='/blog'>Blogs</Link></p>
       <p><Link href='/about'>About Us</Link></p>
       {/* using Next's Link instead of anchor keeps the app as an SPA and updates UI via client side JS code */}
     </main>
