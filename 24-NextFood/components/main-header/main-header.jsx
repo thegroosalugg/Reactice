@@ -6,6 +6,8 @@ import Image from 'next/image';
 import HeaderBackground from './header-background';
 
 export default function MainHeader() {
+  console.log('Main Header Component')
+
   return (
     <>
       <HeaderBackground />
