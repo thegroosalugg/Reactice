@@ -15,6 +15,7 @@ export default function MainHeader() {
         <Link href='/' className={css.logo}>
           {/* in NextJS the image is an object and we must acess its src property */}
           {/* <img src={logo.src} alt='munch' /> */}
+          
           {/* Using the alternative Next Image hook. Pass the whole object instead of a key. Adds extra properties. Lazy Loading.
         'Priority' sets loading priority, as image will always be displayed */}
           <Image src={logo} alt='munch' priority />
