@@ -4,9 +4,10 @@ import css from './main-header.module.css';
 import logo from '@/assets/logo.png';
 import Image from 'next/image';
 import HeaderBackground from './header-background';
+import NavLink from './nav-link';
 
 export default function MainHeader() {
-  console.log('Main Header Component')
+  console.log('Main Header Component');
 
   return (
     <>
@@ -23,12 +24,8 @@ export default function MainHeader() {
         </Link>
         <nav className={css.nav}>
           <ul>
-            <li>
-              <Link href='/meals'>Meals</Link>
-            </li>
-            <li>
-              <Link href='/community'>Community</Link>
-            </li>
+            <NavLink href='/meals' label='Meals' />
+            <NavLink href='/community' label='Community' />
           </ul>
         </nav>
       </header>
