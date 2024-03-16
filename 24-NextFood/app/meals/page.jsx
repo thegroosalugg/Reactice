@@ -3,11 +3,15 @@ import Link from 'next/link';
 import css from './page.module.css';
 import MealsGrid from '@/components/meals/meals-grid';
 import { getMeals } from '@/lib/meals';
+import { Suspense } from 'react';
 
-            // server side components can be converted to async functions
-export default async function MealsPage() {
+// server side components can be converted to async functions
+async function Meals() {
   const meals = await getMeals();
+  return <MealsGrid meals={meals} />;
+}
 
+export default function MealsPage() {
   return (
     <>
       <header className={css.header}>
@@ -19,9 +23,10 @@ export default async function MealsPage() {
           <Link href='/meals/share'>Share Your Meal</Link>
         </p>
       </header>
-      <main>
-        <MealsGrid meals={meals} />
-      </main>
+      {/* suspense will show the fallback while the promise is being fetched */}
+      <Suspense fallback={<p className={css.loading}>Loading Meals...</p>}>
+        <Meals />
+      </Suspense>
     </>
   );
 }
