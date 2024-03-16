@@ -10,3 +10,8 @@ export async function getMeals() { // now we can call functions on the database
 
   return db.prepare('SELECT * FROM meals').all() // prepare a new sequel statement, to select all columnts from meals, then fetch the data with .all()
 }
+
+export function getMeal(slug) {
+  return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug)
+ // protects against sequel injection attacks, do not concatenate the query directly or insert executable code inside it
+}
