@@ -29,8 +29,11 @@ export default function MealItem({ params }) {
       <main>
         {/* <p
           className={css.instructions}
-          dangerouslySetInnerHTML={{ __html: instructions }} // the value should be displayed as HTML, which can be done with this prop
+          // by reading the meal.instructions as HTML, it allows us to preserve formatting by replacing new lines \n with HTML <br/>
+          dangerouslySetInnerHTML={{ __html: instructions }} // allows the value to be set directly as html code. Expects an object with __html key
         ></p> */}
+
+        {/* style whitespace also preserves formatting, eliminating need for dangerousHTLM, regexp, xss & data mutation */}
         <p className={css.instructions} style={{ whiteSpace: 'pre-line' }}>{meal.instructions}</p>
       </main>
     </>
