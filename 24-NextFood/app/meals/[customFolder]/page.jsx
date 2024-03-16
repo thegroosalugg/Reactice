@@ -5,7 +5,7 @@ import { getMeal } from '@/lib/meals';
 // params key from object passed by Next
 export default function MealItem({ params }) {
   const meal = getMeal(params.customFolder); // search for value equal to folder name
-  meal.instructions = meal.instructions.replace(/\n/g, '<br />'); // regular expression replaces new lines \n with html line breaks
+  // const instructions = meal.instructions.replace(/\n/g, '<br />'); // regular expression replaces new lines \n with html line breaks
 
   return (
     <>
@@ -22,10 +22,11 @@ export default function MealItem({ params }) {
         </div>
       </header>
       <main>
-        <p
+        {/* <p
           className={css.instructions}
-          dangerouslySetInnerHTML={{ __html: meal.instructions }} // the value should be displayed as HTML, which can be done with this prop
-        ></p>
+          dangerouslySetInnerHTML={{ __html: instructions }} // the value should be displayed as HTML, which can be done with this prop
+        ></p> */}
+        <p className={css.instructions} style={{ whiteSpace: 'pre-line' }}>{meal.instructions}</p>
       </main>
     </>
   );
