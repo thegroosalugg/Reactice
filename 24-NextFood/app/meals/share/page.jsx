@@ -1,9 +1,16 @@
+'use client';
+
 import ImagePicker from '@/components/meals/image-picker';
 import css from './page.module.css';
 import { shareMeal } from '@/lib/action';
 import FormButton from '@/components/meals/meal-form-submit';
+import { useFormState } from 'react-dom'; // is a Hook that allows you to update state based on the result of a form action
 
 export default function ShareMealPage() {
+  // First argument takes returnable code, second function takes fallback state while first value awaited
+  const [state, formAction] = useFormState(shareMeal, { message: null }); // not to be confused with useFormStatus
+  // formSubmit replaces shareMeal as the action
+
   return (
     <>
       <header className={css.header}>
@@ -14,7 +21,7 @@ export default function ShareMealPage() {
       </header>
       <main className={css.main}>
         {/* attach server functions via action */}
-        <form className={css.form} action={shareMeal}>
+        <form className={css.form} action={formAction}>
           <div className={css.row}>
             <p>
               <label htmlFor='name'>Your name</label>
@@ -42,7 +49,8 @@ export default function ShareMealPage() {
               required
             ></textarea>
           </p>
-          <ImagePicker name='image' label="Current Pic" />
+          <ImagePicker name='image' label='Current Pic' />
+          {state.message && <p>{state.message}</p>}
           <p className={css.actions}>
             <FormButton />
           </p>
