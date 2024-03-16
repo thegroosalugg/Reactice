@@ -1,11 +1,16 @@
 import Image from 'next/image';
 import css from './page.module.css';
 import { getMeal } from '@/lib/meals';
+import { notFound } from 'next/navigation';
 
 // params key from object passed by Next
 export default function MealItem({ params }) {
   const meal = getMeal(params.customFolder); // search for value equal to folder name
   // const instructions = meal.instructions.replace(/\n/g, '<br />'); // regular expression replaces new lines \n with html line breaks
+
+  if (!meal) {
+    notFound(); // Next hook, loads the nearest notFound page, from /meals parent. Allows for custom error pages when wrong URL entered
+  }
 
   return (
     <>
