@@ -19,25 +19,34 @@ export async function shareMeal(prevState, formData) {
     creator_email: formData.get('email'),
   };
 
-  if (
-    invalid(meal.title) ||
-    invalid(meal.summary) ||
-    invalid(meal.instructions) ||
-    invalid(meal.creator) ||
-    invalid(meal.creator_email) ||
-    !meal.creator_email.includes('@') ||
-    !meal.image ||
-    meal.image.size === 0
-  ) {
-    // each input element will assign an id which matches a key in the object, so it cannot access its specific message
-    return {
-      title: invalid(meal.title) ? 'Title required' : null,
-      summary: invalid(meal.summary) ? 'Summary required' : null,
-      instructions: invalid(meal.instructions) ? 'Instructions required' : null,
-      name: invalid(meal.creator) ? 'Name required' : null,
-      email: invalid(meal.creator_email) || !meal.creator_email.includes('@') ? 'Email required' : null,
-      image: !meal.image || meal.image.size === 0 ? 'Image required' : null,
-    };
+  const errors = {};
+
+  if (invalid(meal.title)) {
+    errors.title = 'Title required';
+  }
+
+  if (invalid(meal.summary)) {
+    errors.summary = 'Summary required';
+  }
+
+  if (invalid(meal.instructions)) {
+    errors.instructions = 'Instructions required';
+  }
+
+  if (invalid(meal.creator)) {
+    errors.name = 'Name required';
+  }
+
+  if (invalid(meal.creator_email) || !meal.creator_email.includes('@')) {
+    errors.email = 'Invalid email';
+  }
+
+  if (!meal.image || meal.image.size === 0) {
+    errors.image = 'Image required';
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return errors;
   }
 
   await saveMeal(meal);
