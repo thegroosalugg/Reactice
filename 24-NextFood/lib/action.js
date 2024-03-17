@@ -1,6 +1,7 @@
 'use server';
 import { redirect } from 'next/navigation';
 import { saveMeal } from './meals';
+import { revalidatePath } from 'next/cache';
 
 // special directive that ensures the function executes on the server and not the client. Must be async
 // can also be run inside specific functions when initialised inside a component function
@@ -50,5 +51,7 @@ export async function shareMeal(prevState, formData) {
   }
 
   await saveMeal(meal);
+  revalidatePath('/meals'); // allows you to purge cached data on-demand for a specific
+  // path. Run builds are heavily cached and require the cache to be cleared when new data is entered for it to appear on the page
   redirect('/meals');
 }

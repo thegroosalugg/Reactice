@@ -5,6 +5,11 @@ import MealsGrid from '@/components/meals/meals-grid';
 import { getMeals } from '@/lib/meals';
 import { Suspense } from 'react';
 
+export const metadata = {
+  title: 'All Meals',
+  description: 'Available meals, including user submissions',
+};
+
 // server side components can be converted to async functions
 async function Meals() {
   const meals = await getMeals();
