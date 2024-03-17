@@ -9,7 +9,7 @@ import Input from '@/components/meals/input';
 
 export default function ShareMealPage() {
   // First argument takes returnable code, second function takes fallback state while first value awaited
-  const [state, formAction] = useFormState(shareMeal, { message: null }); // not to be confused with useFormStatus
+  const [state, formAction] = useFormState(shareMeal, {}); // not to be confused with useFormStatus
   // formSubmit replaces shareMeal as the action
 
   return (
@@ -24,19 +24,19 @@ export default function ShareMealPage() {
         {/* attach server functions via action */}
         <form className={css.form} action={formAction}>
           <div className={css.row}>
-            <Input id='name' label='Your Name' message={state.message} />
-            <Input id='email' label='Your email' message={state.message} />
+            <Input id='name' label='Your Name' message={state} />
+            <Input id='email' label='Your email' message={state} />
           </div>
-          <Input id='title' label='Title' message={state.message} />
-          <Input id='summary' label='Short Summary' message={state.message} />
+          <Input id='title' label='Title' message={state} />
+          <Input id='summary' label='Short Summary' message={state} />
           <Input
             id='instructions'
             label='Instructions'
-            message={state.message}
+            message={state}
             text
             rows='10'
           />
-          <ImagePicker name='image' label='Current Pic' message={state.message} />
+          <ImagePicker id='image' label='Current Pic' message={state} />
           <p className={css.actions}>
             <FormButton />
           </p>

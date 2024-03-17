@@ -29,17 +29,15 @@ export async function shareMeal(prevState, formData) {
     !meal.image ||
     meal.image.size === 0
   ) {
-    console.log(
-        '\nValidation Failed:\n' +
-        `Title: ${!invalid(meal.title)}\n` +
-        `Summary: ${!invalid(meal.summary)}\n` +
-        `Instructions: ${!invalid(meal.instructions)}\n` +
-        `Creator: ${!invalid(meal.creator)}\n` +
-        `Creator Email: ${!invalid(meal.creator_email)} Contains @: ${meal.creator_email.includes('@')}\n` +
-        `Image:`, meal.image, 'invalid:', meal.image.size === 0
-    );
-
-    return { message: 'Field required' };
+    // each input element will assign an id which matches a key in the object, so it cannot access its specific message
+    return {
+      title: invalid(meal.title) ? 'Title required' : null,
+      summary: invalid(meal.summary) ? 'Summary required' : null,
+      instructions: invalid(meal.instructions) ? 'Instructions required' : null,
+      name: invalid(meal.creator) ? 'Name required' : null,
+      email: invalid(meal.creator_email) || !meal.creator_email.includes('@') ? 'Email required' : null,
+      image: !meal.image || meal.image.size === 0 ? 'Image required' : null,
+    };
   }
 
   await saveMeal(meal);

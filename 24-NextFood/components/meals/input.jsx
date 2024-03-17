@@ -13,7 +13,8 @@ export default function Input({ text, id, label, message, ...props }) {
         {...props}
         required
       />
-      {message && <span className={css.error}>{message}</span>}
+      {/* message is a FormState object that holds a message relative to the input, whose key matches the ID */}
+      {message[`${id}`] && <span className={css.error}>{message[`${id}`]}</span>}
     </p>
   );
 }

@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import css from './image-picker.module.css';
 import Image from 'next/image';
 
-export default function ImagePicker({ label, name, message }) {
+export default function ImagePicker({ label, id, message }) {
   const imageInput = useRef();
   const [uploadedImage, setUplodedImage] = useState();
 
@@ -31,7 +31,7 @@ export default function ImagePicker({ label, name, message }) {
 
   return (
     <div className={css.picker}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <div className={css.controls}>
         <div className={css.preview}>
           {!uploadedImage && <p>Nothing Here...</p>}
@@ -40,9 +40,9 @@ export default function ImagePicker({ label, name, message }) {
         <input
           className={css.input} // hides this element
           type='file'
-          id={name}
+          id={id}
           accept='image/png, image/jpeg'
-          name={name}
+          name={id}
           ref={imageInput}
           onChange={handleImageChange}
           required
@@ -55,7 +55,7 @@ export default function ImagePicker({ label, name, message }) {
           Upload Picture
         </button>
       </div>
-      {message && <span className={css.error}>{message}</span>}
+      {message[`${id}`] && <span className={css.error}>{message[`${id}`]}</span>}
     </div>
   );
 }
