@@ -43,3 +43,9 @@
 .preview img {
   object-fit: cover;
 }
+
+.error {
+  display: block;
+  color: #c74410;
+  margin-top: 0.5rem;
+}

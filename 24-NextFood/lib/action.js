@@ -30,7 +30,7 @@ export async function shareMeal(prevState, formData) {
     meal.image.size === 0
   ) {
     console.log(
-      'Validation Check Failed:\n' +
+        '\nValidation Failed:\n' +
         `Title: ${!invalid(meal.title)}\n` +
         `Summary: ${!invalid(meal.summary)}\n` +
         `Instructions: ${!invalid(meal.instructions)}\n` +

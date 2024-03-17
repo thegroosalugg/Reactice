@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import css from './image-picker.module.css';
 import Image from 'next/image';
 
-export default function ImagePicker({ label, name }) {
+export default function ImagePicker({ label, name, message }) {
   const imageInput = useRef();
   const [uploadedImage, setUplodedImage] = useState();
 
@@ -55,6 +55,7 @@ export default function ImagePicker({ label, name }) {
           Upload Picture
         </button>
       </div>
+      {message && <span className={css.error}>{message}</span>}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import css from './page.module.css';
 import { shareMeal } from '@/lib/action';
 import FormButton from '@/components/meals/meal-form-submit';
 import { useFormState } from 'react-dom'; // is a Hook that allows you to update state based on the result of a form action
+import Input from '@/components/meals/input';
 
 export default function ShareMealPage() {
   // First argument takes returnable code, second function takes fallback state while first value awaited
@@ -23,34 +24,19 @@ export default function ShareMealPage() {
         {/* attach server functions via action */}
         <form className={css.form} action={formAction}>
           <div className={css.row}>
-            <p>
-              <label htmlFor='name'>Your name</label>
-              <input type='text' id='name' name='name' required />
-            </p>
-            <p>
-              <label htmlFor='email'>Your email</label>
-              <input type='email' id='email' name='email' required />
-            </p>
+            <Input id='name' label='Your Name' message={state.message} />
+            <Input id='email' label='Your email' message={state.message} />
           </div>
-          <p>
-            <label htmlFor='title'>Title</label>
-            <input type='text' id='title' name='title' required />
-          </p>
-          <p>
-            <label htmlFor='summary'>Short Summary</label>
-            <input type='text' id='summary' name='summary' required />
-          </p>
-          <p>
-            <label htmlFor='instructions'>Instructions</label>
-            <textarea
-              id='instructions'
-              name='instructions'
-              rows='10'
-              required
-            ></textarea>
-          </p>
-          <ImagePicker name='image' label='Current Pic' />
-          {state.message && <p>{state.message}</p>}
+          <Input id='title' label='Title' message={state.message} />
+          <Input id='summary' label='Short Summary' message={state.message} />
+          <Input
+            id='instructions'
+            label='Instructions'
+            message={state.message}
+            text
+            rows='10'
+          />
+          <ImagePicker name='image' label='Current Pic' message={state.message} />
           <p className={css.actions}>
             <FormButton />
           </p>
