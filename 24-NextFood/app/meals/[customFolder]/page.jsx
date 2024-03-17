@@ -3,6 +3,17 @@ import css from './page.module.css';
 import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
 
+// dynamic metadata generators must export async function with a reserved name
+export async function generateMetadata({ params }) {
+  const meal = getMeal(params.customFolder); // search for value equal to folder name
+
+  if (!meal) {
+    notFound();
+  }
+
+  return { title: meal.title, description: meal.summary };
+}
+
 // params key from object passed by Next
 export default function MealItem({ params }) {
   const meal = getMeal(params.customFolder); // search for value equal to folder name
