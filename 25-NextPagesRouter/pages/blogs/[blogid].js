@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from "next/link";
 
-// dynamic nested page. Filename must be inside [squarebrackets] which serves as the dynamic path. URL: our-domain.com/blogs/anydynamicdata
+// dynamic nested page. File/foldername must be inside [squarebrackets] which serves as the dynamic path. URL: our-domain.com/blogs/anydynamicdata
 
 export default function dynamicBlogPage() {
   const router = useRouter();
