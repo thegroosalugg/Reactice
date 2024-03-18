@@ -21,6 +21,20 @@ const DUMMY_DATA = [
   },
 ];
 
-export default function HomePage() {
-  return <MeetupList meetups={DUMMY_DATA} />;
+// props object is received directly from getStaticProps below, otherwise no data would have been passed
+export default function HomePage(props) {
+  return <MeetupList meetups={props.meetups} />;
+}
+
+// Reserved function name. Pages Router component, obsolete in App Router. It calls this function before it calls the component.
+// contains the initial data this page needs. UseEffect runs AFTER the component renders once, thus initial data is missing, affecting SEO
+// executed during the build process, not on the server or client, so the code is protected
+export async function getStaticProps() {
+  // fetch data for API
+
+  // must return an object with a PROPS key, this then holds another object with the data we want
+  return {
+    props: { meetups: DUMMY_DATA },
+    revalidate: 10, // number of seconds before NextJS regenerates this page for an incoming request
+  }; // this ensures that when new data is added, the page fetches it and displays the data, i.e. user submitted content
 }
