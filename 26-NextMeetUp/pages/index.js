@@ -29,25 +29,25 @@ export default function HomePage(props) {
 // Reserved function name. Pages Router component, obsolete in App Router. It calls this function before it calls the component.
 // contains the initial data this page needs. UseEffect runs AFTER the component renders once, thus initial data is missing, affecting SEO
 // executed during the build process, not on the server or client, so the code is protected. Creates a static page for initial render
-// export async function getStaticProps() {
-//   // fetch data for API
-
-//   // must return an object with a PROPS key, this then holds another object with the data we want
-//   return {
-//     props: { meetups: DUMMY_DATA },
-//     revalidate: 10, // number of seconds before NextJS regenerates this page for an incoming request
-//   }; // this ensures that when new data is added, the page fetches it and displays the data, i.e. user submitted content
-// }
-
-
-// executed only on the server. Will fetch data each time a request is sent, unlike static which needs to be revalidated
-export async function getServerSideProps(context) {
+export async function getStaticProps() {
   // fetch data for API
 
-  const request = context.req; // is passed a context object which holds the response and request, in case any additional data is needed
-  const response = context.res; // not used here, displayed just for syntax
-
+  // must return an object with a PROPS key, this then holds another object with the data we want
   return {
     props: { meetups: DUMMY_DATA },
-  };
+    revalidate: 10, // number of seconds before NextJS regenerates this page for an incoming request
+  }; // this ensures that when new data is added, the page fetches it and displays the data, i.e. user submitted content
 }
+
+
+// // executed only on the server. Will fetch data each time a request is sent, unlike static which needs to be revalidated
+// export async function getServerSideProps(context) {
+//   // fetch data for API
+
+//   const request = context.req; // is passed a context object which holds the response and request, in case any additional data is needed
+//   const response = context.res; // not used here, displayed just for syntax
+
+//   return {
+//     props: { meetups: DUMMY_DATA },
+//   };
+// }
