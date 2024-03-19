@@ -26,7 +26,7 @@ export async function getStaticProps() {
   // must return an object with a PROPS key, this then holds another object with the data we want
   return {
     props: { // fetched data must be transformed due to ID syntax used in Mongo
-      meetups: meetups.map((meetup) => ({
+      meetups: meetups.map((meetup) => ({ // wrap ({}) to ensure we return an object, not execute a function
         title: meetup.title,
         image: meetup.image,
         address: meetup.address,
