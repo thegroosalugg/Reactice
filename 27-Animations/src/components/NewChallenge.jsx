@@ -65,8 +65,8 @@ export default function NewChallenge({ onDone }) {
             <motion.li
               variants={{ // this is a child component, as such initial/exit/animation are set to these variant keys in the parent
                 hide: { opacity: 0, scale: 0.5 }, // thus only the variant objects need to be defined, the other code needs no repetition
-                show: { opacity: 1, scale: 1 }, // names of variant keys must match the parent
-              }}
+                show: { opacity: 1, scale: [0.8, 1.3, 1] }, // names of variant keys must match the parent
+              }} // setting values inside an array is equivalent to @keyframes allowing you to set larger steps
               exit={{ opacity: 1, scale: 1 }} // overrides parent's exit property only for the child
               // when using spring, the exit animation waits for the child compponent to finish before closng the modal...
               // ...causing the backdrop to linger on screen. As such to avoid this, exit must be overriden manually with hardcode...

@@ -24,7 +24,7 @@ export default function Header() {
       <header id='main-header'>
         <h1>Your Challenges</h1>
         <motion.button
-          whileHover={{ scale: 1.1 }} // increase or decrease button size while hovering
+          whileHover={{ scale: 1.1, backgroundColor: '#eee', color: '#000' }} // increase or decrease button size while hovering
           transition={{ type: 'spring', stiffness: 500, mass: 5 }}
           onClick={handleStartAddNewChallenge}
           className='button'
