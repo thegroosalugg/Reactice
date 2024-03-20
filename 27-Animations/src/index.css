@@ -280,11 +280,6 @@ main {
   display: inline-block;
   font-size: 0.85rem;
   margin-left: 0.25rem;
-  transition: transform 0.3s ease-out;
-}
-
-.challenge-item-details.expanded .challenge-item-details-icon {
-  transform: rotate(180deg);
 }
 
 .challenge-item-description {
@@ -315,7 +310,7 @@ main {
   max-width: 90%;
   z-index: 10;
   /* add our keyframes animation here then set properties. 'Forwards' means it remains at the 100% state when its over */
-  animation: slide-up 0.3s ease-out forwards;
+  /* animation: slide-up 0.3s ease-out forwards; */
 }
 
 /* use keyframes to animate DOM elements, can be named anything,
