@@ -1,11 +1,20 @@
 import { MongoClient } from 'mongodb';
 import MeetupList from '@/components/meetups/MeetupList';
+import Head from 'next/head';
 
 // ROOT PAGE. It all starts here
 
 // props object is received directly from getStaticProps below, otherwise no data would have been passed
 export default function HomePage(props) {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <>
+      <Head>
+        <title>Meet Ups</title>
+        <meta name='description' content='List of meet ups' />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </>
+  );
 }
 
 // Reserved function name. Pages Router component, obsolete in App Router. It calls this function before it calls the component.
@@ -25,8 +34,10 @@ export async function getStaticProps() {
 
   // must return an object with a PROPS key, this then holds another object with the data we want
   return {
-    props: { // fetched data must be transformed due to ID syntax used in Mongo
-      meetups: meetups.map((meetup) => ({ // wrap ({}) to ensure we return an object, not execute a function
+    props: {
+      // fetched data must be transformed due to ID syntax used in Mongo
+      meetups: meetups.map((meetup) => ({
+        // wrap ({}) to ensure we return an object, not execute a function
         title: meetup.title,
         image: meetup.image,
         address: meetup.address,
@@ -36,7 +47,6 @@ export async function getStaticProps() {
     revalidate: 10, // number of seconds before NextJS regenerates this page for an incoming request
   }; // this ensures that when new data is added, the page fetches it and displays the data, i.e. user submitted content
 }
-
 
 // // executed only on the server. Will fetch data each time a request is sent, unlike static which needs to be revalidated
 // export async function getServerSideProps(context) {

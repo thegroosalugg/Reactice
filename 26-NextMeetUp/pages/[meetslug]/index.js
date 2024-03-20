@@ -1,8 +1,18 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import MeetUpDetails from '@/components/meetups/MeetUpDetails';
+import Head from 'next/head';
 
 export default function MeetUpDetailsPage(props) {
-  return <MeetUpDetails {...props.meetupData} />;
+  return (
+    <>
+    {/* this is the syntax to add metadata to the page router, import Head and wrap the title and description */}
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name='description' content={props.meetupData.description} />
+      </Head>
+      <MeetUpDetails {...props.meetupData} />;
+    </>
+  );
 }
 
 // this function needs to run along side getStaticProps when using dynamic pages
@@ -39,8 +49,10 @@ export async function getStaticProps(context) {
   const meetupCollections = db.collection('meetups');
 
   // findOne provided by Mongo, key is what we look for, value is what it must match, ObjectId converts our string to Mongo format so it compares correctly
-  const foundMeetUp = await meetupCollections.findOne({ _id: new ObjectId(meetupId) });
-  // lecture did not use 'new' keyword and everything worked. For me, I have to insert this word or the app breaks. 
+  const foundMeetUp = await meetupCollections.findOne({
+    _id: new ObjectId(meetupId),
+  });
+  // lecture did not use 'new' keyword and everything worked. For me, I have to insert this word or the app breaks.
 
   client.close(); // close the connection to DB
 

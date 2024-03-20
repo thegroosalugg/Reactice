@@ -1,4 +1,5 @@
 import NewMeetupForm from '@/components/meetups/NewMeetupForm';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 // NeW Meet Up Folder. Root index page
@@ -21,5 +22,13 @@ export default function NewMeetUpPage() {
     router.replace('/'); // replace is like push, redirects, but ensures we cannot click back button
   }
 
-  return <NewMeetupForm onAddMeetup={handleAddMeetUp} />;
+  return (
+    <>
+      <Head>
+        <title>Create a new Meet Up</title>
+        <meta name='description' content='New Meet Up Form Page' />
+      </Head>
+      <NewMeetupForm onAddMeetup={handleAddMeetUp} />;
+    </>
+  );
 }
