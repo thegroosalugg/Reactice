@@ -27,8 +27,8 @@ export default function ChallengeItem({
     updateChallengeStatus(challenge.id, 'completed');
   }
 
-  return (
-    <li>
+  return ( // layout prop animates layout changes, such as when a list item is removed and the other items move up the list
+    <motion.li layout exit={{ y: -30, opacity: 0}}>
       <article className='challenge-item'>
         <header>
           <img {...challenge.image} />
@@ -66,6 +66,6 @@ export default function ChallengeItem({
           )}
         </div>
       </article>
-    </li>
+    </motion.li>
   );
 }
