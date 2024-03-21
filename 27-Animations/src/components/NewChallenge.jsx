@@ -1,11 +1,12 @@
 import { useContext, useRef, useState } from 'react';
-import { motion } from 'framer-motion'; // import framer motion
+import { motion, useAnimate, stagger } from 'framer-motion'; // import framer motion
 
 import { ChallengesContext } from '../store/challenges-context.jsx';
 import Modal from './Modal.jsx';
 import images from '../assets/images.js';
 
 export default function NewChallenge({ onDone }) {
+  const [scope, animate] = useAnimate(); // animate is the function we execute, scope is the ref assigned to the DOM elements, like useRef
   const title = useRef();
   const description = useRef();
   const deadline = useRef();
@@ -32,6 +33,12 @@ export default function NewChallenge({ onDone }) {
       !challenge.deadline.trim() ||
       !challenge.image
     ) {
+      // Imperative animation triggers only when form validation fails
+      animate(
+        'input, textarea', // 1st argument: name affected elements in string form separated by commas
+        { x: [10, 0, -10, 0] }, // 2nd argument: equivalent to animate prop, set desired animations
+        { type: 'spring', duration: 0.2, delay: stagger(0.05) } // 3rd argument: transitions equivalent, set animation configuration
+      ); // stagger needs to be imported, equivalent to staggerChildren that adds delay between element animations
       return;
     }
 
@@ -41,7 +48,7 @@ export default function NewChallenge({ onDone }) {
 
   return (
     <Modal title='New Challenge' onClose={onDone}>
-      <form id='new-challenge' onSubmit={handleSubmit}>
+      <form id='new-challenge' onSubmit={handleSubmit} ref={scope}>
         <p>
           <label htmlFor='title'>Title</label>
           <input ref={title} type='text' name='title' id='title' />
@@ -63,7 +70,8 @@ export default function NewChallenge({ onDone }) {
         >
           {images.map((image) => (
             <motion.li
-              variants={{ // this is a child component, as such initial/exit/animation are set to these variant keys in the parent
+              variants={{
+                // this is a child component, as such initial/exit/animation are set to these variant keys in the parent
                 hide: { opacity: 0, scale: 0.5 }, // thus only the variant objects need to be defined, the other code needs no repetition
                 show: { opacity: 1, scale: [0.8, 1.3, 1] }, // names of variant keys must match the parent
               }} // setting values inside an array is equivalent to @keyframes allowing you to set larger steps
