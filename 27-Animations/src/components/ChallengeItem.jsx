@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { motion } from 'framer-motion'; // import framer motion
+import { AnimatePresence, motion } from 'framer-motion'; // import framer motion
 
 import { ChallengesContext } from '../store/challenges-context.jsx';
 
@@ -28,7 +28,8 @@ export default function ChallengeItem({
   }
 
   return ( // layout prop animates layout changes, such as when a list item is removed and the other items move up the list
-    <motion.li layout exit={{ y: -30, opacity: 0}}>
+    // layout can however cause a conflict with other components such as the span, which changes the height of this component
+    <motion.li layout exit={{ y: -30, opacity: 0 }}>
       <article className='challenge-item'>
         <header>
           <img {...challenge.image} />
@@ -57,13 +58,19 @@ export default function ChallengeItem({
             </button>
           </p>
 
-          {isExpanded && (
-            <div>
-              <p className='challenge-item-description'>
-                {challenge.description}
-              </p>
-            </div>
-          )}
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }} // this div changes height of the whole component, affecting animations
+                animate={{ height: 'auto', opacity: 1 }} // height can be set to auto, to prevent this element from affecting 'layout'
+                exit={{ height: 0, opacity: 0 }} // sets back to invisible
+              >
+                <p className='challenge-item-description'>
+                  {challenge.description}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </article>
     </motion.li>
