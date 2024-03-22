@@ -2,8 +2,7 @@ import { createContext, useContext, useState } from 'react';
 
 const AccordionContext = createContext({
   openItemId: null, // functions and states stored here as skeletons for ease of autocomplete when they're called
-  openItem: () => {},
-  closeItem: () => {},
+  toggleItem: () => {},
 });
 
 // accordion provider wraps only the accordion, not the whole app, as such we create a specific context to call
@@ -20,18 +19,13 @@ export function useAccordionContext() {
 export default function Accordion({ className, children }) {
   const [openItemId, setOpenItemId] = useState();
 
-  function openItem(id) {
-    setOpenItemId(id);
-  }
-
-  function closeItem() {
-    setOpenItemId(null);
+  function toggleItem(id) {
+    setOpenItemId(prevId => (prevId === id ? null : id)); // sets active to inactive and inactive to active
   }
 
   const contextValue = {
     openItemId,
-    openItem,
-    closeItem,
+    toggleItem,
   };
 
   return (
