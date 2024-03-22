@@ -7,17 +7,17 @@ function App() {
       <section>
         <h2>React Patterns & Practices</h2>
         <Accordion className='accordion'>
-        <AccordionItem className='accordion-item' title='Compound Components'>
-            <artic>
+        <AccordionItem id='1' className='accordion-item' title='Compound Components'>
+            <article>
               <p>Compound Components are designed to specifically work together</p>
               <p>But they are not too useful on their own.</p>
-            </artic>
+            </article>
           </AccordionItem>
-          <AccordionItem className='accordion-item' title='TBD'>
-            <artic>
+          <AccordionItem id='2' className='accordion-item' title='TBD'>
+            <article>
               <p>More Coming Soon...</p>
               <p>...</p>
-            </artic>
+            </article>
           </AccordionItem>
         </Accordion>
       </section>
