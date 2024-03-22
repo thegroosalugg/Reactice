@@ -1,26 +1,49 @@
 import { Link } from 'react-router-dom';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 import cityImg from '../assets/city.jpg';
 import heroImg from '../assets/hero.png';
 
 export default function WelcomePage() {
+  const { scrollY } = useScroll(); // creates an object that tracks scrolling. Can also track scrollX
+
+  // takes 3 arguments,
+  // 1: value to be transformed
+  // 2: array of breakpoints (number of pixels scrolled)
+  // 3: values those breakpoints are transformed to
+  const yCity = useTransform(scrollY, [0, 200], [0, -100]);
+  const opacityCity = useTransform(scrollY, [0, 200, 300, 500], [1, 0.5, 0.5, 0]);
+  const yHero = useTransform(scrollY, [0, 200], [0, -200]);
+  const opacityHero = useTransform(scrollY, [0, 300, 500], [1, 1, 0]);
+  const yText = useTransform(scrollY, [0, 200, 300, 500], [1, 50, 50, 300]);
+  const scaleText = useTransform(scrollY, [0, 300], [1, 1.5]);
+
   return (
     <>
-      <header id="welcome-header">
-        <div id="welcome-header-content">
+      <header id='welcome-header'>
+        <motion.div
+          id='welcome-header-content'
+          style={{ scale: scaleText, y: yText }} // transform the text on scroll
+        >
           <h1>Ready for a challenge?</h1>
-          <Link id="cta-link" to="/challenges">
+          <Link id='cta-link' to='/challenges'>
             Get Started
           </Link>
-        </div>
-        <img
+        </motion.div>
+        <motion.img
           src={cityImg}
-          alt="A city skyline touched by sunlight"
-          id="city-image"
+          alt='A city skyline touched by sunlight'
+          id='city-image'
+          style={{ opacity: opacityCity, y: yCity }} // motion style prop. Assigned to value of useTransform constants
         />
-        <img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
+        <motion.img
+          src={heroImg}
+          alt='A superhero wearing a cape'
+          id='hero-image'
+          style={{ opacity: opacityHero, y: yHero }} // transform hero
+        />
       </header>
-      <main id="welcome-content">
+      <main id='welcome-content'>
         <section>
           <h2>There&apos;s never been a better time.</h2>
           <p>
