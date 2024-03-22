@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { ChallengesContext } from '../store/challenges-context.jsx';
 import ChallengeItem from './ChallengeItem.jsx';
@@ -34,25 +35,47 @@ export default function Challenges() {
   const displayedChallenges = filteredChallenges[selectedType];
 
   return (
-    <div id="challenges">
+    <div id='challenges'>
       <ChallengeTabs
         challenges={filteredChallenges}
         onSelectType={handleSelectType}
         selectedType={selectedType}
       >
-        {displayedChallenges.length > 0 && (
-          <ol className="challenge-items">
-            {displayedChallenges.map((challenge) => (
-              <ChallengeItem
-                key={challenge.id}
-                challenge={challenge}
-                onViewDetails={() => handleViewDetails(challenge.id)}
-                isExpanded={expanded === challenge.id}
-              />
-            ))}
-          </ol>
-        )}
-        {displayedChallenges.length === 0 && <p>No challenges found.</p>}
+        {/* to have an exit animation, we need to wrap both the list, and the list item with animate presence as both disappear
+        from the dom individually. The exit config for <li> ChallengeItem is set inside that component */}
+        <AnimatePresence mode='wait'>
+          {/* by default AP mode is 'sync' where all animations are played at the same time, 'wait' delays the next animation */}
+          {displayedChallenges.length > 0 && (
+            <motion.ol
+              key='list' // key is required so AnimatePresence can differentiate between 2 nested elements, <ol> & <p>
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -30, opacity: 0 }} // exit animation when entire list exists DOM
+              className='challenge-items'
+            >
+              <AnimatePresence>
+                {displayedChallenges.map((challenge) => (
+                  <ChallengeItem
+                    key={challenge.id}
+                    challenge={challenge}
+                    onViewDetails={() => handleViewDetails(challenge.id)}
+                    isExpanded={expanded === challenge.id}
+                  />
+                ))}
+              </AnimatePresence>
+            </motion.ol>
+          )}
+          {displayedChallenges.length === 0 && (
+            <motion.p
+              key='fallback'
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+            >
+              No challenges found.
+            </motion.p>
+          )}
+        </AnimatePresence>
       </ChallengeTabs>
     </div>
   );

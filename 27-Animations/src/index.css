@@ -282,10 +282,6 @@ main {
   margin-left: 0.25rem;
 }
 
-.challenge-item-details.expanded .challenge-item-details-icon {
-  transform: rotate(180deg);
-}
-
 .challenge-item-description {
   margin: 0;
 }
@@ -313,6 +309,23 @@ main {
   width: 30rem;
   max-width: 90%;
   z-index: 10;
+  /* add our keyframes animation here then set properties. 'Forwards' means it remains at the 100% state when its over */
+  /* animation: slide-up 0.3s ease-out forwards; */
+}
+
+/* use keyframes to animate DOM elements, can be named anything,
+especially useful with components such as modals which are not part of the DOM when they're not on screen and therefore cannot be targeted */
+@keyframes slide-up {
+  /* can set as many states as needed for which steps animation can go through. Can also name 'to' and 'from' */
+  0% {
+    /* transform translateY will move it along the Y axis */
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal h2 {

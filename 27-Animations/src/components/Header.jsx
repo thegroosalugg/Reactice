@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import NewChallenge from './NewChallenge.jsx';
 
@@ -15,13 +16,21 @@ export default function Header() {
 
   return (
     <>
-      {isCreatingNewChallenge && <NewChallenge onDone={handleDone} />}
+      <AnimatePresence>
+        {/* wrap around components exiting the DOM */}
+        {isCreatingNewChallenge && <NewChallenge onDone={handleDone} />}
+      </AnimatePresence>
 
-      <header id="main-header">
+      <header id='main-header'>
         <h1>Your Challenges</h1>
-        <button onClick={handleStartAddNewChallenge} className="button">
+        <motion.button
+          whileHover={{ scale: 1.1, backgroundColor: '#eee', color: '#000' }} // increase or decrease button size while hovering
+          transition={{ type: 'spring', stiffness: 500, mass: 5 }}
+          onClick={handleStartAddNewChallenge}
+          className='button'
+        >
           Add Challenge
-        </button>
+        </motion.button>
       </header>
     </>
   );

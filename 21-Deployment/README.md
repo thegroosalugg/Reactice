@@ -4,4 +4,4 @@ Mini Deployment Project with Firebaase
  https://react-deployment-demo-fa340.web.app
 
 disable:
-$firebase hosting:disable
+firebase hosting:disable
