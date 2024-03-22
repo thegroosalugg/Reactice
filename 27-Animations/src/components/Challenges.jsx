@@ -48,6 +48,8 @@ export default function Challenges() {
           {displayedChallenges.length > 0 && (
             <motion.ol
               key='list' // key is required so AnimatePresence can differentiate between 2 nested elements, <ol> & <p>
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
               exit={{ y: -30, opacity: 0 }} // exit animation when entire list exists DOM
               className='challenge-items'
             >
