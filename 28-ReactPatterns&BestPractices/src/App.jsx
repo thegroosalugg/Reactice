@@ -1,12 +1,13 @@
 import { PLACES } from './assets/places';
+import { UNIVERSE } from './assets/universe';
 import Accordion from './components/Accordion/Accordion';
-import Place from './components/SearchableList/Place';
 import SearchableList from './components/SearchableList/SearchableList';
+import Place from './components/Place';
+import Universe from './components/Universe';
 
 function App() {
   return (
     <main>
-
       <section>
         <h2>React Patterns & Practices</h2>
 
@@ -46,11 +47,23 @@ function App() {
 
       <section>
         {/* passing a function as children to a function component allows the parent to customize how its children are rendered */}
-        <SearchableList items={PLACES} keyFn={item => item.id}>
+        <SearchableList
+          items={PLACES}
+          keyFn={(item) => item.id}
+          label='Search the World'
+        >
           {(item) => <Place {...item} />}
         </SearchableList>
-      </section>
 
+        <SearchableList
+          items={UNIVERSE}
+          keyFn={(item) => item.name} // key functions takes a different value for the key
+          label='Search the Universe'
+        >
+          {/* with RENDER PROPS we can handle the data differently for other component functions */}
+          {(spaceRock) => <Universe spaceRock={spaceRock} />}
+        </SearchableList>
+      </section>
     </main>
   );
 }
