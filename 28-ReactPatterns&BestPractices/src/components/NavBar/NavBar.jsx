@@ -25,7 +25,7 @@ export default function NavBar() {
     changeActiveTab,
   };
 
-  console.log('ACTIVE TAB:', activeTab)
+  console.log('[activeTab]:', activeTab)
 
   return (
     <NavContext.Provider value={contextValue}>
