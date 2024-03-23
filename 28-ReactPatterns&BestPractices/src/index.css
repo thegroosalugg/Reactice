@@ -157,16 +157,12 @@ main {
 }
 
 .Planet {
-  background: linear-gradient(to bottom, #003366, #336699);
+  background: radial-gradient(circle, #001f57, #092b7f, #020f3a);
 }
 
 .Star {
   background: linear-gradient(to bottom, #e3a839, #bf5c16);
   color: black;
-}
-
-.Exoplanet {
-  background: linear-gradient(to bottom, #545073, #260e3e);
 }
 
 #travel-demo button {

@@ -1,9 +1,9 @@
-import { PLACES } from './assets/places';
-import { UNIVERSE } from './assets/universe';
+import { PLACES } from './assets/places/places';
+import { SOLARSYSTEM } from './assets/solar-system/solarSystem';
 import Accordion from './components/Accordion/Accordion';
 import SearchableList from './components/SearchableList/SearchableList';
 import Place from './components/Place';
-import Universe from './components/Universe';
+import SolarSystem from './components/SolarSystem/SolarSystem';
 
 function App() {
   return (
@@ -56,12 +56,12 @@ function App() {
         </SearchableList>
 
         <SearchableList
-          items={UNIVERSE}
+          items={SOLARSYSTEM}
           keyFn={(item) => item.name} // key functions takes a different value for the key
           label='Search the Universe'
         >
           {/* with RENDER PROPS we can handle the data differently for other component functions */}
-          {(spaceRock) => <Universe spaceRock={spaceRock} />}
+          {(item) => <SolarSystem item={item} />}
         </SearchableList>
       </section>
     </main>
