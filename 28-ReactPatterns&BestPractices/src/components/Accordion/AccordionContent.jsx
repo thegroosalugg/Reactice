@@ -7,7 +7,7 @@ export default function AccordionContent({ className, children }) {
 
   const status = openItemId === id ? 'open' : 'close';
 
-  console.log(' [id]:', id, '\n', '[status]:', status, '\n', '[openItemId]:', openItemId)
+  // console.log(' [id]:', id, '\n', '[status]:', status, '\n', '[openItemId]:', openItemId)
 
   return (
       <div className={`${className} ${status}`}>{children}</div>

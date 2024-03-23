@@ -1,7 +1,10 @@
 import { createContext, useContext, useState } from 'react';
 import NavButton from './NavButton';
 
-const NavContext = createContext({ activeTab: '', changeActiveTab: () => {} });
+const NavContext = createContext({
+  activeTab: '',
+  changeActiveTab: () => {},
+});
 
 export function useNavContext() {
   const ctx = useContext(NavContext); // create custom useContext hook to replace vanilla hook
@@ -13,8 +16,8 @@ export function useNavContext() {
   return ctx;
 }
 
-export default function NavBar() {
-  const [activeTab, setActiveTab] = useState('accordion');
+export default function NavBar({ children }) {
+  const [activeTab, setActiveTab] = useState('Accordion');
 
   function changeActiveTab(tab) {
     setActiveTab(tab);
@@ -25,7 +28,7 @@ export default function NavBar() {
     changeActiveTab,
   };
 
-  console.log('[activeTab]:', activeTab)
+  console.log('[activeTab]:', activeTab);
 
   return (
     <NavContext.Provider value={contextValue}>
@@ -36,6 +39,8 @@ export default function NavBar() {
           <NavButton tab='Solar System' />
         </ul>
       </nav>
+      {/* use RENDER PROPS to pass state value to app, which will render a page based on the state */}
+      {children(activeTab)}
     </NavContext.Provider>
   );
 }
