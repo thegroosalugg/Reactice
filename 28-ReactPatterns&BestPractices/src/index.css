@@ -99,7 +99,8 @@ main {
 .place {
   display: flex;
   gap: 1rem;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 1.5rem 2rem;
+  transition: transform 0.3s ease-in-out;
 }
 
 .place img {
@@ -126,17 +127,16 @@ main {
   margin: 0.4rem 0.2rem;
 }
 
-.space header {
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid #ffffff;
-  border-radius: 6px;
-  padding: 0.4rem 1rem;
+.space h2 {
+  margin: 0;
+  padding: 0.5rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease-in-out;
 }
 
-.space header h3,
-.space header h5 {
-  margin: 0;
+.hover:hover {
+  transform: scale(1.1);
 }
 
 .hidden {
@@ -156,14 +156,46 @@ main {
   justify-content: space-between;
 }
 
-.Planet {
-  background: radial-gradient(circle, #001f57, #092b7f, #020f3a);
+.Sun {
+  background: radial-gradient(circle, #f8e4b2, #f8d080, #f7bc5d);
 }
 
-.Star {
-  background: linear-gradient(to bottom, #e3a839, #bf5c16);
-  color: black;
+.Mercury {
+  background: radial-gradient(circle, #b8b8b8, #a3a3a3, #8e8e8e);
 }
+
+.Venus {
+  background: radial-gradient(circle, #e3c79a, #d1b088, #bf9976);
+}
+
+.Earth {
+  background: radial-gradient(circle, #99ccff, #7fbf7f, #4d804d);
+}
+
+.Mars {
+  background: radial-gradient(circle, #e58e73, #d27c61, #bf6b4f);
+}
+
+.Jupiter {
+  background: radial-gradient(circle, #e3c79a, #d1b088, #bf9976);
+}
+
+.Saturn {
+  background: radial-gradient(circle, #e8d19f, #d1ba8d, #baa37b);
+}
+
+.Uranus {
+  background: radial-gradient(circle, #a3d4f2, #92c4e1, #81b4d0);
+}
+
+.Neptune {
+  background: radial-gradient(circle, #9cb3d9, #8a9fc2, #788bac);
+}
+
+.Pluto {
+  background: radial-gradient(circle, #ccc, #b8b8b8, #a3a3a3);
+}
+
 
 #travel-demo button {
   padding: 0.5rem 1rem;

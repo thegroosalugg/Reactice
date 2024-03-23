@@ -10,10 +10,7 @@ export default function SolarSystem({ item }) {
 
   return (
     <div className='space' onClick={handleClick}>
-      <header className={item.type}>
-        <h3>{item.name}</h3>
-        <h5>{item.type.toUpperCase()}</h5>
-      </header>
+      <h2 className={`${item.name} hover`}>{item.name}</h2>
       <div
         className={isOpen ? '' : 'hidden'}
         style={{
