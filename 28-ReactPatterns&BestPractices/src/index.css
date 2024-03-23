@@ -66,6 +66,10 @@ main {
   color:#1e2130;
 }
 
+.active {
+  border-bottom: 2px solid #EEEEEE;
+}
+
 .accordion {
   margin: 2rem 0;
   border: 1px solid #5d6273;
@@ -129,7 +133,7 @@ main {
 .place {
   display: flex;
   gap: 1rem;
-  margin: 1.5rem 0 1.5rem 2rem;
+  margin: 1.5rem 0 1.5rem 20%;
   transition: transform 0.3s ease-in-out;
 }
 

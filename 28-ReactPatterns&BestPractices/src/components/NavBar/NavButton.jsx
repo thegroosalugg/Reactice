@@ -1,10 +1,10 @@
-import { useNavContext } from "./NavBar";
+import { useNavContext } from './NavBar';
 
 export default function NavButton({ tab }) {
-  const { changeActiveTab } = useNavContext();
+  const { activeTab, changeActiveTab } = useNavContext();
 
   return (
-    <li>
+    <li className={activeTab === tab ? 'active' : ''}>
       <button onClick={() => changeActiveTab(tab)}>{tab}</button>
     </li>
   );
