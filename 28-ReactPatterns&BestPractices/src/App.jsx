@@ -1,10 +1,14 @@
-import Accordion from './components/accordion/Accordion';
+import { PLACES } from './assets/places';
+import Accordion from './components/Accordion/Accordion';
+import SearchableList from './components/SearchableList/SearchableList';
 
 function App() {
   return (
     <main>
+
       <section>
         <h2>React Patterns & Practices</h2>
+
         <Accordion className='accordion'>
 
           <Accordion.item id='1' className='accordion-item'>
@@ -38,6 +42,12 @@ function App() {
 
         </Accordion>
       </section>
+
+      <section>
+        <SearchableList items={PLACES} />
+        <SearchableList items={[{ title: 'item 1' }, { title: 'item 2' }, { title: 'item 3' }]} />
+      </section>
+
     </main>
   );
 }
