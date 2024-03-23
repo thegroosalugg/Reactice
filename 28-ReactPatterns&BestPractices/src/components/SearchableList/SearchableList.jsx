@@ -1,15 +1,24 @@
+import { useState } from 'react';
+import Place from './Place';
+
 export default function SearchableList({ items }) {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const searchResults = items.filter((item) =>
+    JSON.stringify(item).toLowerCase().includes(searchTerm.toLocaleLowerCase())
+  );
+
+  function handleChange(event) {
+    setSearchTerm(event.target.value);
+  }
+
   return (
     <div className='searchable-list'>
-      <input type='search' placeholder='Search' />
+      <input type='search' placeholder='Search' onChange={handleChange} />
       <ul>
-        {items.map((item) => (
-          <li key={item.id} className='place'>
-            <img src={item.image} alt={item.title} />
-            <div>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-            </div>
+        {searchResults.map((item) => (
+          <li key={item.id}>
+            <Place {...item} />
           </li>
         ))}
       </ul>

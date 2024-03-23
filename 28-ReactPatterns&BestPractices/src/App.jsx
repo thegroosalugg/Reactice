@@ -45,7 +45,6 @@ function App() {
 
       <section>
         <SearchableList items={PLACES} />
-        <SearchableList items={[{ title: 'item 1' }, { title: 'item 2' }, { title: 'item 3' }]} />
       </section>
 
     </main>
