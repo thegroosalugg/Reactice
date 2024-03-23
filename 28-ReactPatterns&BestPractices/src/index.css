@@ -92,6 +92,8 @@ main {
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow: auto;
+  max-height: 35vh;
 }
 
 .place {
@@ -118,6 +120,55 @@ main {
   color: #b3b5c6;
 }
 
+.space {
+  display: flex;
+  flex-direction: column;
+  margin: 0.4rem 0.2rem;
+}
+
+.space header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+}
+
+.space header h3,
+.space header h5 {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.space article {
+  margin: 1rem;
+}
+
+.space span {
+  padding: 0 1rem;
+}
+
+.space .data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Planet {
+  background: linear-gradient(to bottom, #003366, #336699);
+}
+
+.Star {
+  background: linear-gradient(to bottom, #e3a839, #bf5c16);
+  color: black;
+}
+
+.Exoplanet {
+  background: linear-gradient(to bottom, #545073, #260e3e);
+}
+
 #travel-demo button {
   padding: 0.5rem 1rem;
   border: none;
@@ -131,4 +182,17 @@ main {
 #travel-demo button:hover,
 #travel-demo button:active {
   background-color: #363e57;
+}
+
+/* hidethescrollbar */
+::-webkit-scrollbar {
+  width: 0px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Hide the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Hide the thumb */
 }
