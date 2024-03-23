@@ -4,11 +4,13 @@ import Accordion from './components/Accordion/Accordion';
 import SearchableList from './components/SearchableList/SearchableList';
 import Place from './components/Place';
 import SolarSystem from './components/SolarSystem/SolarSystem';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   return (
     <main>
       <section>
+        <NavBar />
         <h2>React Patterns & Practices</h2>
 
         <Accordion className='accordion'>
