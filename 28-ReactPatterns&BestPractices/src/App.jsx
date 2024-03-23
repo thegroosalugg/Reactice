@@ -46,7 +46,7 @@ function App() {
 
       <section>
         {/* passing a function as children to a function component allows the parent to customize how its children are rendered */}
-        <SearchableList items={PLACES}>
+        <SearchableList items={PLACES} keyFn={item => item.id}>
           {(item) => <Place {...item} />}
         </SearchableList>
       </section>
