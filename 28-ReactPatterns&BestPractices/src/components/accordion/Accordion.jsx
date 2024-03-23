@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import AccordionItem from './AccordionItem';
+import AccordionTitle from './AccordionTitle';
+import AccordionContent from './AccordionContent';
 
 const AccordionContext = createContext({
   openItemId: null, // functions and states stored here as skeletons for ease of autocomplete when they're called
@@ -21,7 +23,7 @@ export default function Accordion({ className, children }) {
   const [openItemId, setOpenItemId] = useState();
 
   function toggleItem(id) {
-    setOpenItemId(prevId => (prevId === id ? null : id)); // sets active to inactive and inactive to active
+    setOpenItemId((prevId) => (prevId === id ? null : id)); // sets active to inactive and inactive to active
   }
 
   const contextValue = {
@@ -37,6 +39,8 @@ export default function Accordion({ className, children }) {
   );
 }
 
-Accordion.item = AccordionItem // this adds the AccordionItem componenet faction as a value to the Accordion component function
-// as such, we can now access AccordionItem as a key value of Accordion, and no longer need to import it.
+Accordion.item = AccordionItem;
+Accordion.title = AccordionTitle;
+Accordion.content = AccordionContent; // this adds the AccordionContent componenet faction as a value to the Accordion component function
+// as such, we can now access AccordionContent as a key value of Accordion, and no longer need to import it.
 // this also ensures the functions are used within the compound and not outside of it
