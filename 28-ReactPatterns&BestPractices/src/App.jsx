@@ -1,5 +1,5 @@
 import NavBar from './components/NavBar/NavBar';
-import AccordionPage from './pages/AccordionPage';
+import AccordionPage from './pages/AccordionPage/AccordionPage';
 import SolarSystemPage from './pages/SolarSystemPage';
 import PlacesPage from './pages/PlacesPage';
 
