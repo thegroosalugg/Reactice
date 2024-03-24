@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 import SearchBar from './SearchBar';
+import SearchList from './SearchList';
 
 // Render props: React pattern where a component's functionality is provided by passing a function (the "render prop")
 // as a prop to the component. This function returns React elements that define what the component should render.
@@ -51,30 +51,9 @@ export default function SearchableList({ flex, items, keyFn, label, children }) 
     <SearchContext.Provider value={contextValue}>
       <div className='searchable-list'>
         <SearchBar label={label} />
-        <motion.ul
-          className={flex ? 'space-list' : ''}
-          variants={{
-            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-            hidden: { opacity: 0 },
-          }}
-          initial='hidden'
-          animate='visible'
-        >
-          {searchResults.map((item) => (
-            // pass a function as  a prop, so we can pass the found item to the parent for varying handling of keys
-            <motion.li
-              key={keyFn(item)}
-              variants={{
-                visible: { opacity: 1, scale: 1 },
-                hidden: { opacity: 0, scale: 1.2 },
-              }}
-            >
-              {/* here children expects to receive a function that returns renderable code.
-            This allows the child to pass data up to the parent, and for the parent to expect a parameter */}
-              {children(item)}
-            </motion.li>
-          ))}
-        </motion.ul>
+        <SearchList flex={flex} keyFn={keyFn}>
+          {children}
+        </SearchList>
       </div>
     </SearchContext.Provider>
   );
