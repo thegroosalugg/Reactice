@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 // as a prop to the component. This function returns React elements that define what the component should render.
 
 export default function SearchableList({ flex, items, keyFn, label, children }) {
+
   const lastChange = useRef(); // store as a ref to presrve its value across state re-renders
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -28,7 +29,15 @@ export default function SearchableList({ flex, items, keyFn, label, children }) 
 
   return (
     <div className='searchable-list'>
-      <input type='search' placeholder={label} onChange={handleChange} />
+      <motion.input
+        type='search'
+        placeholder={label}
+        onChange={handleChange}
+        initial={{ translateY: 100 }}
+        animate={{ translateY: 0 }}
+        transition={{ type: 'easeInOut', duration: 0.5 }}
+        whileFocus={{ scale: 1.1 }}
+      />
       <motion.ul
         className={flex ? 'space-list' : ''}
         variants={{

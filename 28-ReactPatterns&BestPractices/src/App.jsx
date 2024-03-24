@@ -15,7 +15,6 @@ function App() {
               key={activeTab} // Ensure components are re-mounted when switching between tabs
               initial={{ opacity: 0, y: -30 }} // Initial animation when component mounts
               animate={{ opacity: 1, y: 0 }} // Animate opacity when component changes
-              exit={{ opacity: 0, y: 30 }} // Animate opacity when component is removed
               transition={{ duration: 0.5 }}
             >
               {activeTab === 'Accordion' && <AccordionPage />}
