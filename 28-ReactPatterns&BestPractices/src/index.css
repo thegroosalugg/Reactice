@@ -67,6 +67,7 @@ main {
   background-color: transparent;
   top: 10%;
   border-radius: 15px;
+  border: none;
   width: 30rem;
   max-width: 90%;
   z-index: 10;

@@ -5,10 +5,18 @@ import Modal from '../Modal';
 import { useSearchContext } from '../SearchableList/SearchableList';
 
 export default function SolarSystem({ item }) {
+  const { searchResults } = useSearchContext();
   const [isOpen, setIsOpen] = useState(false);
-  const { searchResults, searchTerm } = useSearchContext()
 
-  console.log('[searchResults]', searchResults, '\n', '[searchTerm]', searchTerm)
+  let offsetMultiplier = 30;
+
+  if (searchResults.length < 5) {
+    offsetMultiplier += 7
+  }
+
+  const offset = (10 - searchResults.length) * offsetMultiplier;
+
+  console.log('searchResults', searchResults, '\n', 'offset', offset);
 
   function handleClick() {
     setIsOpen((prevState) => !prevState);
@@ -20,6 +28,7 @@ export default function SolarSystem({ item }) {
         className={`space ${item.name}`}
         onClick={handleClick}
         whileHover={{ scale: 1.1 }}
+        animate={{ translateX: offset }}
         transition={{ type: 'easeInOut', duration: 0.5 }}
       />
       <AnimatePresence>
