@@ -64,7 +64,8 @@ main {
 }
 
 .modal {
-  top: 30%;
+  background-color: transparent;
+  top: 10%;
   border-radius: 15px;
   width: 30rem;
   max-width: 90%;
@@ -182,6 +183,27 @@ main {
 .space {
   border-radius: 50%;
   margin: 15px;
+}
+
+.space-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.space-item img {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.space-item h2,
+.space-item p {
+  margin: 1px;
 }
 
 .Sun {
