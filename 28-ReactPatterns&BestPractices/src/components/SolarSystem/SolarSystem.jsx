@@ -10,7 +10,7 @@ export default function SolarSystem({ item }) {
 
   return (
     <div className='space' onClick={handleClick}>
-      <h2 className={`${item.name} hover`}>{item.name}</h2>
+      <h2 className={item.name}>{item.name}</h2>
       <div
         className={isOpen ? '' : 'hidden'}
         style={{
