@@ -118,10 +118,19 @@ main {
 
 .searchable-list ul {
   list-style: none;
-  margin: 0;
+  margin: 0 0 20rem 0;
   padding: 0;
-  overflow: auto;
+  overflow: visible;
   max-height: 55vh;
+  border-radius: 10px;
+}
+
+.space-list {
+  display: flex;
+  position: relative;
+  top: 50%; /* Move to the vertical center */
+  left: 50%; /* Move to the horizontal center */
+  transform: translate(-70%, 50%); /* Adjust for centering */
 }
 
 .place {
@@ -149,76 +158,69 @@ main {
 }
 
 .space {
-  display: flex;
-  flex-direction: column;
-  margin: 0.4rem 0.2rem;
-}
-
-.space h2 {
-  margin: 0;
-  padding: 0.5rem 0;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  border-radius: 6px;
-}
-
-.hidden {
-  display: none;
-}
-
-.space article {
-  margin: 1rem;
-}
-
-.space span {
-  padding: 0 1rem;
-}
-
-.space .data {
-  display: flex;
-  justify-content: space-between;
+  border-radius: 50%;
+  margin: 15px;
 }
 
 .Sun {
   background: radial-gradient(circle, #f8e4b2, #f8d080, #f7bc5d);
+  width: 150px;
+  height: 150px;
 }
 
 .Mercury {
   background: radial-gradient(circle, #b8b8b8, #a3a3a3, #8e8e8e);
+  width: 20px;
+  height: 20px;
 }
 
 .Venus {
   background: radial-gradient(circle, #e3c79a, #d1b088, #bf9976);
+  width: 30px;
+  height: 30px;
 }
 
 .Earth {
-  background: radial-gradient(circle, #99ccff, #7fbf7f, #4d804d);
+  background: radial-gradient(circle, #7fbf7f, #78a7d6, #5d97c4);
+  width: 50px;
+  height: 50px;
 }
 
 .Mars {
   background: radial-gradient(circle, #e58e73, #d27c61, #bf6b4f);
+  width: 20px;
+  height: 20px;
 }
 
 .Jupiter {
   background: radial-gradient(circle, #e3c79a, #d1b088, #bf9976);
+  width: 100px;
+  height: 100px;
 }
 
 .Saturn {
   background: radial-gradient(circle, #e8d19f, #d1ba8d, #baa37b);
+  width: 90px;
+  height: 90px;
 }
 
 .Uranus {
-  background: radial-gradient(circle, #a3d4f2, #92c4e1, #81b4d0);
+  background: radial-gradient(circle, #86ae86, #7fbf7f, #4d804d);
+  width: 80px;
+  height: 80px;
 }
 
 .Neptune {
   background: radial-gradient(circle, #9cb3d9, #8a9fc2, #788bac);
+  width: 70px;
+  height: 70px;
 }
 
 .Pluto {
   background: radial-gradient(circle, #ccc, #b8b8b8, #a3a3a3);
+  width: 10px;
+  height: 10px;
 }
-
 
 #travel-demo button {
   padding: 0.5rem 1rem;

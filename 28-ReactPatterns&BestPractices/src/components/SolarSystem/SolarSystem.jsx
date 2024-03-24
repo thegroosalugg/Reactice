@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import SPaceItem from './SpaceItem';
+import { motion, AnimatePresence } from 'framer-motion';
+import SpaceItem from './SpaceItem';
 
 export default function SolarSystem({ item }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,18 +10,31 @@ export default function SolarSystem({ item }) {
   }
 
   return (
-    <div className='space' onClick={handleClick}>
-      <h2 className={item.name}>{item.name}</h2>
-      <div
-        className={isOpen ? '' : 'hidden'}
-        style={{
-          backgroundImage: `url(${item.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <SPaceItem item={item} />
-      </div>
-    </div>
+    <>
+      <motion.div
+        className={`space ${item.name}`}
+        onClick={handleClick}
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: 'easeInOut', duration: 0.5 }}
+      />
+      {/* <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className='content'
+            initial={{ opacity: 0, scaleY: 0.5 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            exit={{ opacity: 0, scaleY: 0 }}
+            transition={{ type: 'tween', duration: 0.5 }}
+            style={{
+              backgroundImage: `url(${item.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            >
+            <SpaceItem item={item} />
+            </motion.div>
+            )}
+          </AnimatePresence> */}
+    </>
   );
 }

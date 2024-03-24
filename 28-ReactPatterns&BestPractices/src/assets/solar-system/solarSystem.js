@@ -12,7 +12,6 @@ import plutoImg from './Pluto.jpg';
 export const SOLARSYSTEM = [
   {
     name: 'Sun',
-    type: 'Star',
     image: sunImg,
     diameter: '1,391,000 km',
     distanceFromEarth: '149.6 million km',
@@ -21,7 +20,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Mercury',
-    type: 'Planet',
+
     image: mercuryImg,
     diameter: '4,880 km',
     distanceFromSun: '57.9 million km',
@@ -30,7 +29,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Venus',
-    type: 'Planet',
+
     image: venusImg,
     diameter: '12,104 km',
     distanceFromSun: '108.2 million km',
@@ -39,7 +38,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Earth',
-    type: 'Planet',
+
     image: earthImg,
     diameter: '12,742 km',
     distanceFromSun: '149.6 million km',
@@ -48,7 +47,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Mars',
-    type: 'Planet',
+
     image: marsImg,
     diameter: '6,779 km',
     distanceFromSun: '227.9 million km',
@@ -57,7 +56,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Jupiter',
-    type: 'Planet',
+
     image: jupiterImg,
     diameter: '139,822 km',
     distanceFromSun: '778.6 million km',
@@ -66,7 +65,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Saturn',
-    type: 'Planet',
+
     image: saturnImg,
     diameter: '116,464 km',
     distanceFromSun: '1.4 billion km',
@@ -75,7 +74,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Uranus',
-    type: 'Planet',
+
     image: uranusImg,
     diameter: '50,724 km',
     distanceFromSun: '2.9 billion km',
@@ -84,7 +83,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Neptune',
-    type: 'Planet',
+
     image: neptuneImg,
     diameter: '49,244 km',
     distanceFromSun: '4.5 billion km',
@@ -93,7 +92,7 @@ export const SOLARSYSTEM = [
   },
   {
     name: 'Pluto',
-    type: 'Planet',
+
     image: plutoImg,
     diameter: '2,377 km',
     distanceFromSun: '5.9 billion km',

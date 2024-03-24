@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 // Render props: React pattern where a component's functionality is provided by passing a function (the "render prop")
 // as a prop to the component. This function returns React elements that define what the component should render.
 
-export default function SearchableList({ items, keyFn, label, children }) {
+export default function SearchableList({ flex, items, keyFn, label, children }) {
   const lastChange = useRef(); // store as a ref to presrve its value across state re-renders
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,7 +29,7 @@ export default function SearchableList({ items, keyFn, label, children }) {
   return (
     <div className='searchable-list'>
       <input type='search' placeholder={label} onChange={handleChange} />
-      <ul>
+      <ul className={flex ? 'space-list' : ''}>
         {searchResults.map((item) => (
           // pass a function as  a prop, so we can pass the found item to the parent for varying handling of keys
           <li key={keyFn(item)}>
