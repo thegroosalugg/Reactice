@@ -20,6 +20,7 @@ export default function Place({ image, title, description }) {
         whileTap={{
           scale: 3,
           rotate: 1080,
+          translateX: 150,
           transition: { duration: 0.5, ease: 'easeInOut' },
         }}
         drag

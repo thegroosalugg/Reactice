@@ -38,7 +38,7 @@ export default function SearchableList({ flex, items, keyFn, label, children }) 
     lastChange.current = setTimeout(() => {
       lastChange.current = null; // would work without this. Clear Timeout already resets the timer
       setSearchTerm(event.target.value);
-    }, 1500);
+    }, 500);
   }
 
   const contextValue = {
