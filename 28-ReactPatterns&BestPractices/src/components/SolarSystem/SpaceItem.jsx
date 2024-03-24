@@ -1,18 +1,14 @@
-export default function SPaceItem({ item }) {
+export default function SpaceItem({ image, name, summary }) {
   return (
-    <article>
-      {Object.keys(item).map((key, index) => {
-        if (key !== 'name' && key !== 'image') {
-          return (
-            <div key={index} className='data'>
-              <span>
-                <b>{key}: </b>{' '}
-              </span>
-              <span>{item[key]}</span>
-            </div>
-          );
-        }
-      })}
+    <article
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <h2>{name}</h2>
+      <p>{summary}</p>
     </article>
   );
 }
