@@ -13,90 +13,61 @@ export const SOLARSYSTEM = [
   {
     name: 'Sun',
     image: sunImg,
-    diameter: '1,391,000 km',
-    distanceFromEarth: '149.6 million km',
-    temperature: '5,500°C (surface)',
-    composition: 'Mainly hydrogen and helium',
+    summary:
+      'The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as visible light and infrared radiation.',
   },
   {
     name: 'Mercury',
-
     image: mercuryImg,
-    diameter: '4,880 km',
-    distanceFromSun: '57.9 million km',
-    orbitalPeriod: '88 days',
-    composition: 'Rocky surface',
+    summary:
+      'Mercury is the smallest planet in the Solar System and the closest to the Sun. It is named after the Roman deity Mercury, the messenger of the gods.',
   },
   {
     name: 'Venus',
-
     image: venusImg,
-    diameter: '12,104 km',
-    distanceFromSun: '108.2 million km',
-    orbitalPeriod: '225 days',
-    composition: 'Thick atmosphere of carbon dioxide with clouds of sulfuric acid',
+    summary:
+      'Venus is the second planet from the Sun. It is named after the Roman goddess of love and beauty. Venus is a terrestrial planet and is sometimes called Earth\'s "sister planet" because of their similar size, mass, proximity to the Sun, and bulk composition.',
   },
   {
     name: 'Earth',
-
     image: earthImg,
-    diameter: '12,742 km',
-    distanceFromSun: '149.6 million km',
-    orbitalPeriod: '365.25 days',
-    composition: 'Rocky surface with oceans of liquid water',
+    summary:
+      "Earth is the third planet from the Sun and the only astronomical object known to harbor life. About 29.2% of Earth's surface is land consisting of continents and islands.",
   },
   {
     name: 'Mars',
-
     image: marsImg,
-    diameter: '6,779 km',
-    distanceFromSun: '227.9 million km',
-    orbitalPeriod: '687 days',
-    composition: 'Iron-rich core with a rocky surface and polar ice caps',
+    summary:
+      'Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury. In English, Mars carries the name of the Roman god of war and is often referred to as the "Red Planet".',
   },
   {
     name: 'Jupiter',
-
     image: jupiterImg,
-    diameter: '139,822 km',
-    distanceFromSun: '778.6 million km',
-    orbitalPeriod: '11.9 years',
-    composition: 'Primarily hydrogen and helium with a thick atmosphere',
+    summary:
+      'Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined.',
   },
   {
     name: 'Saturn',
-
     image: saturnImg,
-    diameter: '116,464 km',
-    distanceFromSun: '1.4 billion km',
-    orbitalPeriod: '29.5 years',
-    composition: 'Gaseous outer layer and rocky core with spectacular rings',
+    summary:
+      'Saturn is the sixth planet from the Sun and the second-largest in the Solar System, after Jupiter. It is a gas giant with an average radius of about nine times that of Earth.',
   },
   {
     name: 'Uranus',
-
     image: uranusImg,
-    diameter: '50,724 km',
-    distanceFromSun: '2.9 billion km',
-    orbitalPeriod: '84 years',
-    composition: 'Mainly hydrogen and helium with an icy mantle',
+    summary:
+      'Uranus is the seventh planet from the Sun. It has the third-largest planetary radius and fourth-largest planetary mass in the Solar System.',
   },
   {
     name: 'Neptune',
-
     image: neptuneImg,
-    diameter: '49,244 km',
-    distanceFromSun: '4.5 billion km',
-    orbitalPeriod: '165 years',
-    composition: 'Mainly hydrogen, helium, and icy materials',
+    summary:
+      'Neptune is the eighth and farthest known Solar planet from the Sun. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the densest giant planet.',
   },
   {
     name: 'Pluto',
-
     image: plutoImg,
-    diameter: '2,377 km',
-    distanceFromSun: '5.9 billion km',
-    orbitalPeriod: '248 years',
-    composition: 'Rocky and icy surface',
+    summary:
+      'Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It was the first and the largest Kuiper belt object to be discovered.',
   },
 ];
