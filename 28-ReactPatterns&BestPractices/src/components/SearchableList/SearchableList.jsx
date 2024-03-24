@@ -1,10 +1,15 @@
 import { createContext, useContext, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import SearchBar from './SearchBar';
 
 // Render props: React pattern where a component's functionality is provided by passing a function (the "render prop")
 // as a prop to the component. This function returns React elements that define what the component should render.
 
-const SearchContext = createContext({ searchResults: [] });
+const SearchContext = createContext({
+  searchResults: [],
+  searchTerm: '',
+  handleChange: () => {},
+});
 
 export function useSearchContext() {
   const ctx = useContext(SearchContext);
@@ -39,20 +44,13 @@ export default function SearchableList({ flex, items, keyFn, label, children }) 
   const contextValue = {
     searchTerm,
     searchResults,
+    handleChange,
   };
 
   return (
     <SearchContext.Provider value={contextValue}>
       <div className='searchable-list'>
-        <motion.input
-          type='search'
-          placeholder={label}
-          onChange={handleChange}
-          initial={{ translateY: 100 }}
-          animate={{ translateY: 0 }}
-          transition={{ type: 'easeInOut', duration: 0.5 }}
-          whileFocus={{ scale: 1.1 }}
-        />
+        <SearchBar label={label} />
         <motion.ul
           className={flex ? 'space-list' : ''}
           variants={{
