@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import { motion } from 'framer-motion';
 
 const AccordionItemContext = createContext();
 
@@ -16,7 +17,10 @@ export function useAccordionItemContext() {
 export default function AccordionItem({ id, className, children }) {
   return (
     <AccordionItemContext.Provider value={id}>
-      <li className={className}>{children}</li>
+      {/* added layout to track Accordion.content entering/exitting DOM */}
+      <motion.li layout className={className}>
+        {children}
+      </motion.li>
     </AccordionItemContext.Provider>
   );
 }
