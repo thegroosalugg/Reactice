@@ -1,9 +1,28 @@
-import { useRef, useState } from 'react';
+import './SearchableList.css'
+import { createContext, useContext, useRef, useState } from 'react';
+import SearchBar from './SearchBar';
+import SearchList from './SearchList';
 
 // Render props: React pattern where a component's functionality is provided by passing a function (the "render prop")
 // as a prop to the component. This function returns React elements that define what the component should render.
 
-export default function SearchableList({ items, keyFn, label, children }) {
+const SearchContext = createContext({
+  searchResults: [],
+  searchTerm: '',
+  handleChange: () => {},
+});
+
+export function useSearchContext() {
+  const ctx = useContext(SearchContext);
+
+  if (!ctx) {
+    throw new Error('useSearchContext must be wrapped by <SearchableList>');
+  }
+
+  return ctx;
+}
+
+export default function SearchableList({ listStyle, items, keyFn, label, children }) {
   const lastChange = useRef(); // store as a ref to presrve its value across state re-renders
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -14,31 +33,31 @@ export default function SearchableList({ items, keyFn, label, children }) {
   function handleChange(event) {
     if (lastChange.current) {
       clearTimeout(lastChange.current); // would work the same without the if check, this runs everytime when there is a timer
-      console.log('Clearing Timeout', lastChange.current)
     }
 
     // function adds a delay before changing state after user input, to let the user to finish typing before searching
     lastChange.current = setTimeout(() => {
       lastChange.current = null; // would work without this. Clear Timeout already resets the timer
       setSearchTerm(event.target.value);
-      console.log('Expired', lastChange.current)
-    }, 1500);
+    }, 500);
   }
 
+  const contextValue = {
+    searchTerm,
+    searchResults,
+    handleChange,
+  };
 
   return (
-    <div className='searchable-list'>
-      <input type='search' placeholder={label} onChange={handleChange} />
-      <ul>
-        {searchResults.map((item) => (
-          // pass a function as  a prop, so we can pass the found item to the parent for varying handling of keys
-          <li key={keyFn(item)}>
-            {/* here children expects to receive a function that returns renderable code.
-            This allows the child to pass data up to the parent, and for the parent to expect a parameter */}
-            {children(item)}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <SearchContext.Provider value={contextValue}>
+      <div className='searchable-list'>
+        <SearchBar label={label} />
+        {/* as bar & list components outsourced, this component simply prop drills listStyle, keyFn and children. Children is expecting
+        a function as RENDER PROPS are used inside SearchList and will pass an argument back to the parent of this component */}
+        <SearchList listStyle={listStyle} keyFn={keyFn}>
+          {children}
+        </SearchList>
+      </div>
+    </SearchContext.Provider>
   );
 }

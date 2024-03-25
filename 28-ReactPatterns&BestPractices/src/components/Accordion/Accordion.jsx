@@ -1,3 +1,4 @@
+import './Accordion.css'
 import { createContext, useContext, useState } from 'react';
 import AccordionItem from './AccordionItem';
 import AccordionTitle from './AccordionTitle';
