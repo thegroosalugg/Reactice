@@ -255,6 +255,18 @@ main {
   position: relative;
   top: 40%;
 }
+ /* saturn's rings */
+.Saturn::before {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 6px;
+  background: radial-gradient(circle, transparent 20%, #a2a09da2 60%);
+  border-radius: 50%;
+  top: 50%;
+  left: -28px;
+  transform: rotate(-40deg);
+}
 
 .Uranus {
   background: radial-gradient(circle, #86ae86, #7fbf7f, #4d804d);
