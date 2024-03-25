@@ -51,6 +51,8 @@ export default function SearchableList({ flex, items, keyFn, label, children }) 
     <SearchContext.Provider value={contextValue}>
       <div className='searchable-list'>
         <SearchBar label={label} />
+        {/* as bar & list components outsourced, this component simply prop drills flex, keyFn and children. Children is expecting
+        a function as RENDER PROPS are used inside SearchList and will pass an argument back to the parent of this component */}
         <SearchList flex={flex} keyFn={keyFn}>
           {children}
         </SearchList>

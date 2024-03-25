@@ -8,6 +8,7 @@ html {
 }
 
 body {
+  height: 100vh;
   background: #151925;
   color: white;
 }

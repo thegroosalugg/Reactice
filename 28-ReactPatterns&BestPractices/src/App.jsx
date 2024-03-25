@@ -10,6 +10,13 @@ function App() {
       <NavBar>
         {/* RENDER PROPS pass a function that returns renderable code. activeTab is passed from the NavBar component */}
         {(activeTab) => {
+          const background =
+            activeTab === 'Solar System'
+              ? 'linear-gradient(to right, #050a18, #0c1225, #13203a, #1a2d50, #223a66, #29487d, #305694)'
+              : '#151925';
+
+          document.body.style.background = background; // dynamically inject app background based on activeTab
+
           return (
             <motion.section
               key={activeTab} // Ensure components are re-mounted when switching between tabs
