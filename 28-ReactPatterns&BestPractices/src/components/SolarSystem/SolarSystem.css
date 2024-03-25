@@ -1,0 +1,92 @@
+.space {
+  border-radius: 50%;
+  margin: 15px;
+}
+
+.Sun {
+  background: radial-gradient(circle, #f8e4b2, #f8d080, #f7bc5d);
+  width: 150px;
+  height: 150px;
+}
+
+.Mercury {
+  background: radial-gradient(circle, #b8b8b8, #a3a3a3, #8e8e8e);
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 35%;
+}
+
+.Venus {
+  background: radial-gradient(circle, #e3c79a, #d1b088, #bf9976);
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 15%;
+}
+
+.Earth {
+  background: radial-gradient(circle, #7fbf7f, #78a7d6, #5d97c4);
+  width: 50px;
+  height: 50px;
+  position: relative;
+  top: 25%;
+}
+
+.Mars {
+  background: radial-gradient(circle, #e58e73, #d27c61, #bf6b4f);
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 45%;
+}
+
+.Jupiter {
+  background: radial-gradient(circle, #e3c79a, #d1b088, #bf9976);
+  width: 100px;
+  height: 100px;
+}
+
+.Saturn {
+  background: radial-gradient(circle, #e8d19f, #d1ba8d, #baa37b);
+  width: 90px;
+  height: 90px;
+  position: relative;
+  top: 40%;
+}
+ /* saturn's rings */
+.Saturn::before {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 6px;
+  background: radial-gradient(circle, transparent 20%, #a2a09da2 60%);
+  border-radius: 50%;
+  top: 50%;
+  left: -28px;
+  transform: rotate(-40deg);
+}
+
+.Uranus {
+  background: radial-gradient(circle, #86ae86, #7fbf7f, #4d804d);
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 10%;
+}
+
+.Neptune {
+  background: radial-gradient(circle, #9cb3d9, #8a9fc2, #788bac);
+  width: 70px;
+  height: 70px;
+  position: relative;
+  top: 40%;
+}
+
+.Pluto {
+  background: radial-gradient(circle, #ccc, #b8b8b8, #a3a3a3);
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 10%;
+}

@@ -1,7 +1,8 @@
+import './SolarSystem.css'
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SpaceItem from './SpaceItem';
-import Modal from '../Modal';
+import Modal from '../Modal/Modal';
 import { useSearchContext } from '../SearchableList/SearchableList';
 
 export default function SolarSystem({ item }) {

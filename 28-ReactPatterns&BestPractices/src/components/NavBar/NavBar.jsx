@@ -1,3 +1,4 @@
+import './NavBar.css'
 import { createContext, useContext, useState } from 'react';
 import NavButton from './NavButton';
 

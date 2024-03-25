@@ -1,3 +1,4 @@
+import './Modal.css'
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 

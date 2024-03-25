@@ -1,3 +1,4 @@
+import './SearchableList.css'
 import { createContext, useContext, useRef, useState } from 'react';
 import SearchBar from './SearchBar';
 import SearchList from './SearchList';

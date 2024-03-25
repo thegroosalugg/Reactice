@@ -1,3 +1,5 @@
+import './SpaceItem.css'
+
 export default function SpaceItem({ image, name, summary }) {
   return (
     <article className="space-item">
