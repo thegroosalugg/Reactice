@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import NavBar from './components/NavBar/NavBar';
-import AccordionPage from './pages/AccordionPage/AccordionPage';
+import AccordionPage from './pages/AccordionPage';
 import SolarSystemPage from './pages/SolarSystemPage';
 import PlacesPage from './pages/PlacesPage';
 
