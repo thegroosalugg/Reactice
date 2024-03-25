@@ -22,7 +22,7 @@ export function useSearchContext() {
   return ctx;
 }
 
-export default function SearchableList({ flex, items, keyFn, label, children }) {
+export default function SearchableList({ listStyle, items, keyFn, label, children }) {
   const lastChange = useRef(); // store as a ref to presrve its value across state re-renders
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -52,9 +52,9 @@ export default function SearchableList({ flex, items, keyFn, label, children }) 
     <SearchContext.Provider value={contextValue}>
       <div className='searchable-list'>
         <SearchBar label={label} />
-        {/* as bar & list components outsourced, this component simply prop drills flex, keyFn and children. Children is expecting
+        {/* as bar & list components outsourced, this component simply prop drills listStyle, keyFn and children. Children is expecting
         a function as RENDER PROPS are used inside SearchList and will pass an argument back to the parent of this component */}
-        <SearchList flex={flex} keyFn={keyFn}>
+        <SearchList listStyle={listStyle} keyFn={keyFn}>
           {children}
         </SearchList>
       </div>

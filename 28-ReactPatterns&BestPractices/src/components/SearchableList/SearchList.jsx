@@ -1,12 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchContext } from './SearchableList';
 
-export default function SearchList({ flex, keyFn, children }) {
+export default function SearchList({ listStyle, keyFn, children }) {
   const { searchResults } = useSearchContext();
 
   return (
       <motion.ul
-        className={flex ? 'space-list' : ''}
+        className={listStyle}
         variants={{
           visible: { opacity: 1 },
           hidden: { opacity: 0 },

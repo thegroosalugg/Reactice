@@ -13,16 +13,16 @@
   font: inherit;
 }
 
-.searchable-list ul {
+.place-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  overflow: visible;
-  max-height: 55vh;
-  border-radius: 10px;
 }
 
 .space-list {
+  list-style: none;
   display: flex;
-  transform: translate(-15%, 60%);
+  justify-content: center;
+  margin: 16vh 0;
+  padding: 0;
 }

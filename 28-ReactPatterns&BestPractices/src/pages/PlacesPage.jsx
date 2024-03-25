@@ -8,6 +8,7 @@ export default function PlacesPage() {
       items={PLACES}
       keyFn={(item) => item.id}
       label='Search the World'
+      listStyle='place-list'
     >
       {(item) => <Place {...item} />}
     </SearchableList>

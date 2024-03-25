@@ -9,15 +9,13 @@ export default function SolarSystem({ item }) {
   const { searchResults } = useSearchContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  let offsetMultiplier = 30;
+  let offsetMultiplier = 1
 
-  if (searchResults.length < 5) {
-    offsetMultiplier += 7
+  if (searchResults.length > 5) {
+    offsetMultiplier += 1
   }
 
   const offset = (10 - searchResults.length) * offsetMultiplier;
-
-  console.log('searchResults', searchResults, '\n', 'offset', offset);
 
   function handleClick() {
     setIsOpen((prevState) => !prevState);

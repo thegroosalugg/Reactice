@@ -9,7 +9,7 @@ export default function SolarSystemPage() {
       items={SOLARSYSTEM}
       keyFn={(item) => item.name} // key functions takes a different value for the key
       label='Search the Universe'
-      flex
+      listStyle='space-list'
     >
       {/* with RENDER PROPS we can handle the data differently for other component functions */}
       {(item) => <SolarSystem item={item} />}

@@ -9,7 +9,6 @@ html {
 
 body {
   height: 100vh;
-  overflow-x: hidden;
   background: #151925;
   color: white;
 }
