@@ -1,15 +1,14 @@
-import { useContext } from 'react';
-
-import ProductItem from '../components/Products/ProductItem';
 import './Products.css';
-import { ProductContext } from '../context (notUsed)/product-context';
+import ProductItem from '../components/Products/ProductItem';
+import { useStore } from '../hooks-store/store';
 
 const Products = (props) => {
-  const { products } = useContext(ProductContext);
+  const [state, dispatch] = useStore(); // store returns a state and dispatch, we don't need dispatch, but is simply displayed how it would look
+  // const state = useStore()[0]; // can also be accessed this way: first element from the array
 
   return (
     <ul className='products-list'>
-      {products.map((prod) => (
+      {state.products.map((prod) => (
         <ProductItem
           key={prod.id}
           id={prod.id}

@@ -1,14 +1,12 @@
-import { useContext } from 'react';
-
-import Card from '../UI/Card';
 import './ProductItem.css';
-import { ProductContext } from '../../context (notUsed)/product-context';
+import Card from '../UI/Card';
+import { useStore } from '../../hooks-store/store';
 
 const ProductItem = (props) => {
-  const { faveItem } = useContext(ProductContext);
+  const dispatch = useStore()[1]; // only dispatch required, so 2nd item from array
 
   const toggleFavHandler = () => {
-    faveItem(props.id);
+    dispatch('faveItem', props.id); // dispatch takes 2 arguments, the identifier key as a string, then the product ID passed to this component
   };
 
   return (

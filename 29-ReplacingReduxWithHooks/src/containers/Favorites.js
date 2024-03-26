@@ -1,12 +1,11 @@
 import './Products.css';
-import { useContext } from 'react';
-import { ProductContext } from '../context (notUsed)/product-context';
 import FavoriteItem from '../components/Favorites/FavoriteItem';
+import { useStore } from '../hooks-store/store';
 
 const Favorites = () => {
-  const { products } = useContext(ProductContext);
+  const state = useStore()[0]; // dispatch not required, access only 1st element from the array
 
-  const favoriteProducts = products.filter((p) => p.isFavorite);
+  const favoriteProducts = state.products.filter((p) => p.isFavorite);
 
   let content = <p className='placeholder'>Got no favorites yet!</p>;
 
