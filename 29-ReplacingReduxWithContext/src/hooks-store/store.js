@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-let globalState = {};
-let listeners = [];
+let globalState = {}; // by storing data outside of the Hook, every component that imports this hook can have access to the same data
+let listeners = []; // where as data stores inside the hook create a separate isolated state for every component importing it
 let actions = {};
 
 export const useStore = () => {
   const setState = useState(globalState)[1]; // only require set state function, so access it with [1] as 2nd element in useState array
 
-  const dispatch = (actionId) => {
+  const dispatch = (actionId, payload) => {
     // invokes the appropriate action function from the actions object based on the actionId, passing the current globalState as an argument
-    const newState = actions[actionId](globalState);
+    const newState = actions[actionId](globalState, payload);
     globalState = { ...globalState, ...newState }; // update state after action completed
 
     // ensures all app components that subscribed to the listeners are updated

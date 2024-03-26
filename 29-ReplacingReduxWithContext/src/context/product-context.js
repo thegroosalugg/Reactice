@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { PRODUCTS } from './dummy-products';
+import { PRODUCTS } from '../dummy-products';
 
 export const ProductContext = createContext({
   products: [],
