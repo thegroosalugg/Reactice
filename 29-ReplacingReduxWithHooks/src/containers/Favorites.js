@@ -1,6 +1,6 @@
 import './Products.css';
 import { useContext } from 'react';
-import { ProductContext } from '../context/product-context';
+import { ProductContext } from '../context (notUsed)/product-context';
 import FavoriteItem from '../components/Favorites/FavoriteItem';
 
 const Favorites = () => {

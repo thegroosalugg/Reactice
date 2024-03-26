@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import Card from '../UI/Card';
 import './ProductItem.css';
-import { ProductContext } from '../../context/product-context';
+import { ProductContext } from '../../context (notUsed)/product-context';
 
 const ProductItem = (props) => {
   const { faveItem } = useContext(ProductContext);
