@@ -1,23 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-
-import FavoriteItem from '../components/Favorites/FavoriteItem';
 import './Products.css';
+import { useContext } from 'react';
+import { ProductContext } from '../context/product-context';
+import FavoriteItem from '../components/Favorites/FavoriteItem';
 
-const Favorites = props => {
-  const favoriteProducts = useSelector(state =>
-    state.shop.products.filter(p => p.isFavorite)
-  );
-  let content = <p className="placeholder">Got no favorites yet!</p>;
+const Favorites = () => {
+  const { products } = useContext(ProductContext);
+
+  const favoriteProducts = products.filter((p) => p.isFavorite);
+
+  let content = <p className='placeholder'>Got no favorites yet!</p>;
+
   if (favoriteProducts.length > 0) {
     content = (
-      <ul className="products-list">
-        {favoriteProducts.map(prod => (
+      <ul className='products-list'>
+        {favoriteProducts.map(({ id, title, description }) => (
           <FavoriteItem
-            key={prod.id}
-            id={prod.id}
-            title={prod.title}
-            description={prod.description}
+            key={id}
+            id={id}
+            title={title}
+            description={description}
           />
         ))}
       </ul>
