@@ -1,9 +1,14 @@
 import './ProductItem.css';
 import Card from '../UI/Card';
 import { useStore } from '../../hooks-store/store';
+import { memo } from 'react';
 
-const ProductItem = (props) => {
-  const dispatch = useStore()[1]; // only dispatch required, so 2nd item from array
+// OPTIMISATION: memo prevents re-renders when the props don't change, however due to globalState, additional configuration is required
+const ProductItem = memo((props) => {
+  // OPTIMISATION: here we only need dispatch, not state, so we pass false to our should listen component to avoid additional re-renders
+  const dispatch = useStore(false)[1]; // only dispatch required, so 2nd item from array
+
+  console.log('RENDERING');
 
   const toggleFavHandler = () => {
     dispatch('faveItem', props.id); // dispatch takes 2 arguments, the identifier key as a string, then the product ID passed to this component
@@ -23,6 +28,6 @@ const ProductItem = (props) => {
       </div>
     </Card>
   );
-};
+});
 
 export default ProductItem;

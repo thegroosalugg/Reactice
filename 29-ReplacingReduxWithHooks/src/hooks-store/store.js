@@ -4,7 +4,8 @@ let globalState = {}; // by storing data outside of the Hook, every component th
 let listeners = []; // where as data stores inside the hook create a separate isolated state for every component importing it
 let actions = {};
 
-export const useStore = () => {
+// OPTIMISATION: shouldListen should check if we want a listeners for this component or not
+export const useStore = (shouldListen = true) => {
   const setState = useState(globalState)[1]; // only require set state function, so access it with [1] as 2nd element in useState array
 
   const dispatch = (actionId, payload) => {
@@ -20,13 +21,18 @@ export const useStore = () => {
   };
 
   useEffect(() => {
-    // records state updating functions in the listeners array. Subscribes components to listen for state changes that affect them
-    listeners.push(setState);
+    // OPTIMISATION: only push and clean state if our custom prop is true, which it will be on default
+    if (shouldListen) {
+      // records state updating functions in the listeners array. Subscribes components to listen for state changes that affect them
+      listeners.push(setState);
+    }
 
-    return () => {
-      listeners = listeners.filter((listener) => listener !== setState); // remove latest added listener when component dismounts
-    };
-  }, [setState]); // React guarantees that state setting functions will never change, so useEffect will not re-run
+    if (shouldListen) {
+      return () => {
+        listeners = listeners.filter((listener) => listener !== setState); // remove latest added listener when component dismounts
+      };
+    }
+  }, [setState, shouldListen]); // React guarantees that state setting functions will never change, so useEffect will not re-run
 
   return [globalState, dispatch];
 };
