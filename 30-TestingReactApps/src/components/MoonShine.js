@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Hooch from './Hooch'
 
 export default function MoonShine() {
   const [clicked, setClicked] = useState(false);
@@ -8,10 +9,10 @@ export default function MoonShine() {
   }
 
   return (
-    <div>
+    <div className='center'>
       <h2>MoonShine</h2>
-      {!clicked && <p>Bootlegging</p>}
-      {clicked && <p>Prohibition</p>}
+      {!clicked && <Hooch>Bootlegging</Hooch>}
+      {clicked && <Hooch>Prohibition</Hooch>}
       <button onClick={changeText}>Mash</button>
     </div>
   );
