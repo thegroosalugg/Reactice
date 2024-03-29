@@ -1,10 +1,11 @@
-import './App.css'
+import ToDos from './components/ToDos'
 
 function App() {
 
   return (
     <main>
-      <p>Hello Victor, how are you today?</p>
+      <h2>Hello Victor, how are you today?</h2>
+      <ToDos />
     </main>
   )
 }
