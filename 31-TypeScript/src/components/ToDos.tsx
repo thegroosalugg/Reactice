@@ -1,15 +1,19 @@
-type ToDosProps = {
-  items: string[]; // can comment this block out if using React.FC syntax
+import ToDo from "../models/ToDo";
+
+ // can comment this block out if using React.FC syntax
+type props = {
+  items: ToDo[]; // items expects an array[] of ToDo class objects
 };
 
-export default function ToDos({ items }: ToDosProps) {
-// const ToDos = ({ items }: ToDosProps) => {                        // same as above, using constant instead of function
-// const ToDos: React.FC<{ items: string[]}> = ({ items }) => {      // another syntax using React.FC, does not need Type declared at top
+export default function ToDos({ items }: props) {
+// const ToDos = ({ items }: props) => {                        // same as above, using constant instead of function
+// const ToDos: React.FC<{ items: ToDo[]}> = ({ items }) => {      // another syntax using React.FC, does not need Type declared at top
 
   return (
     <ul className='todos'>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
+      {/* destructure each item object to get id and text directly */}
+      {items.map(({ id, text}) => (
+        <li key={id}>{text}</li>
       ))}
     </ul>
   );
