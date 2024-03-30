@@ -3,7 +3,7 @@ import ToDo from './models/ToDo';
 
 function App() {
   // when using classes we do not need to construct an object explicitly and can just pass required data
-  const todos = [new ToDo('Hello mother'), new ToDo('Hello mother father')];
+  const todos = [new ToDo('Hello mother'), new ToDo('Hello father')];
 
   return (
     <main>
