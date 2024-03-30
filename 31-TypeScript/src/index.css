@@ -1,14 +1,9 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   background: linear-gradient(to right, #b4b7b1d5, #b9b7b2, #777571, #484645);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -21,67 +16,90 @@ body {
 #root {
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 h2 {
   margin: 0.4rem;
 }
 
-ul {
+.todos {
   list-style-type: none;
   color: #ffffff;
-  margin: 1rem 0;
+  margin: 2rem auto;
   padding: 0;
   display: inline-block;
   overflow: auto;
-  max-height: 30vh;
+  max-height: 50vh;
+  width: 60vw;
+  max-width: 40rem;
+}
+
+.todos li {
+  margin: 1rem 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  color: #000000;
+  background-color: #f7f5ef;
+  text-shadow: none;
+  word-wrap: break-word;
 }
 
 .error {
   margin: 0 0 0.5rem;
-  text-align: center;
   color:#d04444;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(200, 176, 176, 0.3);
 }
 
-form {
-  margin: 0.5rem 0 0 0;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
+.form {
+  width: 60vw;
+  max-width: 40rem;
+  margin: 1rem auto;
 }
 
-label {
-  color: #ffffff;
-  font-weight: 600;
+.form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-button {
+.form input {
+  display: block;
+  width: 60vw;
+  max-width: 40rem;
+  font: inherit;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #f7f5ef;
+  border: none;
+  border-bottom: 2px solid #494844;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-bottom: 0.5rem;
+}
+
+.form button {
+  font: inherit;
+  background-color: #3587ad;
+  border: 1px solid #0a0a0a;
   color: #ffffff;
-  background: #3587ad;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
-}
-
-li {
-  background: #3587ad;
-  border: 1px solid #ccc;
-  padding: 1vw;
-  margin: 1vw 0;
-  box-shadow: 2px 2px 4px rgb(0, 0, 0);
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
 }
 
 button, li, input {
   transition: all 0.5s ease-in-out;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 input:focus {
   transform: scale(1.05);
 }
 
-button:hover, li:hover {
+button:hover, button:active, li:hover {
+  color: #ffffff;
   background: #275487;
 }
 
@@ -96,19 +114,4 @@ button:hover, li:hover {
 
 ::-webkit-scrollbar-thumb {
   background: transparent; /* Hide the thumb */
-}
-
-@media screen and (max-width: 300px) {
-  form {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  button {
-    max-width: fit-content;
-  }
-
-  li {
-    margin: 5vw 0;
-  }
 }
