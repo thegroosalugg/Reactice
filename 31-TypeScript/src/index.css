@@ -37,19 +37,20 @@ h2 {
 .todos li {
   margin: 1rem 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
+  padding: 0.5rem;
   color: #000000;
   background-color: #f7f5ef;
   text-shadow: none;
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
 }
 
 .todos p {
   word-break: break-all;
   max-width: 50vw;
-  padding: 1rem;
+  padding: 0 1rem;
+  margin: 0;
   overflow: auto;
   max-height: 10vh;
 }

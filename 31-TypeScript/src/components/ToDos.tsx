@@ -4,9 +4,10 @@ import ToDoItem from "./ToDoItem";
  // can comment this block out if using React.FC syntax
 type props = {
   items: ToDo[]; // items expects an array[] of ToDo class objects
+  deleteToDo: ( id: number ) => void
 };
 
-export default function ToDos({ items }: props) {
+export default function ToDos({ items, deleteToDo }: props) {
 // const ToDos = ({ items }: props) => {                           // same as above, using constant instead of function
 // const ToDos: React.FC<{ items: ToDo[]}> = ({ items }) => {      // another syntax using React.FC, does not need 'type' declared at the beginning
 
@@ -14,7 +15,7 @@ export default function ToDos({ items }: props) {
     <ul className='todos'>
       {/* destructure each item object to get id and text directly */}
       {items.map(({id, text}) => (
-        <ToDoItem key={id} text={text} />
+        <ToDoItem key={id} text={text} onDelete={() => deleteToDo(id)} />
       ))}
     </ul>
   );

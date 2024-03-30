@@ -13,11 +13,16 @@ function App() {
     setTodos((prevTodos) => [newToDo, ...prevTodos]);
   };
 
+  const deleteHandler = (deleteId: number) => {
+    const updatedToDos = todos.filter(({ id }) => id !== deleteId);
+    setTodos(updatedToDos);
+  };
+
   return (
     <main>
       <h2>Hello Victor, how are you today?</h2>
       <NewToDo addToDo={addToDoHandler} />
-      <ToDos items={todos} />
+      <ToDos items={todos} deleteToDo={deleteHandler} />
     </main>
   );
 }
