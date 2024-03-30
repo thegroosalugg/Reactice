@@ -1,3 +1,4 @@
+import NewToDo from './components/NewToDo';
 import ToDos from './components/ToDos';
 import ToDo from './models/ToDo';
 
@@ -8,6 +9,7 @@ function App() {
   return (
     <main>
       <h2>Hello Victor, how are you today?</h2>
+      <NewToDo />
       <ToDos items={todos} />
     </main>
   );
