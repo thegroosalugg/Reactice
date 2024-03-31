@@ -1,0 +1,140 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
+  background: linear-gradient(to right, #b4b7b1d5, #b9b7b2, #777571, #484645);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h2 {
+  margin: 0.4rem;
+}
+
+.todos {
+  list-style-type: none;
+  color: #ffffff;
+  margin: 2rem auto;
+  padding: 0;
+  display: inline-block;
+  overflow: auto;
+  max-height: 50vh;
+  width: 60vw;
+  max-width: 40rem;
+}
+
+.todos li {
+  margin: 1rem 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  color: #000000;
+  background-color: #f7f5ef;
+  text-shadow: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todos p {
+  word-break: break-all;
+  max-width: 50vw;
+  padding: 0 1rem;
+  margin: 0;
+  overflow: auto;
+  max-height: 10vh;
+}
+
+.todos button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #d04444;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
+}
+
+.todos button:hover {
+  color: #d08a44;
+}
+
+.error {
+  margin: 0 0 0.5rem;
+  color:#d04444;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(200, 176, 176, 0.3);
+}
+
+.form {
+  width: 60vw;
+  max-width: 40rem;
+  margin: 1rem auto;
+}
+
+.form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form input {
+  display: block;
+  width: 60vw;
+  max-width: 40rem;
+  font: inherit;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #f7f5ef;
+  border: none;
+  border-bottom: 2px solid #494844;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-bottom: 0.5rem;
+}
+
+.form button {
+  font: inherit;
+  background-color: #3587ad;
+  border: 1px solid #0a0a0a;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+button, li, input {
+  transition: all 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+input:focus {
+  transform: scale(1.05);
+}
+
+.form button:hover, .form button:active, li:hover {
+  color: #ffffff;
+  background: #275487;
+}
+
+/* hidethescrollbar */
+::-webkit-scrollbar {
+  width: 0px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Hide the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Hide the thumb */
+}
