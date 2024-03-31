@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
+import { TodosContext } from '../store/ToDosContext';
 
-// FC type declared is a function that takes a  string as an argument and does not return any valud (void)
-const NewToDo: React.FC<{ addToDo: ( text: string ) => void }>  = ({ addToDo }) => {
+const NewToDo: React.FC = () => {
   const inputText = useRef<HTMLInputElement>(null); // TS requires ref to select and HTML element for type and set an initial value
   const [error, setError] = useState<string>(); // state type set to string
-
+  const { addToDo } = useContext(TodosContext);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -19,6 +19,7 @@ const NewToDo: React.FC<{ addToDo: ( text: string ) => void }>  = ({ addToDo }) 
 
     setError('');
     addToDo(formData);
+    inputText.current!.value ='';
   };
 
   return (
