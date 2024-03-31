@@ -14,19 +14,25 @@ export const TodosContext = createContext<contextType>({
   deleteToDo: () => {},
 });
 
-const ToDosContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+// const ToDosContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {          // FC const version
+function ToDosContextProvider({ children }: { children: React.ReactNode }) {
   // state type should be an array of ToDo class objects
-  const [todos, setTodos] = useState<ToDo[]>([]);
+  const [todos, setTodos] = useState<ToDo[]>(
+    // in TS JSON.parse always expects a string, but savedData could also be null, so if there's none a stringified array is passed
+    JSON.parse(localStorage.getItem('savedData') || '[]') // initialise with localStorage if it exists or []
+  );
 
   // function expects a string which is passed to the class object
   const addToDo = (text: string) => {
     const newToDo = new ToDo(text);
     setTodos((prevTodos) => [newToDo, ...prevTodos]);
+    localStorage.setItem('savedData', JSON.stringify([newToDo, ...todos])); // save to local storage
   };
 
   const deleteToDo = (deleteId: number) => {
     const updatedToDos = todos.filter(({ id }) => id !== deleteId);
     setTodos(updatedToDos);
+    localStorage.setItem('savedData', JSON.stringify(updatedToDos)); // save to local storage
   };
 
   const context: contextType = {
@@ -36,6 +42,6 @@ const ToDosContextProvider: React.FC<{children: React.ReactNode}> = ({ children 
   };
 
   return <TodosContext.Provider value={context}>{children}</TodosContext.Provider>;
-};
+}
 
 export default ToDosContextProvider;
