@@ -7,6 +7,11 @@ yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
 
+# Build output
+build
+dist
+dist-ssr
+
 # Firebase cache
 .firebase/
 
